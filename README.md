@@ -1,6 +1,6 @@
 # MARTH
 Multilingual Augmented Reality Translation Headset
 
-# Strategy
-while (true)
+## Strategy
+while (true)\n
   forward+B;
