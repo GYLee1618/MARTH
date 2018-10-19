@@ -1,0 +1,1655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tagset>
+  <image>
+    <imageName>scene/111-1113_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="444" y="42" width="785" height="721" offset="112">
+        <tag>22</tag>
+        <segmentation>
+          <xOff>401</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="373" y="744" width="705" height="244" offset="0">
+        <tag>WASHINGTON</tag>
+        <segmentation>
+          <xOff>98</xOff>
+          <xOff>166</xOff>
+          <xOff>245</xOff>
+          <xOff>321</xOff>
+          <xOff>350</xOff>
+          <xOff>415</xOff>
+          <xOff>490</xOff>
+          <xOff>561</xOff>
+          <xOff>622</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/111-1126_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="151" y="621" width="206" height="38" offset="0">
+        <tag>postgrad</tag>
+        <segmentation>
+          <xOff>27</xOff>
+          <xOff>57</xOff>
+          <xOff>81</xOff>
+          <xOff>101</xOff>
+          <xOff>131</xOff>
+          <xOff>150</xOff>
+          <xOff>177</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="374" y="622" width="130" height="42" offset="0">
+        <tag>study</tag>
+        <segmentation>
+          <xOff>26</xOff>
+          <xOff>45</xOff>
+          <xOff>75</xOff>
+          <xOff>104</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="623" y="631" width="104" height="27" offset="0">
+        <tag>www</tag>
+        <segmentation>
+          <xOff>36</xOff>
+          <xOff>69</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="736" y="631" width="224" height="42" offset="0">
+        <tag>prospects</tag>
+        <segmentation>
+          <xOff>28</xOff>
+          <xOff>43</xOff>
+          <xOff>73</xOff>
+          <xOff>96</xOff>
+          <xOff>127</xOff>
+          <xOff>156</xOff>
+          <xOff>182</xOff>
+          <xOff>200</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="975" y="635" width="53" height="31" offset="0">
+        <tag>ac</tag>
+        <segmentation>
+          <xOff>30</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1040" y="628" width="56" height="39" offset="0">
+        <tag>uk</tag>
+        <segmentation>
+          <xOff>27</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/111-1137_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="1118" y="1076" width="60" height="14" offset="0">
+        <tag>3427N</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>23</xOff>
+          <xOff>34</xOff>
+          <xOff>46</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="339" y="726" width="831" height="232" offset="0">
+        <tag>STOP</tag>
+        <segmentation>
+          <xOff>195</xOff>
+          <xOff>406</xOff>
+          <xOff>638</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="235" y="441" width="1024" height="176" offset="0">
+        <tag>EMERGENCY</tag>
+        <segmentation>
+          <xOff>100</xOff>
+          <xOff>248</xOff>
+          <xOff>360</xOff>
+          <xOff>476</xOff>
+          <xOff>591</xOff>
+          <xOff>699</xOff>
+          <xOff>813</xOff>
+          <xOff>917</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1212" y="1088" width="50" height="17" offset="0">
+        <tag>1101</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>24</xOff>
+          <xOff>36</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/111-1141_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="234" y="132" width="1119" height="370" offset="236">
+        <tag>PEPSI</tag>
+        <segmentation>
+          <xOff>206</xOff>
+          <xOff>430</xOff>
+          <xOff>687</xOff>
+          <xOff>984</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/111-1152_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="699" y="334" width="242" height="103" offset="0">
+        <tag>THE</tag>
+        <segmentation>
+          <xOff>81</xOff>
+          <xOff>173</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="444" y="533" width="246" height="94" offset="0">
+        <tag>RAB</tag>
+        <segmentation>
+          <xOff>85</xOff>
+          <xOff>180</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="728" y="535" width="457" height="96" offset="0">
+        <tag>BUTLER</tag>
+        <segmentation>
+          <xOff>74</xOff>
+          <xOff>165</xOff>
+          <xOff>245</xOff>
+          <xOff>309</xOff>
+          <xOff>376</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="516" y="721" width="597" height="91" offset="0">
+        <tag>BUILDING</tag>
+        <segmentation>
+          <xOff>72</xOff>
+          <xOff>164</xOff>
+          <xOff>209</xOff>
+          <xOff>273</xOff>
+          <xOff>365</xOff>
+          <xOff>409</xOff>
+          <xOff>503</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="104" y="351" width="33" height="24" offset="0">
+        <tag>No</tag>
+        <segmentation>
+          <xOff>18</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="142" y="354" width="82" height="21" offset="0">
+        <tag>smokin</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>33</xOff>
+          <xOff>47</xOff>
+          <xOff>62</xOff>
+          <xOff>67</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="105" y="376" width="83" height="27" offset="0">
+        <tag>beyond</tag>
+        <segmentation>
+          <xOff>16</xOff>
+          <xOff>28</xOff>
+          <xOff>41</xOff>
+          <xOff>55</xOff>
+          <xOff>68</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="191" y="376" width="31" height="25" offset="0">
+        <tag>thi</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>24</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="106" y="402" width="59" height="28" offset="0">
+        <tag>point</tag>
+        <segmentation>
+          <xOff>15</xOff>
+          <xOff>29</xOff>
+          <xOff>35</xOff>
+          <xOff>49</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/111-1168_IMG.JPG</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="371" y="112" width="535" height="109" offset="32">
+        <tag>Memorex</tag>
+        <segmentation>
+          <xOff>102</xOff>
+          <xOff>165</xOff>
+          <xOff>273</xOff>
+          <xOff>340</xOff>
+          <xOff>400</xOff>
+          <xOff>464</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="908" y="120" width="12" height="17" offset="0">
+        <tag>R</tag>
+        <segmentation />
+      </taggedRectangle>
+      <taggedRectangle x="1040" y="82" width="28" height="20" offset="0">
+        <tag>Part</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>16</xOff>
+          <xOff>22</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1071" y="81" width="19" height="20" offset="0">
+        <tag>No</tag>
+        <segmentation>
+          <xOff>13</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1039" y="106" width="76" height="24" offset="0">
+        <tag>827240C</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>21</xOff>
+          <xOff>32</xOff>
+          <xOff>42</xOff>
+          <xOff>51</xOff>
+          <xOff>62</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="312" y="541" width="122" height="22" offset="0">
+        <tag>european</tag>
+        <segmentation>
+          <xOff>16</xOff>
+          <xOff>32</xOff>
+          <xOff>43</xOff>
+          <xOff>58</xOff>
+          <xOff>75</xOff>
+          <xOff>90</xOff>
+          <xOff>106</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="311" y="561" width="47" height="28" offset="0">
+        <tag>top</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>27</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="391" y="579" width="32" height="22" offset="0">
+        <tag>20</tag>
+        <segmentation>
+          <xOff>16</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="284" y="639" width="73" height="23" offset="0">
+        <tag>powered</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>20</xOff>
+          <xOff>36</xOff>
+          <xOff>45</xOff>
+          <xOff>52</xOff>
+          <xOff>62</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="361" y="639" width="19" height="22" offset="0">
+        <tag>by</tag>
+        <segmentation>
+          <xOff>9</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="385" y="638" width="77" height="19" offset="0">
+        <tag>Memorex</tag>
+        <segmentation>
+          <xOff>15</xOff>
+          <xOff>26</xOff>
+          <xOff>41</xOff>
+          <xOff>49</xOff>
+          <xOff>58</xOff>
+          <xOff>68</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="346" y="688" width="89" height="18" offset="0">
+        <tag>COMPACT</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>24</xOff>
+          <xOff>42</xOff>
+          <xOff>54</xOff>
+          <xOff>65</xOff>
+          <xOff>77</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="304" y="688" width="130" height="64" offset="0">
+        <tag>disc</tag>
+        <segmentation>
+          <xOff>40</xOff>
+          <xOff>59</xOff>
+          <xOff>93</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="316" y="756" width="103" height="12" offset="0">
+        <tag>Recordable</tag>
+        <segmentation>
+          <xOff>14</xOff>
+          <xOff>23</xOff>
+          <xOff>34</xOff>
+          <xOff>46</xOff>
+          <xOff>54</xOff>
+          <xOff>65</xOff>
+          <xOff>74</xOff>
+          <xOff>86</xOff>
+          <xOff>93</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="289" y="833" width="519" height="150" offset="0">
+        <tag>CD-R</tag>
+        <segmentation>
+          <xOff>137</xOff>
+          <xOff>291</xOff>
+          <xOff>378</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="286" y="1002" width="237" height="34" offset="0">
+        <tag>PROFESSIONAL</tag>
+        <segmentation>
+          <xOff>20</xOff>
+          <xOff>41</xOff>
+          <xOff>62</xOff>
+          <xOff>81</xOff>
+          <xOff>99</xOff>
+          <xOff>118</xOff>
+          <xOff>139</xOff>
+          <xOff>150</xOff>
+          <xOff>173</xOff>
+          <xOff>197</xOff>
+          <xOff>220</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="532" y="1004" width="209" height="32" offset="0">
+        <tag>RECORDABLE</tag>
+        <segmentation>
+          <xOff>20</xOff>
+          <xOff>40</xOff>
+          <xOff>60</xOff>
+          <xOff>82</xOff>
+          <xOff>103</xOff>
+          <xOff>127</xOff>
+          <xOff>150</xOff>
+          <xOff>174</xOff>
+          <xOff>190</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="751" y="1006" width="160" height="32" offset="0">
+        <tag>COMPACT</tag>
+        <segmentation>
+          <xOff>20</xOff>
+          <xOff>43</xOff>
+          <xOff>76</xOff>
+          <xOff>96</xOff>
+          <xOff>118</xOff>
+          <xOff>140</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="919" y="1007" width="76" height="30" offset="0">
+        <tag>DISC</tag>
+        <segmentation>
+          <xOff>22</xOff>
+          <xOff>35</xOff>
+          <xOff>54</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="284" y="1047" width="193" height="33" offset="0">
+        <tag>UNIVERSAL</tag>
+        <segmentation>
+          <xOff>25</xOff>
+          <xOff>52</xOff>
+          <xOff>63</xOff>
+          <xOff>84</xOff>
+          <xOff>105</xOff>
+          <xOff>126</xOff>
+          <xOff>149</xOff>
+          <xOff>173</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="487" y="1051" width="262" height="32" offset="0">
+        <tag>COMPATIBILITY</tag>
+        <segmentation>
+          <xOff>20</xOff>
+          <xOff>45</xOff>
+          <xOff>78</xOff>
+          <xOff>100</xOff>
+          <xOff>122</xOff>
+          <xOff>143</xOff>
+          <xOff>154</xOff>
+          <xOff>178</xOff>
+          <xOff>191</xOff>
+          <xOff>208</xOff>
+          <xOff>218</xOff>
+          <xOff>240</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="758" y="1053" width="55" height="30" offset="0">
+        <tag>650</tag>
+        <segmentation>
+          <xOff>20</xOff>
+          <xOff>39</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="817" y="1053" width="55" height="31" offset="0">
+        <tag>MB</tag>
+        <segmentation>
+          <xOff>32</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="885" y="1054" width="57" height="30" offset="0">
+        <tag>700</tag>
+        <segmentation>
+          <xOff>19</xOff>
+          <xOff>38</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="943" y="1053" width="55" height="31" offset="0">
+        <tag>MB</tag>
+        <segmentation>
+          <xOff>33</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1046" y="1028" width="54" height="47" offset="0">
+        <tag>1X</tag>
+        <segmentation>
+          <xOff>21</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1121" y="974" width="250" height="99" offset="0">
+        <tag>24X</tag>
+        <segmentation>
+          <xOff>76</xOff>
+          <xOff>154</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1125" y="1088" width="248" height="28" offset="0">
+        <tag>COMPATIBLE</tag>
+        <segmentation>
+          <xOff>26</xOff>
+          <xOff>53</xOff>
+          <xOff>91</xOff>
+          <xOff>116</xOff>
+          <xOff>140</xOff>
+          <xOff>162</xOff>
+          <xOff>175</xOff>
+          <xOff>202</xOff>
+          <xOff>224</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1043" y="823" width="254" height="121" offset="0">
+        <tag>700</tag>
+        <segmentation>
+          <xOff>81</xOff>
+          <xOff>168</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="611" y="458" width="183" height="43" offset="-12">
+        <tag>CD-R</tag>
+        <segmentation>
+          <xOff>47</xOff>
+          <xOff>101</xOff>
+          <xOff>132</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="838" y="387" width="319" height="50" offset="4">
+        <tag>Memorex</tag>
+        <segmentation>
+          <xOff>62</xOff>
+          <xOff>100</xOff>
+          <xOff>164</xOff>
+          <xOff>205</xOff>
+          <xOff>240</xOff>
+          <xOff>278</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1200" y="568" width="145" height="45" offset="-24">
+        <tag>700</tag>
+        <segmentation>
+          <xOff>48</xOff>
+          <xOff>97</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1239" y="636" width="31" height="19" offset="-16">
+        <tag>1X</tag>
+        <segmentation>
+          <xOff>12</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1274" y="618" width="90" height="34" offset="-20">
+        <tag>24</tag>
+        <segmentation>
+          <xOff>43</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1261" y="241" width="68" height="23" offset="0">
+        <tag>Imported</tag>
+        <segmentation>
+          <xOff>6</xOff>
+          <xOff>19</xOff>
+          <xOff>27</xOff>
+          <xOff>37</xOff>
+          <xOff>43</xOff>
+          <xOff>48</xOff>
+          <xOff>57</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1063" y="248" width="58" height="17" offset="0">
+        <tag>Memorex</tag>
+        <segmentation>
+          <xOff>14</xOff>
+          <xOff>22</xOff>
+          <xOff>32</xOff>
+          <xOff>39</xOff>
+          <xOff>44</xOff>
+          <xOff>52</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1126" y="247" width="53" height="16" offset="0">
+        <tag>Products</tag>
+        <segmentation>
+          <xOff>7</xOff>
+          <xOff>12</xOff>
+          <xOff>19</xOff>
+          <xOff>27</xOff>
+          <xOff>35</xOff>
+          <xOff>42</xOff>
+          <xOff>47</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1182" y="246" width="44" height="18" offset="0">
+        <tag>Europe</tag>
+        <segmentation>
+          <xOff>8</xOff>
+          <xOff>14</xOff>
+          <xOff>21</xOff>
+          <xOff>28</xOff>
+          <xOff>35</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1050" y="212" width="24" height="21" offset="0">
+        <tag>5</tag>
+        <segmentation />
+      </taggedRectangle>
+      <taggedRectangle x="1089" y="211" width="94" height="21" offset="0">
+        <tag>024460</tag>
+        <segmentation>
+          <xOff>15</xOff>
+          <xOff>30</xOff>
+          <xOff>45</xOff>
+          <xOff>60</xOff>
+          <xOff>77</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1194" y="210" width="92" height="20" offset="0">
+        <tag>000887</tag>
+        <segmentation>
+          <xOff>15</xOff>
+          <xOff>30</xOff>
+          <xOff>48</xOff>
+          <xOff>60</xOff>
+          <xOff>76</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/aPICT0006.JPG</imageName>
+    <resolution x="1280" y="960" />
+    <taggedRectangles>
+      <taggedRectangle x="144" y="225" width="330" height="112" offset="0">
+        <tag>TESCO</tag>
+        <segmentation>
+          <xOff>76</xOff>
+          <xOff>133</xOff>
+          <xOff>196</xOff>
+          <xOff>261</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="135" y="407" width="344" height="150" offset="8">
+        <tag>RACE</tag>
+        <segmentation>
+          <xOff>84</xOff>
+          <xOff>180</xOff>
+          <xOff>267</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="517" y="446" width="267" height="112" offset="-12">
+        <tag>FOR</tag>
+        <segmentation>
+          <xOff>73</xOff>
+          <xOff>180</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="814" y="416" width="279" height="134" offset="-20">
+        <tag>LIFE</tag>
+        <segmentation>
+          <xOff>69</xOff>
+          <xOff>127</xOff>
+          <xOff>205</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="403" y="622" width="265" height="54" offset="0">
+        <tag>CANCER</tag>
+        <segmentation>
+          <xOff>44</xOff>
+          <xOff>91</xOff>
+          <xOff>140</xOff>
+          <xOff>184</xOff>
+          <xOff>221</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="686" y="595" width="343" height="75" offset="0">
+        <tag>RESEARCH</tag>
+        <segmentation>
+          <xOff>43</xOff>
+          <xOff>82</xOff>
+          <xOff>122</xOff>
+          <xOff>160</xOff>
+          <xOff>208</xOff>
+          <xOff>253</xOff>
+          <xOff>296</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1041" y="594" width="76" height="55" offset="-8">
+        <tag>UK</tag>
+        <segmentation>
+          <xOff>38</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/aPICT0007.JPG</imageName>
+    <resolution x="1280" y="960" />
+    <taggedRectangles>
+      <taggedRectangle x="431" y="450" width="252" height="57" offset="0">
+        <tag>TESCO</tag>
+        <segmentation>
+          <xOff>55</xOff>
+          <xOff>100</xOff>
+          <xOff>149</xOff>
+          <xOff>200</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="361" y="550" width="382" height="83" offset="8">
+        <tag>VALUE</tag>
+        <segmentation>
+          <xOff>79</xOff>
+          <xOff>175</xOff>
+          <xOff>243</xOff>
+          <xOff>327</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="319" y="706" width="379" height="116" offset="0">
+        <tag>Washing</tag>
+        <segmentation>
+          <xOff>78</xOff>
+          <xOff>132</xOff>
+          <xOff>181</xOff>
+          <xOff>239</xOff>
+          <xOff>266</xOff>
+          <xOff>324</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="724" y="719" width="62" height="76" offset="0">
+        <tag>up</tag>
+        <segmentation>
+          <xOff>37</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="322" y="806" width="229" height="119" offset="0">
+        <tag>liquid</tag>
+        <segmentation>
+          <xOff>16</xOff>
+          <xOff>34</xOff>
+          <xOff>85</xOff>
+          <xOff>143</xOff>
+          <xOff>169</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/aPICT0025.JPG</imageName>
+    <resolution x="960" y="1280" />
+    <taggedRectangles>
+      <taggedRectangle x="622" y="289" width="71" height="22" offset="0">
+        <tag>SAFETY</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>25</xOff>
+          <xOff>35</xOff>
+          <xOff>47</xOff>
+          <xOff>58</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="700" y="289" width="66" height="19" offset="0">
+        <tag>NOTICE</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>27</xOff>
+          <xOff>37</xOff>
+          <xOff>43</xOff>
+          <xOff>55</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="524" y="325" width="14" height="21" offset="0">
+        <tag>if</tag>
+        <segmentation>
+          <xOff>8</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="544" y="330" width="33" height="20" offset="0">
+        <tag>you</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>22</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="582" y="325" width="68" height="23" offset="0">
+        <tag>become</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>21</xOff>
+          <xOff>32</xOff>
+          <xOff>43</xOff>
+          <xOff>57</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="658" y="322" width="68" height="24" offset="0">
+        <tag>trapped</tag>
+        <segmentation>
+          <xOff>7</xOff>
+          <xOff>13</xOff>
+          <xOff>22</xOff>
+          <xOff>34</xOff>
+          <xOff>45</xOff>
+          <xOff>56</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="730" y="323" width="18" height="21" offset="0">
+        <tag>in</tag>
+        <segmentation>
+          <xOff>8</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="754" y="320" width="27" height="22" offset="0">
+        <tag>the</tag>
+        <segmentation>
+          <xOff>7</xOff>
+          <xOff>16</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="787" y="320" width="23" height="22" offset="0">
+        <tag>lift</tag>
+        <segmentation>
+          <xOff>5</xOff>
+          <xOff>10</xOff>
+          <xOff>15</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="524" y="362" width="59" height="21" offset="0">
+        <tag>please</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>18</xOff>
+          <xOff>28</xOff>
+          <xOff>38</xOff>
+          <xOff>48</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="590" y="361" width="47" height="22" offset="0">
+        <tag>press</tag>
+        <segmentation>
+          <xOff>9</xOff>
+          <xOff>16</xOff>
+          <xOff>27</xOff>
+          <xOff>38</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="643" y="358" width="29" height="23" offset="0">
+        <tag>the</tag>
+        <segmentation>
+          <xOff>9</xOff>
+          <xOff>18</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="679" y="358" width="47" height="20" offset="0">
+        <tag>alarm</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>16</xOff>
+          <xOff>25</xOff>
+          <xOff>34</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="732" y="354" width="57" height="23" offset="0">
+        <tag>button</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>21</xOff>
+          <xOff>27</xOff>
+          <xOff>34</xOff>
+          <xOff>44</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="795" y="355" width="20" height="22" offset="0">
+        <tag>at</tag>
+        <segmentation>
+          <xOff>11</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="526" y="398" width="63" height="18" offset="0">
+        <tag>regular</tag>
+        <segmentation>
+          <xOff>9</xOff>
+          <xOff>18</xOff>
+          <xOff>27</xOff>
+          <xOff>37</xOff>
+          <xOff>45</xOff>
+          <xOff>54</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="593" y="393" width="20" height="21" offset="0">
+        <tag>30</tag>
+        <segmentation>
+          <xOff>10</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="623" y="396" width="63" height="15" offset="0">
+        <tag>second</tag>
+        <segmentation>
+          <xOff>8</xOff>
+          <xOff>19</xOff>
+          <xOff>28</xOff>
+          <xOff>38</xOff>
+          <xOff>50</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="691" y="392" width="70" height="20" offset="0">
+        <tag>intervals</tag>
+        <segmentation>
+          <xOff>5</xOff>
+          <xOff>12</xOff>
+          <xOff>20</xOff>
+          <xOff>31</xOff>
+          <xOff>37</xOff>
+          <xOff>47</xOff>
+          <xOff>55</xOff>
+          <xOff>61</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="530" y="427" width="31" height="21" offset="0">
+        <tag>The</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>20</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="569" y="427" width="46" height="23" offset="0">
+        <tag>alarm</tag>
+        <segmentation>
+          <xOff>9</xOff>
+          <xOff>16</xOff>
+          <xOff>25</xOff>
+          <xOff>34</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="623" y="426" width="25" height="21" offset="0">
+        <tag>will</tag>
+        <segmentation>
+          <xOff>8</xOff>
+          <xOff>15</xOff>
+          <xOff>19</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="654" y="428" width="52" height="18" offset="0">
+        <tag>sound</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>20</xOff>
+          <xOff>30</xOff>
+          <xOff>40</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="711" y="425" width="18" height="21" offset="0">
+        <tag>at</tag>
+        <segmentation>
+          <xOff>11</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="736" y="424" width="28" height="20" offset="0">
+        <tag>the</tag>
+        <segmentation>
+          <xOff>7</xOff>
+          <xOff>17</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="528" y="464" width="96" height="18" offset="0">
+        <tag>Information</tag>
+        <segmentation>
+          <xOff>6</xOff>
+          <xOff>14</xOff>
+          <xOff>23</xOff>
+          <xOff>33</xOff>
+          <xOff>40</xOff>
+          <xOff>50</xOff>
+          <xOff>60</xOff>
+          <xOff>66</xOff>
+          <xOff>72</xOff>
+          <xOff>83</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="630" y="461" width="38" height="18" offset="0">
+        <tag>desk</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>20</xOff>
+          <xOff>28</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="674" y="462" width="35" height="17" offset="0">
+        <tag>and</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>24</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="714" y="460" width="38" height="22" offset="0">
+        <tag>help</tag>
+        <segmentation>
+          <xOff>10</xOff>
+          <xOff>21</xOff>
+          <xOff>25</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="758" y="457" width="25" height="20" offset="0">
+        <tag>will</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>17</xOff>
+          <xOff>20</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="791" y="456" width="47" height="22" offset="0">
+        <tag>arrive</tag>
+        <segmentation>
+          <xOff>9</xOff>
+          <xOff>14</xOff>
+          <xOff>21</xOff>
+          <xOff>27</xOff>
+          <xOff>35</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="529" y="494" width="60" height="25" offset="0">
+        <tag>without</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>19</xOff>
+          <xOff>26</xOff>
+          <xOff>34</xOff>
+          <xOff>44</xOff>
+          <xOff>53</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="597" y="495" width="46" height="23" offset="0">
+        <tag>delay</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>20</xOff>
+          <xOff>26</xOff>
+          <xOff>35</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="652" y="493" width="69" height="23" offset="0">
+        <tag>PLEASE</tag>
+        <segmentation>
+          <xOff>11</xOff>
+          <xOff>22</xOff>
+          <xOff>33</xOff>
+          <xOff>44</xOff>
+          <xOff>55</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="727" y="491" width="28" height="21" offset="0">
+        <tag>DO</tag>
+        <segmentation>
+          <xOff>14</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="763" y="491" width="38" height="20" offset="0">
+        <tag>NOT</tag>
+        <segmentation>
+          <xOff>12</xOff>
+          <xOff>27</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="808" y="490" width="53" height="21" offset="0">
+        <tag>PANIC</tag>
+        <segmentation>
+          <xOff>13</xOff>
+          <xOff>24</xOff>
+          <xOff>36</xOff>
+          <xOff>42</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/bPICT0015.JPG</imageName>
+    <resolution x="960" y="1280" />
+    <taggedRectangles>
+      <taggedRectangle x="38" y="153" width="266" height="56" offset="0">
+        <tag>MAXIMUM</tag>
+        <segmentation>
+          <xOff>48</xOff>
+          <xOff>88</xOff>
+          <xOff>126</xOff>
+          <xOff>139</xOff>
+          <xOff>183</xOff>
+          <xOff>221</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="324" y="151" width="149" height="54" offset="0">
+        <tag>LOAD</tag>
+        <segmentation>
+          <xOff>34</xOff>
+          <xOff>72</xOff>
+          <xOff>110</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="496" y="152" width="140" height="54" offset="0">
+        <tag>1600</tag>
+        <segmentation>
+          <xOff>21</xOff>
+          <xOff>60</xOff>
+          <xOff>101</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="656" y="153" width="76" height="56" offset="0">
+        <tag>KG</tag>
+        <segmentation>
+          <xOff>38</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="149" y="242" width="79" height="54" offset="0">
+        <tag>OR</tag>
+        <segmentation>
+          <xOff>41</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="248" y="240" width="75" height="55" offset="0">
+        <tag>22</tag>
+        <segmentation>
+          <xOff>37</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="343" y="242" width="274" height="53" offset="0">
+        <tag>PERSONS</tag>
+        <segmentation>
+          <xOff>39</xOff>
+          <xOff>78</xOff>
+          <xOff>117</xOff>
+          <xOff>156</xOff>
+          <xOff>195</xOff>
+          <xOff>234</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="178" y="353" width="411" height="79" offset="0">
+        <tag>GUIDELINE</tag>
+        <segmentation>
+          <xOff>53</xOff>
+          <xOff>102</xOff>
+          <xOff>128</xOff>
+          <xOff>178</xOff>
+          <xOff>224</xOff>
+          <xOff>269</xOff>
+          <xOff>295</xOff>
+          <xOff>362</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="224" y="927" width="33" height="47" offset="0">
+        <tag>5</tag>
+        <segmentation />
+      </taggedRectangle>
+      <taggedRectangle x="513" y="826" width="80" height="53" offset="0">
+        <tag>5A</tag>
+        <segmentation>
+          <xOff>38</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="515" y="1040" width="71" height="47" offset="0">
+        <tag>5B</tag>
+        <segmentation>
+          <xOff>31</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="644" y="828" width="75" height="47" offset="0">
+        <tag>5A</tag>
+        <segmentation>
+          <xOff>36</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="637" y="1042" width="73" height="56" offset="0">
+        <tag>5B</tag>
+        <segmentation>
+          <xOff>34</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="515" y="1226" width="59" height="50" offset="0">
+        <tag>4B</tag>
+        <segmentation>
+          <xOff>31</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="238" y="1129" width="28" height="43" offset="0">
+        <tag>4</tag>
+        <segmentation />
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/ComputerScienceSmall.jpg</imageName>
+    <resolution x="338" y="255" />
+    <taggedRectangles>
+      <taggedRectangle x="99" y="94" width="128" height="20" offset="0">
+        <tag>Department</tag>
+        <segmentation>
+          <xOff>16</xOff>
+          <xOff>29</xOff>
+          <xOff>43</xOff>
+          <xOff>54</xOff>
+          <xOff>64</xOff>
+          <xOff>74</xOff>
+          <xOff>93</xOff>
+          <xOff>106</xOff>
+          <xOff>117</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="238" y="96" width="21" height="19" offset="0">
+        <tag>of</tag>
+        <segmentation>
+          <xOff>14</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="100" y="115" width="103" height="21" offset="0">
+        <tag>Computer</tag>
+        <segmentation>
+          <xOff>17</xOff>
+          <xOff>29</xOff>
+          <xOff>48</xOff>
+          <xOff>60</xOff>
+          <xOff>75</xOff>
+          <xOff>84</xOff>
+          <xOff>95</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="100" y="139" width="79" height="19" offset="0">
+        <tag>Science</tag>
+        <segmentation>
+          <xOff>14</xOff>
+          <xOff>25</xOff>
+          <xOff>31</xOff>
+          <xOff>43</xOff>
+          <xOff>55</xOff>
+          <xOff>67</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="314" y="116" width="16" height="37" offset="0">
+        <tag>1</tag>
+        <segmentation />
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/IMG_1214.JPG</imageName>
+    <resolution x="640" y="480" />
+    <taggedRectangles>
+      <taggedRectangle x="96" y="115" width="422" height="94" offset="4">
+        <tag>REDBACK</tag>
+        <segmentation>
+          <xOff>61</xOff>
+          <xOff>116</xOff>
+          <xOff>178</xOff>
+          <xOff>234</xOff>
+          <xOff>295</xOff>
+          <xOff>352</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="35" y="47" width="248" height="60" offset="0">
+        <tag>HOWARD</tag>
+        <segmentation>
+          <xOff>38</xOff>
+          <xOff>76</xOff>
+          <xOff>127</xOff>
+          <xOff>162</xOff>
+          <xOff>200</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="285" y="52" width="293" height="66" offset="0">
+        <tag>JACOBSON</tag>
+        <segmentation>
+          <xOff>29</xOff>
+          <xOff>68</xOff>
+          <xOff>101</xOff>
+          <xOff>141</xOff>
+          <xOff>177</xOff>
+          <xOff>212</xOff>
+          <xOff>251</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/IMG_1252.JPG</imageName>
+    <resolution x="640" y="480" />
+    <taggedRectangles>
+      <taggedRectangle x="220" y="99" width="184" height="53" offset="16">
+        <tag>PanaSync</tag>
+        <segmentation>
+          <xOff>23</xOff>
+          <xOff>46</xOff>
+          <xOff>69</xOff>
+          <xOff>92</xOff>
+          <xOff>118</xOff>
+          <xOff>140</xOff>
+          <xOff>161</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="402" y="101" width="96" height="44" offset="0">
+        <tag>E70</tag>
+        <segmentation>
+          <xOff>33</xOff>
+          <xOff>64</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/IMG_1292.JPG</imageName>
+    <resolution x="1598" y="922" />
+    <taggedRectangles>
+      <taggedRectangle x="384" y="279" width="1117" height="219" offset="0">
+        <tag>conditions</tag>
+        <segmentation>
+          <xOff>131</xOff>
+          <xOff>278</xOff>
+          <xOff>412</xOff>
+          <xOff>564</xOff>
+          <xOff>599</xOff>
+          <xOff>681</xOff>
+          <xOff>713</xOff>
+          <xOff>870</xOff>
+          <xOff>1000</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/PICT0002.JPG</imageName>
+    <resolution x="1280" y="960" />
+    <taggedRectangles>
+      <taggedRectangle x="73" y="770" width="333" height="57" offset="0">
+        <tag>GARDEN</tag>
+        <segmentation>
+          <xOff>52</xOff>
+          <xOff>109</xOff>
+          <xOff>163</xOff>
+          <xOff>224</xOff>
+          <xOff>273</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="434" y="779" width="206" height="52" offset="0">
+        <tag>PATH</tag>
+        <segmentation>
+          <xOff>44</xOff>
+          <xOff>91</xOff>
+          <xOff>142</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="660" y="779" width="103" height="52" offset="0">
+        <tag>AT</tag>
+        <segmentation>
+          <xOff>52</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="792" y="773" width="343" height="57" offset="0">
+        <tag>GIVERNY</tag>
+        <segmentation>
+          <xOff>55</xOff>
+          <xOff>82</xOff>
+          <xOff>136</xOff>
+          <xOff>179</xOff>
+          <xOff>234</xOff>
+          <xOff>291</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="68" y="839" width="223" height="45" offset="0">
+        <tag>CLAUDE</tag>
+        <segmentation>
+          <xOff>42</xOff>
+          <xOff>73</xOff>
+          <xOff>108</xOff>
+          <xOff>148</xOff>
+          <xOff>188</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="311" y="849" width="206" height="40" offset="0">
+        <tag>MONET</tag>
+        <segmentation>
+          <xOff>48</xOff>
+          <xOff>92</xOff>
+          <xOff>134</xOff>
+          <xOff>168</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/PICT0009.JPG</imageName>
+    <resolution x="960" y="1280" />
+    <taggedRectangles>
+      <taggedRectangle x="230" y="331" width="406" height="99" offset="-4">
+        <tag>LITTER</tag>
+        <segmentation>
+          <xOff>59</xOff>
+          <xOff>110</xOff>
+          <xOff>185</xOff>
+          <xOff>258</xOff>
+          <xOff>336</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="231" y="845" width="400" height="62" offset="0">
+        <tag>COLCHESTER</tag>
+        <segmentation>
+          <xOff>35</xOff>
+          <xOff>75</xOff>
+          <xOff>116</xOff>
+          <xOff>152</xOff>
+          <xOff>198</xOff>
+          <xOff>239</xOff>
+          <xOff>277</xOff>
+          <xOff>319</xOff>
+          <xOff>360</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="273" y="914" width="319" height="53" offset="0">
+        <tag>BOROUGH</tag>
+        <segmentation>
+          <xOff>38</xOff>
+          <xOff>81</xOff>
+          <xOff>128</xOff>
+          <xOff>175</xOff>
+          <xOff>225</xOff>
+          <xOff>272</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/PICTs0033.JPG</imageName>
+    <resolution x="640" y="480" />
+    <taggedRectangles>
+      <taggedRectangle x="78" y="309" width="125" height="68" offset="0">
+        <tag>UK</tag>
+        <segmentation>
+          <xOff>62</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="237" y="311" width="315" height="67" offset="0">
+        <tag>DANCE</tag>
+        <segmentation>
+          <xOff>63</xOff>
+          <xOff>137</xOff>
+          <xOff>207</xOff>
+          <xOff>266</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="153" y="382" width="274" height="39" offset="0">
+        <tag>PROTOTYPE</tag>
+        <segmentation>
+          <xOff>30</xOff>
+          <xOff>60</xOff>
+          <xOff>98</xOff>
+          <xOff>124</xOff>
+          <xOff>162</xOff>
+          <xOff>190</xOff>
+          <xOff>220</xOff>
+          <xOff>250</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="442" y="384" width="35" height="38" offset="0">
+        <tag>&amp;</tag>
+        <segmentation />
+      </taggedRectangle>
+      <taggedRectangle x="100" y="426" width="213" height="38" offset="0">
+        <tag>INSPIRED</tag>
+        <segmentation>
+          <xOff>14</xOff>
+          <xOff>49</xOff>
+          <xOff>78</xOff>
+          <xOff>110</xOff>
+          <xOff>122</xOff>
+          <xOff>153</xOff>
+          <xOff>179</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="332" y="425" width="211" height="41" offset="0">
+        <tag>RECORDS</tag>
+        <segmentation>
+          <xOff>29</xOff>
+          <xOff>53</xOff>
+          <xOff>85</xOff>
+          <xOff>123</xOff>
+          <xOff>152</xOff>
+          <xOff>185</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/PICTs0035.JPG</imageName>
+    <resolution x="640" y="480" />
+    <taggedRectangles>
+      <taggedRectangle x="32" y="252" width="130" height="63" offset="4">
+        <tag>First</tag>
+        <segmentation>
+          <xOff>36</xOff>
+          <xOff>52</xOff>
+          <xOff>78</xOff>
+          <xOff>108</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="176" y="255" width="70" height="69" offset="0">
+        <tag>f</tag>
+        <segmentation />
+      </taggedRectangle>
+      <taggedRectangle x="264" y="256" width="178" height="58" offset="0">
+        <tag>Eastern</tag>
+        <segmentation>
+          <xOff>33</xOff>
+          <xOff>62</xOff>
+          <xOff>87</xOff>
+          <xOff>105</xOff>
+          <xOff>134</xOff>
+          <xOff>153</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="457" y="260" width="179" height="56" offset="-4">
+        <tag>National</tag>
+        <segmentation>
+          <xOff>27</xOff>
+          <xOff>52</xOff>
+          <xOff>66</xOff>
+          <xOff>80</xOff>
+          <xOff>109</xOff>
+          <xOff>137</xOff>
+          <xOff>168</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="79" y="334" width="186" height="79" offset="0">
+        <tag>Bus</tag>
+        <segmentation>
+          <xOff>65</xOff>
+          <xOff>130</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="299" y="338" width="292" height="73" offset="0">
+        <tag>Times</tag>
+        <segmentation>
+          <xOff>66</xOff>
+          <xOff>94</xOff>
+          <xOff>183</xOff>
+          <xOff>240</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/PICTs0054_new.JPG</imageName>
+    <resolution x="640" y="480" />
+    <taggedRectangles>
+      <taggedRectangle x="159" y="86" width="327" height="53" offset="0">
+        <tag>EMERGENCY</tag>
+        <segmentation>
+          <xOff>30</xOff>
+          <xOff>82</xOff>
+          <xOff>114</xOff>
+          <xOff>148</xOff>
+          <xOff>184</xOff>
+          <xOff>215</xOff>
+          <xOff>255</xOff>
+          <xOff>290</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="130" y="318" width="140" height="47" offset="0">
+        <tag>DOOR</tag>
+        <segmentation>
+          <xOff>36</xOff>
+          <xOff>72</xOff>
+          <xOff>107</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="284" y="318" width="233" height="48" offset="0">
+        <tag>CONTROL</tag>
+        <segmentation>
+          <xOff>33</xOff>
+          <xOff>68</xOff>
+          <xOff>107</xOff>
+          <xOff>140</xOff>
+          <xOff>171</xOff>
+          <xOff>206</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+  <image>
+    <imageName>scene/SimonLucas.jpg</imageName>
+    <resolution x="1600" y="1200" />
+    <taggedRectangles>
+      <taggedRectangle x="1178" y="739" width="42" height="28" offset="0">
+        <tag>2N</tag>
+        <segmentation>
+          <xOff>19</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="688" y="742" width="88" height="58" offset="0">
+        <tag>4B</tag>
+        <segmentation>
+          <xOff>39</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="794" y="743" width="124" height="57" offset="0">
+        <tag>526</tag>
+        <segmentation>
+          <xOff>36</xOff>
+          <xOff>81</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="670" y="843" width="144" height="40" offset="0">
+        <tag>Simon</tag>
+        <segmentation>
+          <xOff>31</xOff>
+          <xOff>46</xOff>
+          <xOff>87</xOff>
+          <xOff>118</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="833" y="847" width="136" height="39" offset="0">
+        <tag>Lucas</tag>
+        <segmentation>
+          <xOff>27</xOff>
+          <xOff>54</xOff>
+          <xOff>83</xOff>
+          <xOff>110</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="666" y="984" width="191" height="30" offset="0">
+        <tag>Department</tag>
+        <segmentation>
+          <xOff>22</xOff>
+          <xOff>41</xOff>
+          <xOff>62</xOff>
+          <xOff>83</xOff>
+          <xOff>96</xOff>
+          <xOff>108</xOff>
+          <xOff>137</xOff>
+          <xOff>157</xOff>
+          <xOff>177</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="864" y="986" width="31" height="29" offset="0">
+        <tag>of</tag>
+        <segmentation>
+          <xOff>19</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="903" y="990" width="157" height="27" offset="0">
+        <tag>Computer</tag>
+        <segmentation>
+          <xOff>24</xOff>
+          <xOff>43</xOff>
+          <xOff>71</xOff>
+          <xOff>91</xOff>
+          <xOff>111</xOff>
+          <xOff>125</xOff>
+          <xOff>146</xOff>
+        </segmentation>
+      </taggedRectangle>
+      <taggedRectangle x="1072" y="987" width="126" height="28" offset="0">
+        <tag>Science</tag>
+        <segmentation>
+          <xOff>18</xOff>
+          <xOff>40</xOff>
+          <xOff>48</xOff>
+          <xOff>68</xOff>
+          <xOff>88</xOff>
+          <xOff>106</xOff>
+        </segmentation>
+      </taggedRectangle>
+    </taggedRectangles>
+  </image>
+</tagset>
+
