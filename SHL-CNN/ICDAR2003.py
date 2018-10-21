@@ -23,6 +23,11 @@ class ICDAR2003:
 		# import training data
 		self.trainfiles = self.xml_parse(directory+'/'+'train','char.xml')
 		self.testfiles = self.xml_parse(directory+'/'+'test','char.xml')
+		# import pdb
+		# pdb.set_trace()
+		self.trainfiles = self.trainfiles+self.testfiles[689:]
+		self.testfiles = self.testfiles[:689]
+		# pdb.set_trace()
 		self.classes = 62
 		self.mapping = dict(zip(string.ascii_letters+string.digits,range(62)))
 
