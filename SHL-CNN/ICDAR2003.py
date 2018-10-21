@@ -35,12 +35,29 @@ class ICDAR2003:
 			for child in root if re.search(r'^[A-Za-z0-9]$',child.attrib['tag'])]
 		return imagepaths
 
-	def load_data(self):
-		train_data = np.array([get_image(file[0]) for file in self.trainfiles])
-		train_tags = self.one_hot([file[1] for file in self.trainfiles],self.classes)
-		test_data = np.array([get_image(file[0]) for file in self.testfiles])
-		test_tags = self.one_hot([file[1] for file in self.testfiles],self.classes)
+	def load_data(self,size=-1):
+		trainfiles = self.trainfiles[:min(size,len(self.trainfiles))]
+		testfiles = self.testfiles[:min(size,len(self.testfiles))]
+
+		train_data = np.array([get_image(file[0],(48,48)) for file in trainfiles])
+		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes)
+		test_data = np.array([get_image(file[0],(48,48)) for file in testfiles])
+		test_tags = self.one_hot([file[1] for file in testfiles],self.classes)
+
 		return train_data, train_tags, test_data, test_tags
+
+	# def get_max_size(self):
+	# 	from PIL import Image
+	# 	toobig = 0
+	# 	total = 0
+	# 	for file in self.testfiles:
+	# 		im = Image.open(file[0])
+	# 		total += 1
+	# 		if im.size[0] > 48:
+	# 			toobig += 1
+	# 		elif im.size[1] > 48:
+	# 			toobig += 1
+	# 	return toobig,total
 
 	def one_hot(self,targets,classes):
 		targets = np.array([self.mapping[char] for char in targets]).reshape(-1)
