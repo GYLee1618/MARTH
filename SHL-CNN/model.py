@@ -5,8 +5,10 @@ from keras.layers import *
 from keras import backend as K
 from keras.regularizers import l2
 import keras
+from keras.preprocessing.image import ImageDataGenerator
 from ICDAR2003 import ICDAR2003
 import os 
+from sklearn.model_selection import train_test_split
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 BATCH_SIZE = 128
@@ -38,6 +40,9 @@ def output_layer(model,nodes):
 icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
 x_train,y_train,x_test,y_test = icdar2003.load_data()
 x_train = x_train/255.
+
+x_train, x_val, y_train, y_val = train_test_split(
+    x_train,y_train,test_size=.1,random_state=2345432)
 
 # model = SHL(input_shape)
 # model = output_layer(model,NUM_CLASSES_EN)
@@ -74,7 +79,7 @@ datagen.fit(x_train)
 model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           epochs=EPOCHS,
           verbose=1,
-          validation_split=.2)
+          validation_data=(x_val,y_val))
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
