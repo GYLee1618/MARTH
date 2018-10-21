@@ -32,12 +32,12 @@ x_train, x_val, y_train, y_val = train_test_split(
 # model = output_layer(model,NUM_CLASSES_EN)
 model = Sequential()
 model.add(Conv2D(64, kernel_size=(9, 9),activation='sigmoid',input_shape=input_shape,padding='same',
-				data_format='channels_last',kernel_regularizer=l2(0.01),
+				data_format='channels_last',
 				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None)))
 model.add(MaxPooling2D(pool_size=(3, 3),strides=2))
 model.add(BatchNormalization())
 # model.add(Activation('sigmoid'))
-model.add(Conv2D(64, kernel_size=(9, 9),activation='sigmoid',padding='same',kernel_regularizer=l2(0.01),
+model.add(Conv2D(64, kernel_size=(9, 9),activation='sigmoid',padding='same',
 				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None)))
 model.add(BatchNormalization())
 # model.add(Activation('sigmoid'))
@@ -54,10 +54,10 @@ model.add(LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_
 model.add(Flatten())
 model.add(Dense(NUM_CLASSES_EN,activation='softmax',
 				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None),
-				kernel_regularizer=l2(0.001)))
+				kernel_regularizer=l2(0.01)))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
-				optimizer=keras.optimizers.Adam(),
+				optimizer=keras.optimizers.Adam(lr=.0001),
 				metrics=['accuracy'])
 
 # import pdb
