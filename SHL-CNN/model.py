@@ -6,10 +6,26 @@ from keras import backend as K
 from keras.regularizers import l2
 import keras
 from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import LearningRateScheduler, ReduceLROnPlateau
 from ICDAR2003 import ICDAR2003
 import os 
 from sklearn.model_selection import train_test_split
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+
+
+def lr_schedule(epoch):
+    lr = 1e-3
+    
+    if epoch > 180:
+        lr *= 0.5e-3
+    elif epoch > 160:
+        lr *= 1e-3
+    elif epoch > 120:
+        lr *= 1e-2
+    elif epoch > 80:
+        lr *= 1e-1
+    print('Learning rate: ', lr)
+    return lr
 
 BATCH_SIZE = 32
 NUM_CLASSES_EN = 62
@@ -60,6 +76,15 @@ model.compile(loss=keras.losses.categorical_crossentropy,
 				optimizer=keras.optimizers.Adam(),
 				metrics=['accuracy'])
 
+lr_scheduler = LearningRateScheduler(lr_schedule)
+
+lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
+                               cooldown=0,
+                               patience=5,
+                               min_lr=0.5e-6)
+
+callbacks = [lr_reducer,lr_scheduler]
+
 # import pdb
 # pdb.set_trace()
 datagen = ImageDataGenerator(
@@ -75,6 +100,7 @@ datagen.fit(x_train)
 
 model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           epochs=EPOCHS,
+          callbacks=callbacks,
           steps_per_epoch=len(x_train)/BATCH_SIZE,
           verbose=1,
           validation_data=(x_val,y_val))
