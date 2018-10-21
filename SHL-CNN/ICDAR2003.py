@@ -35,7 +35,7 @@ class ICDAR2003:
 			for child in root if re.search(r'^[A-Za-z0-9]$',child.attrib['tag'])]
 		return imagepaths
 
-	def load_data(self):
+	def load_data(self,max_size):
 		train_data = np.array([get_image(file[0]) for file in self.trainfiles])
 		train_tags = self.one_hot([file[1] for file in self.trainfiles],self.classes)
 		test_data = np.array([get_image(file[0]) for file in self.testfiles])
