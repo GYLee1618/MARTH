@@ -25,13 +25,14 @@ NUM_CLASSES_EN = 62
 NUM_CLASSES_RUSS = 500
 EPOCHS = 1
 
-ROWS, COLS = 32,32
+ROWS, COLS = 48,48
 channels = 3
 
 input_shape = (ROWS, COLS, 3)
+icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
 
-(x_train_1,y_train_1),(x_test_1,y_test_1) = cifar10.load_data()
-(x_train_2,y_train_2),(x_test_2,y_test_2) = cifar10.load_data()
+x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data()
+x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data()
 
 
 x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
@@ -55,10 +56,10 @@ x_test_2 /= 255
 
 
 
-y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES)
-y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES)
-y_train_2 = keras.utils.to_categorical(y_train_2, 10)
-y_test_2 = keras.utils.to_categorical(y_test_2, 10)
+y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
+y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
+y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
+y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1)
@@ -78,18 +79,18 @@ g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(g)
 i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(h)
 j = Flatten()(i)
-k1 = Dense(NUM_CLASSES,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
-k2 = Dense(10,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k1 = Dense(NUM_CLASSES_EN,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k2 = Dense(NUM_CLASSES_EN,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.SGD(),
+            	optimizer=keras.optimizers.Adam(lr=.0005),
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.SGD(),
+            	optimizer=keras.optimizers.Adam(lr=.0005),
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
