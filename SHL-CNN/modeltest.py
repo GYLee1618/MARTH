@@ -134,6 +134,9 @@ for ii in range(EPOCHS):
 		x_train_2_b,y_train_2_b = x_train_2_batches[jj]
 		train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 		train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+		print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc)
+		print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc)
+
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
