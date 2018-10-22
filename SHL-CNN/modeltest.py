@@ -20,10 +20,16 @@ def lrn(x):
 	return tf.nn.lrn(x)
 
 BATCH_SIZE = 64
+<<<<<<< HEAD
 NUM_CLASSES = 10
 NUM_CLASSES_EN = 62
 NUM_CLASSES_RUSS = 500
 EPOCHS = 500
+=======
+NUM_CLASSES_1 = 31
+NUM_CLASSES_2 = 31
+EPOCHS = 1
+>>>>>>> c55087274e7ca8099f88ada890212dcd90da696e
 
 ROWS, COLS = 48,48
 channels = 3
@@ -32,8 +38,8 @@ input_shape = (ROWS, COLS, 3)
 
 icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
 
-x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data()
-x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data()
+x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
+x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
 
 x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
 x_test_1 = x_test_1.reshape(x_test_1.shape[0], ROWS, COLS, channels)
@@ -79,8 +85,8 @@ g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(g)
 i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(h)
 j = Flatten()(i)
-k1 = Dense(NUM_CLASSES_EN,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
-k2 = Dense(NUM_CLASSES_EN,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
