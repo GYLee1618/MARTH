@@ -22,7 +22,7 @@ def lrn(x):
 BATCH_SIZE = 64
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
-EPOCHS = 1
+EPOCHS = 1000
 
 ROWS, COLS = 48,48
 channels = 3
