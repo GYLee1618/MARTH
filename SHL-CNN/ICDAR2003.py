@@ -20,7 +20,7 @@ directory
 |  |  |--[filepaths detailed in char.xml]
 '''
 class ICDAR2003:
-	def __init__(self,directory,classes):
+	def __init__(self,directory):
 		# import training data
 		self.trainfiles = ()
 		self.testfiles = ()
