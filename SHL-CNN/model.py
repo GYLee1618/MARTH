@@ -31,7 +31,7 @@ x_train = x_train/255.
 x_test = x_test/255.
 
 x_train, x_val, y_train, y_val = train_test_split(
-    x_train,y_train,test_size=.1,random_state=None)
+    x_train,y_train,test_size=.1,random_state=314321)
 
 # model = SHL(input_shape)
 # model = output_layer(model,NUM_CLASSES_EN)
@@ -58,7 +58,7 @@ model.add(Dense(NUM_CLASSES_EN,activation='softmax',
 				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
-				optimizer=keras.optimizers.SGD(lr=.001),
+				optimizer=keras.optimizers.SGD(lr=.01),
 				metrics=['accuracy'])
 
 lr_reducer = ReduceLROnPlateau(factor=np.sqrt(.01),
@@ -71,6 +71,7 @@ callbacks = [lr_reducer]
 
 # import pdb
 # pdb.set_trace()
+'''
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
@@ -88,6 +89,13 @@ model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           steps_per_epoch=len(x_train)/BATCH_SIZE,
           verbose=1,
           validation_data=(x_val,y_val))
+'''
+
+model.fit(x_train, y_train,
+          batch_size=BATCH_SIZE,
+          epochs=EPOCHS,
+          verbose=1,
+          validation_data=(x_val, y_val))
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
