@@ -20,23 +20,16 @@ def lrn(x):
 	return tf.nn.lrn(x)
 
 BATCH_SIZE = 64
-<<<<<<< HEAD
-NUM_CLASSES = 10
-NUM_CLASSES_EN = 62
-NUM_CLASSES_RUSS = 500
-EPOCHS = 500
-=======
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
-EPOCHS = 1
->>>>>>> c55087274e7ca8099f88ada890212dcd90da696e
+EPOCHS = 1000
 
 ROWS, COLS = 48,48
 channels = 3
 
 input_shape = (ROWS, COLS, 3)
 
-icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
+icdar2003 = ICDAR2003('./ICDAR')
 
 x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
 x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
