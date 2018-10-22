@@ -28,7 +28,8 @@ class ICDAR2003:
 		self.testfiles[0] = self.xml_parse(directory+'/'+'test','char.xml',0)
 		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)
 		self.testfiles[1] = self.xml_parse(directory+'/'+'test','char.xml',1)
-		
+		import pdb
+		pdb.set_trace()
 		self.trainfiles = self.trainfiles+self.testfiles[689:]
 		self.testfiles = self.testfiles[:689]
 		
