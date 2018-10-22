@@ -22,8 +22,8 @@ directory
 class ICDAR2003:
 	def __init__(self,directory):
 		# import training data
-		self.trainfiles = ()
-		self.testfiles = ()
+		self.trainfiles = [0,0]
+		self.testfiles = [0,0]
 		self.trainfiles[0] = self.xml_parse(directory+'/'+'train','char.xml',0)
 		self.testfiles[0] = self.xml_parse(directory+'/'+'test','char.xml',0)
 		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)
@@ -33,7 +33,7 @@ class ICDAR2003:
 		self.testfiles = self.testfiles[:689]
 		
 		self.classes = 31
-		self.mapping = dict(zip(string.ascii_letters+string.digits,range(31)))
+		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
 
 	def xml_parse(self,directory,fname,mode):
 		tree = ET.parse(directory+'/'+fname)
