@@ -23,7 +23,7 @@ BATCH_SIZE = 64
 NUM_CLASSES = 10
 NUM_CLASSES_EN = 62
 NUM_CLASSES_RUSS = 500
-EPOCHS = 1
+EPOCHS = 20
 
 ROWS, COLS = 32,32
 channels = 3
@@ -86,10 +86,10 @@ model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.SGD(),
+            	optimizer=keras.optimizers.Adam(lr=.0005),
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.SGD(),
+            	optimizer=keras.optimizers.Adam(lr=.0005),
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
