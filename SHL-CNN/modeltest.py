@@ -29,11 +29,11 @@ ROWS, COLS = 48,48
 channels = 3
 
 input_shape = (ROWS, COLS, 3)
+
 icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
 
 x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data()
 x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data()
-
 
 x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
 x_test_1 = x_test_1.reshape(x_test_1.shape[0], ROWS, COLS, channels)
@@ -56,10 +56,10 @@ x_test_2 /= 255
 
 
 
-y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
-y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
-y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
-y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
+# y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
+# y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
+# y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
+# y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1)
