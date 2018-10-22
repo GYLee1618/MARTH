@@ -71,12 +71,11 @@ callbacks = [lr_reducer]
 
 # import pdb
 # pdb.set_trace()
-'''
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=60,width_shift_range=0.2,height_shift_range=0.2,shear_range=0.,
-        zoom_range=0.2,channel_shift_range=0.,fill_mode='nearest',cval=0.,
+        rotation_range=30,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
+        zoom_range=0.0,channel_shift_range=0.,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
@@ -89,13 +88,7 @@ model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           steps_per_epoch=len(x_train)/BATCH_SIZE,
           verbose=1,
           validation_data=(x_val,y_val))
-'''
 
-model.fit(x_train, y_train,
-          batch_size=BATCH_SIZE,
-          epochs=EPOCHS,
-          verbose=1,
-          validation_data=(x_val, y_val))
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
