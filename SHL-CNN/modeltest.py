@@ -31,7 +31,7 @@ channels = 3
 input_shape = (ROWS, COLS, 3)
 
 (x_train_1,y_train_1),(x_test_1,y_test_1) = cifar10.load_data()
-(x_train_2,y_train_2),(x_test_2,y_test_2) = cifar100.load_data()
+(x_train_2,y_train_2),(x_test_2,y_test_2) = cifar10.load_data()
 
 
 x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
@@ -57,8 +57,8 @@ x_test_2 /= 255
 
 y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES)
 y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES)
-y_train_2 = keras.utils.to_categorical(y_train_2, 100)
-y_test_2 = keras.utils.to_categorical(y_test_2, 100)
+y_train_2 = keras.utils.to_categorical(y_train_2, 10)
+y_test_2 = keras.utils.to_categorical(y_test_2, 10)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1)
@@ -79,7 +79,7 @@ h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format
 i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
-k2 = Dense(100,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k2 = Dense(10,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
