@@ -129,16 +129,26 @@ for ii in range(EPOCHS):
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_1_b,y_train_1_b = next(x_train_1_batches)
 	x_train_2_b,y_train_2_b = next(x_train_2_batches)
-	for jj in tqdm(range(min(len(x_train_1_batches),len(x_train_2_batches)))): 
+	train1error_sum = 0
+	train2error_sum = 0
+	train1acc_sum = 0
+	train2acc_sum = 0
+	num_batches = min(len(x_train_1_batches),len(x_train_2_batches))
+	for jj in tqdm(range(num_batches)): 
 		x_train_1_b,y_train_1_b = x_train_1_batches[jj]
 		x_train_2_b,y_train_2_b = x_train_2_batches[jj]
 		train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 		train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
-		print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc)
-		print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc)
-
+		train1error_sum += train1error
+		train1acc_sum += train1acc
+		train2error_sum += train2error
+		train2acc_sum += train2acc
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
+	train1error = train1error_sum/num_batches
+	train1acc = train1acc_sum/num_batches
+	train2error = train2error_sum/num_batches
+	train2acc = train2acc_sum/num_batches
 	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
 	print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
