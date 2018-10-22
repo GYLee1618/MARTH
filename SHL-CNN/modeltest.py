@@ -55,9 +55,11 @@ g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(g)
 i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(h)
 j = Flatten()(i)
-k = Dense(NUM_CLASSES_EN,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
-
-model1 = Model(inputs=a, outputs=i)
+k1 = Dense(NUM_CLASSES,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+k2 = Dense(100,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(j)
+ 
+model1 = Model(inputs=a, outputs=k1)
+model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
@@ -70,7 +72,7 @@ model1.fit(x_train, y_train,
           verbose=1,
           validation_split=.1)
 
-score = model1.evaluate(x_test, y_test, verbose=0)
+score = model2.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
