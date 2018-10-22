@@ -65,7 +65,17 @@ model2 = Model(inputs=a, outputs=k2)
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=keras.optimizers.Adam(),
 				metrics=['accuracy'])
+model2.compile(loss=keras.losses.categorical_crossentropy,
+            	optimizer=keras.optimizers.Adam(),
+				metrics=['accuracy'])
 
+layer1 = model1.get_layer(index = 7)
+layer2 = model2.get_layer(index = 7)
+
+
+if layer1 == layer2:
+	print("BOOM")
+'''
 model1.fit(x_train, y_train,
           batch_size=BATCH_SIZE,
           epochs=EPOCHS,
@@ -75,6 +85,7 @@ model1.fit(x_train, y_train,
 score = model2.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+'''
 
 
 
