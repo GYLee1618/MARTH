@@ -12,6 +12,8 @@ import os
 from sklearn.model_selection import train_test_split
 from keras.models import Model
 from keras.datasets import cifar10
+from keras.datasets import cifar100
+from tqdm import tqdm
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 def lrn(x):
@@ -21,27 +23,39 @@ BATCH_SIZE = 64
 NUM_CLASSES = 10
 NUM_CLASSES_EN = 62
 NUM_CLASSES_RUSS = 500
-EPOCHS = 1000
+EPOCHS = 1
 
 ROWS, COLS = 32,32
 channels = 3
 
 input_shape = (ROWS, COLS, 3)
 
-(x_train,y_train),(x_test,y_test) = cifar10.load_data()
+(x_train_1,y_train_1),(x_test_1,y_test_1) = cifar10.load_data()
+(x_train_2,y_train_2),(x_test_2,y_test_2) = cifar100.load_data()
 
-x_train = x_train.reshape(x_train.shape[0], ROWS, COLS, channels)
-x_test = x_test.reshape(x_test.shape[0], ROWS, COLS, channels)
+
+x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
+x_test_1 = x_test_1.reshape(x_test_1.shape[0], ROWS, COLS, channels)
+
+x_train_2 = x_train_2.reshape(x_train_2.shape[0], ROWS, COLS, channels)
+x_test_2 = x_test_2.reshape(x_test_2.shape[0], ROWS, COLS, channels)
 
 input_shape = (ROWS, COLS, channels)
 
-x_train = x_train.astype('float32')
-x_test = x_test.astype('float32')
-x_train /= 255
-x_test /= 255
+x_train_1 = x_train_1.astype('float32')
+x_test_1 = x_test_1.astype('float32')
+x_train_1 /= 255
+x_test_1 /= 255
 
-y_train = keras.utils.to_categorical(y_train, NUM_CLASSES)
-y_test = keras.utils.to_categorical(y_test, NUM_CLASSES)
+x_train_2 = x_train_2.astype('float32')
+x_test_2 = x_test_2.astype('float32')
+x_train_2 /= 255
+x_test_2 /= 255
+
+y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES)
+y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES)
+y_train_2 = keras.utils.to_categorical(y_train_2, 100)
+y_test_2 = keras.utils.to_categorical(y_test_2, 100)
 
 
 
@@ -63,26 +77,62 @@ model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(),
+            	optimizer=keras.optimizers.SGD(),
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(),
+            	optimizer=keras.optimizers.SGD(),
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
 layer2 = model2.get_layer(index = 7)
 
 
+
+
 if layer1 == layer2:
 	print("BOOM")
 
+datagen = ImageDataGenerator(
+        featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
+        samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
+        rotation_range=60,width_shift_range=0.2,height_shift_range=0.2,shear_range=0.,
+        zoom_range=0.2,channel_shift_range=0.,fill_mode='nearest',cval=0.,
+        horizontal_flip=False,vertical_flip=False,rescale=None,
+        preprocessing_function=None,data_format=None,validation_split=0.0)
 
-model1.fit(x_train[:12,:,:,:], y_train[:12,:],
-          batch_size=BATCH_SIZE,
-          epochs=1,
-          verbose=1,
-          validation_split=.1)
+x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE)
+x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE)
 
+m_m,n_n = x_train_1_batches[0]
+
+val1error = 0
+val1acc = 0
+val2error = 0
+val2acc = 0
+train1error = 0
+train2error = 0
+train1acc = 0
+train2acc = 0
+
+
+for ii in range(EPOCHS):
+	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
+	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
+	x_train_1_b,y_train_1_b = next(x_train_1_batches)
+	x_train_2_b,y_train_2_b = next(x_train_2_batches)
+	for jj in tqdm(range(min(len(x_train_1_batches),len(x_train_2_batches)))): 
+		x_train_1_b,y_train_1_b = x_train_1_batches[jj]
+		x_train_2_b,y_train_2_b = x_train_2_batches[jj]
+		train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+		train2error,train2acc = model2.train_on_batch(x_train_1_b,y_train_2_b)
+	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
+	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
+	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
+	print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
+
+
+
+'''
 layer1 = model1.get_layer(index = 7)
 layer2 = model2.get_layer(index = 7)
 
@@ -93,7 +143,7 @@ if layer1 == layer2:
 
 
 
-'''
+
 score = model2.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
