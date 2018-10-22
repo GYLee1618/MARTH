@@ -13,24 +13,13 @@ from sklearn.model_selection import train_test_split
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 
-def lr_schedule(epoch):
-    lr = 1e-3
-    
-    if epoch > 180:
-        lr *= 0.5e-3
-    elif epoch > 160:
-        lr *= 1e-3
-    elif epoch > 120:
-        lr *= 1e-2
-    elif epoch > 80:
-        lr *= 1e-1
-    print('Learning rate: ', lr)
-    return lr
+def lrn(x):
+	return tf.nn.lrn(x)
 
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 NUM_CLASSES_EN = 62
 NUM_CLASSES_RUSS = 500
-EPOCHS = 2500
+EPOCHS = 1000
 
 ROWS, COLS = 48,48
 
@@ -42,56 +31,51 @@ x_train = x_train/255.
 x_test = x_test/255.
 
 x_train, x_val, y_train, y_val = train_test_split(
-    x_train,y_train,test_size=.1,random_state=2345432)
+    x_train,y_train,test_size=.1,random_state=None)
 
 # model = SHL(input_shape)
 # model = output_layer(model,NUM_CLASSES_EN)
 model = Sequential()
-model.add(Conv2D(64, kernel_size=(9, 9),activation='sigmoid',input_shape=input_shape,padding='same',
+model.add(Conv2D(64, kernel_size=(7, 7),activation='sigmoid',input_shape=input_shape,padding='same',
 				data_format='channels_last',
-				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None)))
+				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
 model.add(MaxPooling2D(pool_size=(3, 3),strides=2))
-model.add(BatchNormalization())
-# model.add(Activation('sigmoid'))
-model.add(Conv2D(64, kernel_size=(9, 9),activation='sigmoid',padding='same',
-				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None)))
-model.add(BatchNormalization())
-# model.add(Activation('sigmoid'))
+model.add(Lambda(lrn))
+model.add(Conv2D(64, kernel_size=(7, 7),activation='sigmoid',padding='same',
+				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
+# model.add(BatchNormalization())
+model.add(Lambda(lrn))
 model.add(MaxPooling2D(pool_size=(3, 3),strides=2))
 # model.add(Flatten())
 model.add(LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',
-				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None),
-				kernel_regularizer=l2(0.01)))
+				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
 # model.add(Dropout(.2))
 model.add(LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',
-				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None),
-				kernel_regularizer=l2(0.01)))
+				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
 # model.add(Dropout(.2))
 model.add(Flatten())
 model.add(Dense(NUM_CLASSES_EN,activation='softmax',
-				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01, seed=None),
-				kernel_regularizer=l2(0.01)))
+				kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
-				optimizer=keras.optimizers.Adam(lr=.0001),
+				optimizer=keras.optimizers.SGD(lr=.001),
 				metrics=['accuracy'])
 
-lr_scheduler = LearningRateScheduler(lr_schedule)
-
-lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
+lr_reducer = ReduceLROnPlateau(factor=np.sqrt(.01),
                                cooldown=0,
                                patience=5,
-                               min_lr=0.5e-6)
+                               min_lr=.5e-10,
+                               verbose=1)
 
-callbacks = [lr_reducer,lr_scheduler]
+callbacks = [lr_reducer]
 
 # import pdb
 # pdb.set_trace()
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=12,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
-        zoom_range=0.1,channel_shift_range=0.,fill_mode='nearest',cval=0.,
+        rotation_range=60,width_shift_range=0.2,height_shift_range=0.2,shear_range=0.,
+        zoom_range=0.2,channel_shift_range=0.,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
