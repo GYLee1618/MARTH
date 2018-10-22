@@ -48,7 +48,7 @@ class ICDAR2003:
 		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes)
 		test_data = np.array([get_image(file[0],(48,48)) for file in testfiles])
 		test_tags = self.one_hot([file[1] for file in testfiles],self.classes)
-
+		
 		return train_data, train_tags, test_data, test_tags
 
 	def one_hot(self,targets,classes):
