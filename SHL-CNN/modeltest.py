@@ -75,13 +75,25 @@ layer2 = model2.get_layer(index = 7)
 
 if layer1 == layer2:
 	print("BOOM")
-'''
-model1.fit(x_train, y_train,
+
+
+model1.fit(x_train[:12,:,:,:], y_train[:12,:],
           batch_size=BATCH_SIZE,
-          epochs=EPOCHS,
+          epochs=1,
           verbose=1,
           validation_split=.1)
 
+layer1 = model1.get_layer(index = 7)
+layer2 = model2.get_layer(index = 7)
+
+
+if layer1 == layer2:
+	print("BOOM2")
+
+
+
+
+'''
 score = model2.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
