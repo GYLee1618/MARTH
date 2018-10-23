@@ -22,7 +22,7 @@ def lrn(x):
 BATCH_SIZE = 64
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
-EPOCHS = 1000
+EPOCHS = 10000
 
 ROWS, COLS = 48,48
 channels = 3
@@ -84,12 +84,13 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=keras.initializ
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
+optim = keras.optimizer.SGD(lr=.001,decay=.01)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.0001),
+            	optimizer=optim,
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.0001),
+            	optimizer=optim,
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
@@ -153,6 +154,9 @@ for ii in range(EPOCHS):
 	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
 	print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
+from keras.models import load_model
+
+model.save('SHL-CNN.h5')
 
 
 '''
