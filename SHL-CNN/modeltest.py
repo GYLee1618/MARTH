@@ -66,7 +66,8 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 	x_train_2,y_train_2,test_size=.2,random_state=random.seed(time.time()))
-intial = keras.initializers.RandomNormal(mean=0, stddev=0.01,seed=random.seed(time.time()))
+
+intial = keras.initializers.RandomNormal(mean=0, stddev=0.25,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -106,8 +107,8 @@ model2.compile(loss=keras.losses.categorical_crossentropy,
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=15,width_shift_range=0.4,height_shift_range=0.15,shear_range=0.,
-        zoom_range=0.21,channel_shift_range=0.1,fill_mode='nearest',cval=0.,
+        rotation_range=15,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
+        zoom_range=0.1,channel_shift_range=0.0,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
