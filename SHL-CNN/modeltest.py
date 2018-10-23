@@ -27,7 +27,7 @@ NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
-eps = .0005
+eps = 0
 min_rate = .5e-07
 
 ROWS, COLS = 48,48
@@ -168,11 +168,11 @@ for ii in range(EPOCHS):
 	# print(total_loss)
 	try:
 		# print(losses1,'\n',losses2,'\n',losses3)
-		print(losses2[0]+losses1[0] - losses2[2] - losses1[2])
+		print(losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52)
 	except:
 		pass
 
-	if ((ii > 5 and (losses2[0]+losses1[0]- losses2[2] - losses1[2]) < eps and learn >= min_rate and cooldown <= 0)  or 
+	if ((ii > 5 and (losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
 		learn = learn*np.sqrt(.1)
