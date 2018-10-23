@@ -69,10 +69,10 @@ x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 
 
 a = Input(shape=input_shape)
-b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.0001))(a)
+b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.0001))(d)
+e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(d)
 f = MaxPooling2D(pool_size=(3, 3),strides=2)(e)
 g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01))(g)
@@ -86,10 +86,10 @@ model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.00025),
+            	optimizer=keras.optimizers.Adam(lr=.0001),
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.00025),
+            	optimizer=keras.optimizers.Adam(lr=.0001),
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
