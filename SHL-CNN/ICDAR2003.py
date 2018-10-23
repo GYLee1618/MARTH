@@ -36,7 +36,7 @@ class ICDAR2003:
 		self.testfiles[1] = self.testfiles[1][:344]
 		
 		self.classes = (26,36)
-		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
+		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(26))+list(range(36))))
 
 	def xml_parse(self,directory,fname,mode):
 		tree = ET.parse(directory+'/'+fname)
