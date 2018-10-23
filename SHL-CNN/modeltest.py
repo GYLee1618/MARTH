@@ -124,9 +124,12 @@ train1error = 0
 train2error = 0
 train1acc = 0
 train2acc = 0
-
+from keras.models import load_model
 
 for ii in range(EPOCHS):
+	if ii % 100 == 0:
+		model1.save('SHL-CNN1.h5')
+		model2.save('SHL-CNN2.h5')
 	print("Epoch: ", ii)
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
