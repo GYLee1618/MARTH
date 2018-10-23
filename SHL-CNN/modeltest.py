@@ -25,7 +25,7 @@ BATCH_SIZE = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 EPOCHS = 10000
-eps = .0001
+eps = .000001
 min_rate = .5e-07
 
 ROWS, COLS = 48,48
@@ -137,7 +137,7 @@ for ii in range(EPOCHS):
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
-	total_loss = [(losses1[i+1]+losses2[i+1]) - (losses1[i]+losses2[i]) for i in range(len(losses1)-1)]
+	total_loss = [np.abs((losses1[i+1]+losses2[i+1]) - (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	if all(loss < eps for loss in total_loss) and learn >= min_rate:
 		learn = learn*np.sqrt(.1)
 		print("Changing learning rate to: ",learn)
