@@ -171,7 +171,7 @@ for ii in range(EPOCHS):
 
 	for jj in tqdm(range(num_batches)): 
 		if random.random() >.5:
-			if batch1_count > len(x_train_1_batches):
+			if batch1_count > len(x_train_1_batches)-1:
 				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 				train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 				batch2_count += 1
@@ -181,7 +181,7 @@ for ii in range(EPOCHS):
 				batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 		else:
-			if batch2_count > len(x_train_2_batches):
+			if batch2_count > len(x_train_2_batches)-1:
 				x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 				train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 				batch1_count +=1
