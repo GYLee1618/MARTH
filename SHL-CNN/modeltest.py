@@ -86,10 +86,10 @@ model2 = Model(inputs=a, outputs=k2)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.001),
+            	optimizer=keras.optimizers.Adam(lr=.00025),
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=keras.optimizers.Adam(lr=.001),
+            	optimizer=keras.optimizers.Adam(lr=.00025),
 				metrics=['accuracy'])
 
 layer1 = model1.get_layer(index = 7)
