@@ -58,8 +58,6 @@ class ICDAR2003:
 		imagepaths = [(directory+'/'+child.attrib['file'],child.attrib['tag'])
 			for child in root if re.search(regex,child.attrib['tag'])]
 
-		import pdb
-		pdb.set_trace()
 		return imagepaths
 
 	def load_data(self,dataset,size=-1):

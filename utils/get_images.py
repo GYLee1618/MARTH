@@ -4,8 +4,7 @@ import numpy as np
 def get_image(fname,size):
     im = Image.open(fname)
     im.thumbnail(size,Image.LANCZOS)
-    
-    	
+
     pix = im.getdata()
     pix = np.array(pix).reshape((im.size[0],im.size[1],3))
 
