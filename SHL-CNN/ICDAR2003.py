@@ -22,30 +22,36 @@ directory
 class ICDAR2003:
 	def __init__(self,directory):
 		# import training data
-		self.trainfiles = [0,0]
-		self.testfiles = [0,0]
+		self.trainfiles = [0,0,0]
+		self.testfiles = [0,0,0]
 		self.trainfiles[0] = self.xml_parse(directory+'/'+'train','char.xml',0)
 		self.testfiles[0] = self.xml_parse(directory+'/'+'test','char.xml',0)
 		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)
 		self.testfiles[1] = self.xml_parse(directory+'/'+'test','char.xml',1)
+		self.trainfiles[2] = self.xml_parse(directory+'/'+'train','char.xml',2)
+		self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
 		# import pdb
 		# pdb.set_trace()
-		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0][344:]
-		self.testfiles[0] = self.testfiles[0][:344]
-		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1][344:]
-		self.testfiles[1] = self.testfiles[1][:344]
+		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0][300:]
+		self.testfiles[0] = self.testfiles[0][:300]
+		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1][300:]
+		self.testfiles[1] = self.testfiles[1][:300]
+		self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2][100:]
+		self.testfiles[2] = self.testfiles[2][:100]
 		
-		self.classes = (26,36)
-		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(26))+list(range(36))))
+		self.classes = (26,26,10)
+		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(26))+list(range(26))+list(range(26))))
 
 	def xml_parse(self,directory,fname,mode):
 		tree = ET.parse(directory+'/'+fname)
 		root = tree.getroot()
 		
-		if mode:
-			regex = r'^[A-Z0-9]$'
-		else:
+		if mode == 0:
+			regex = r'^[A-Z]$'
+		elif mode == 1:
 			regex = r'^[a-z]$'
+		elif mode == 2:
+			regex = r'^[0-9]$'
 
 		# only want alphanumeric for this case
 		imagepaths = [(directory+'/'+child.attrib['file'],child.attrib['tag'])
