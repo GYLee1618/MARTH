@@ -37,7 +37,7 @@ icdar2003 = ICDAR2003('./ICDAR')
 
 x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
 x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
-x_train_3,y_train_3,x_test_3,y_test_3 = icdar2003.load_data(2)
+# x_train_3,y_train_3,x_test_3,y_test_3 = icdar2003.load_data(2)
 
 # x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
 # x_test_1 = x_test_1.reshape(x_test_1.shape[0], ROWS, COLS, channels)
@@ -152,7 +152,7 @@ lastloss2 = 0
 lastloss3 = 0
 cooldown = 0
 from keras.models import load_model
-
+(len(x_train_1_batches)/num_batches)
 losses1 = []
 losses2 = []
 losses3 = []
