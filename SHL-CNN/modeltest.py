@@ -238,8 +238,7 @@ for ii in range(EPOCHS):
 			jj -= 1
 
 		
-		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}\
-				Train3 loss: {:0.4}  Train3 accuracy: {:0.4}     ".format(jj+1,num_batches,
+		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   Train3 loss: {:0.4f}  Train3 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 				train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
 				train2acc_sum/(batch2_count+.0001),train3error_sum/(batch3_count+.0001),train3acc_sum/(batch3_count+.0001)),end='\r')
 
@@ -265,12 +264,10 @@ for ii in range(EPOCHS):
 		losses3.pop(0)
 	train3acc = train3acc_sum/num_batches
 
-	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   \
-			Train3 loss: {:0.4}  Train3 accuracy: {:0.4}     ".format(jj+1,num_batches,
+	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   Train3 loss: {:0.4f}  Train3 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001),
 			train3error_sum/(batch3_count+.0001),train3acc_sum/(batch3_count+.0001)))
-	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}   \
-			Val3 loss:   {:0.4f}  Val3 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
+	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}   Val3 loss:   {:0.4f}  Val3 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
 			val1error,val1acc,val2error,val2acc,val3error,val3acc))
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
