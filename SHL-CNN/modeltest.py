@@ -76,8 +76,8 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 	x_train_2,y_train_2,test_size=.1,random_state=random.seed(time.time()))
 
-x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
-	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
+# x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
+# 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
 
 intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
 
