@@ -30,7 +30,7 @@ EPOCHS = 10000
 eps = 0
 min_rate = .5e-07
 
-ROWS, COLS = 128,128
+ROWS, COLS = 96,96
 channels = 3
 
 
