@@ -185,9 +185,9 @@ for ii in range(EPOCHS):
 		model2.compile(loss=keras.losses.categorical_crossentropy,
 		            	optimizer=optim,
 						metrics=['accuracy'])
-		model3.compile(loss=keras.losses.categorical_crossentropy,
-		            	optimizer=optim,
-						metrics=['accuracy'])
+		# model3.compile(loss=keras.losses.categorical_crossentropy,
+		#             	optimizer=optim,
+		# 				metrics=['accuracy'])
 	cooldown -= 1
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
