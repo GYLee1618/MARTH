@@ -166,7 +166,7 @@ for ii in range(EPOCHS):
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
 	try:
-		print(losses1,'\n',losses2,'\n',losses3)
+		# print(losses1,'\n',losses2,'\n',losses3)
 		print(losses2[0]+losses1[0]+losses3[0] - losses2[2] - losses1[2] - losses3[2])
 	except:
 		pass
@@ -247,23 +247,23 @@ for ii in range(EPOCHS):
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	val3error,val3acc = model3.test_on_batch(x_val_3,y_val_3)
 	
-	train1error = train1error_sum/num_batches
+	train1error = train1error_sum/batch1_count
 	losses1 += [train1error]
 	if (len(losses1) > 3):
 		losses1.pop(0)
-	train1acc = train1acc_sum/num_batches
+	train1acc = train1acc_sum/batch1_count
 	
-	train2error = train2error_sum/num_batches
+	train2error = train2error_sum/batch2_count
 	losses2 += [train2error]
 	if (len(losses2) > 3):
 		losses2.pop(0)
-	train2acc = train2acc_sum/num_batches
+	train2acc = train2acc_sum/batch2_count
 
-	train3error = train3error_sum/num_batches
+	train3error = train3error_sum/batch3_count
 	losses3 += [train3error]
 	if (len(losses3) > 3):
 		losses3.pop(0)
-	train3acc = train3acc_sum/num_batches
+	train3acc = train3acc_sum/batch3_count
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   Train3 loss: {:0.4f}  Train3 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001),
