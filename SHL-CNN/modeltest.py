@@ -22,8 +22,8 @@ def lrn(x):
 	return tf.nn.lrn(x)
 
 BATCH_SIZE = 16
-NUM_CLASSES_1 = 26
-NUM_CLASSES_2 = 26
+NUM_CLASSES_1 = 52
+NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
 eps = .0005
@@ -32,7 +32,6 @@ min_rate = .5e-07
 ROWS, COLS = 48,48
 channels = 3
 
-input_shape = (ROWS, COLS, 3)
 
 icdar2003 = ICDAR2003('./ICDAR')
 
@@ -95,13 +94,13 @@ i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
-k3 = Dense(NUM_CLASSES_3,activation='softmax',kernel_initializer=intial)(j)
+# k3 = Dense(NUM_CLASSES_3,activation='softmax',kernel_initializer=intial)(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
-model3 = Model(inputs=a, outputs=k3)
+# model3 = Model(inputs=a, outputs=k3)
 learn = .01
-optim = keras.optimizers.SGD(lr=learn, momentum=.5)
+optim = keras.optimizers.SGD(lr=learn)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
@@ -109,11 +108,12 @@ model1.compile(loss=keras.losses.categorical_crossentropy,
 model2.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
 				metrics=['accuracy'])
-model3.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=optim,
-				metrics=['accuracy'])
+# model3.compile(loss=keras.losses.categorical_crossentropy,
+#             	optimizer=optim,
+# 				metrics=['accuracy'])
 
-# layer1 = model1.get_layer(index = 7)
+ # layer1 = model1.get_layer(index = 2)
+ # print(layer1.output_shape)
 # layer2 = model2.get_layer(index = 7)
 
 
@@ -132,7 +132,7 @@ datagen = ImageDataGenerator(
 
 x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE)
 x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE)
-x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE)
+# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE)
 
 
 val1error = 0
@@ -162,21 +162,21 @@ for ii in range(EPOCHS):
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
-		model3.save('SHL-CNN3.h5')
+		# model3.save('SHL-CNN3.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
 	try:
 		# print(losses1,'\n',losses2,'\n',losses3)
-		print(losses2[0]+losses1[0]+losses3[0] - losses2[2] - losses1[2] - losses3[2])
+		print(losses2[0]+losses1[0] - losses2[2] - losses1[2])
 	except:
 		pass
 
-	if ((ii > 5 and (losses2[0]+losses1[0]+losses3[0] - losses2[2] - losses1[2]-losses3[2]) < eps and learn >= min_rate and cooldown <= 0)  or 
+	if ((ii > 5 and (losses2[0]+losses1[0]- losses2[2] - losses1[2]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
 		learn = learn*np.sqrt(.1)
 		print("Changing learning rate to: ",learn)
-		optim = keras.optimizers.SGD(lr=learn,momentum=.5)
+		optim = keras.optimizers.SGD(lr=learn)
 
 		model1.compile(loss=keras.losses.categorical_crossentropy,
 		            	optimizer=optim,
@@ -223,30 +223,30 @@ for ii in range(EPOCHS):
 			train1acc_sum += train1acc
 			batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
-		elif (rng > (len(x_train_1_batches)/num_batches)  and rng < 1-(len(x_train_3_batches)/num_batches) 
+		elif (rng > (len(x_train_1_batches)/num_batches)#  and rng < 1-(len(x_train_3_batches)/num_batches) 
 			and batch2_count < len(x_train_2_batches)):
 			x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 			train2error_sum += train2error
 			train2acc_sum += train2acc
 			batch2_count += 1
-		elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
-			x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
-			train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
-			train3error_sum += train3error
-			train3acc_sum += train3acc
+		# elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
+		# 	x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
+		# 	train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
+		# 	train3error_sum += train3error
+		# 	train3acc_sum += train3acc
 			batch3_count +=1
 		else:
 			jj -= 1
 
 		
-		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   Train3 loss: {:0.4f}  Train3 accuracy: {:0.4f}     ".format(jj+1,num_batches,
-				train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
-				train2acc_sum/(batch2_count+.0001),train3error_sum/(batch3_count+.0001),train3acc_sum/(batch3_count+.0001)),end='\r')
+		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".
+				format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
+				train2acc_sum/(batch2_count+.0001)),end='\r')
 
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
-	val3error,val3acc = model3.test_on_batch(x_val_3,y_val_3)
+	# val3error,val3acc = model3.test_on_batch(x_val_3,y_val_3)
 	
 	train1error = train1error_sum/batch1_count
 	losses1 += [train1error]
@@ -260,23 +260,22 @@ for ii in range(EPOCHS):
 		losses2.pop(0)
 	train2acc = train2acc_sum/batch2_count
 
-	train3error = train3error_sum/batch3_count
-	losses3 += [train3error]
-	if (len(losses3) > 3):
-		losses3.pop(0)
-	train3acc = train3acc_sum/batch3_count
+	# train3error = train3error_sum/batch3_count
+	# losses3 += [train3error]
+	# if (len(losses3) > 3):
+	# 	losses3.pop(0)
+	# train3acc = train3acc_sum/batch3_count
 
-	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}   Train3 loss: {:0.4f}  Train3 accuracy: {:0.4f}     ".format(jj+1,num_batches,
-			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001),
-			train3error_sum/(batch3_count+.0001),train3acc_sum/(batch3_count+.0001)))
-	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}   Val3 loss:   {:0.4f}  Val3 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
-			val1error,val1acc,val2error,val2acc,val3error,val3acc))
+	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
+			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
+	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
+			val1error,val1acc,val2error,val2acc))
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
 
-from keras.models import load_model
+# from keras.models import load_model
 
-model.save('SHL-CNN.h5')
+# model.save('SHL-CNN.h5')
 
 
 '''

@@ -28,29 +28,29 @@ class ICDAR2003:
 		self.testfiles[0] = self.xml_parse(directory+'/'+'test','char.xml',0)
 		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)
 		self.testfiles[1] = self.xml_parse(directory+'/'+'test','char.xml',1)
-		self.trainfiles[2] = self.xml_parse(directory+'/'+'train','char.xml',2)
-		self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
+		# self.trainfiles[2] = self.xml_parse(directory+'/'+'train','char.xml',2)
+		# self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
 		# import pdb
 		# pdb.set_trace()
 		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0]
 		self.testfiles[0] = None
 		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1]
 		self.testfiles[1] = None
-		self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2]
-		self.testfiles[2] = None
+		# self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2]
+		# self.testfiles[2] = None
 		
-		self.classes = (26,26,10)
-		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(26))+list(range(26))+list(range(26))))
+		self.classes = (52,10)
+		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(52))+list(range(10))))
 
 	def xml_parse(self,directory,fname,mode):
 		tree = ET.parse(directory+'/'+fname)
 		root = tree.getroot()
 		
 		if mode == 0:
-			regex = r'^[A-Z]$'
+			regex = r'^[A-Za-z]$'
+		# elif mode == 1:
+			# regex = r'^[a-z]$'
 		elif mode == 1:
-			regex = r'^[a-z]$'
-		elif mode == 2:
 			regex = r'^[0-9]$'
 
 		# only want alphanumeric for this case
