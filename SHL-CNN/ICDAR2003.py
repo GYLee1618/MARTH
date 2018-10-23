@@ -35,7 +35,7 @@ class ICDAR2003:
 		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1][344:]
 		self.testfiles[1] = self.testfiles[1][:344]
 		
-		self.classes = 31
+		self.classes = (26,36)
 		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
 
 	def xml_parse(self,directory,fname,mode):
@@ -43,9 +43,9 @@ class ICDAR2003:
 		root = tree.getroot()
 		
 		if mode:
-			regex = r'^[A-Z0-4]$'
+			regex = r'^[A-Z0-9]$'
 		else:
-			regex = r'^[a-z5-9]$'
+			regex = r'^[a-z]$'
 
 		# only want alphanumeric for this case
 		imagepaths = [(directory+'/'+child.attrib['file'],child.attrib['tag'])
@@ -57,9 +57,9 @@ class ICDAR2003:
 		testfiles = self.testfiles[dataset][:min(size,len(self.testfiles))]
 
 		train_data = np.array([get_image(file[0],(48,48)) for file in trainfiles])
-		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes)
+		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes[dataset])
 		test_data = np.array([get_image(file[0],(48,48)) for file in testfiles])
-		test_tags = self.one_hot([file[1] for file in testfiles],self.classes)
+		test_tags = self.one_hot([file[1] for file in testfiles],self.classes[dataset])
 
 		return train_data, train_tags, test_data, test_tags
 
