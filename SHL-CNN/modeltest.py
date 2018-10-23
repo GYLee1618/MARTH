@@ -173,7 +173,7 @@ for ii in range(EPOCHS):
 	if ((ii > 5 and (losses2[2]+losses1[2]+losses3[2] - losses2[4] - losses1[4]-losses3[4]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 5
-		learn = learn*.5
+		learn = learn*np.sqrt(.1)
 		print("Changing learning rate to: ",learn)
 		optim = keras.optimizers.SGD(lr=learn,momentum=.5)
 

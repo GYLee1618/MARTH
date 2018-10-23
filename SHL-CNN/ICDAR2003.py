@@ -32,12 +32,12 @@ class ICDAR2003:
 		self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
 		# import pdb
 		# pdb.set_trace()
-		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0][300:]
-		self.testfiles[0] = self.testfiles[0][:300]
-		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1][300:]
-		self.testfiles[1] = self.testfiles[1][:300]
-		self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2][100:]
-		self.testfiles[2] = self.testfiles[2][:100]
+		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0]
+		self.testfiles[0] = None
+		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1]
+		self.testfiles[1] = None
+		self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2]
+		self.testfiles[2] = None
 		
 		self.classes = (26,26,10)
 		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(26))+list(range(26))+list(range(26))))
