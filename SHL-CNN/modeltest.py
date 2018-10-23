@@ -131,9 +131,11 @@ lastloss1 = 0
 lastloss2 = 0
 from keras.models import load_model
 
+losses1 = []
+losses2 = []
+
 for ii in range(EPOCHS):
-	losses1 = []
-	losses2 = []
+	
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
@@ -212,9 +214,13 @@ for ii in range(EPOCHS):
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	train1error = train1error_sum/num_batches
 	losses1 += [train1error]
+	if (len(losses1) > 5):
+		losses1.pop(0)
 	train1acc = train1acc_sum/num_batches
 	train2error = train2error_sum/num_batches
 	losses2 += [train2error]
+	if (len(losses2) > 5):
+		losses2.pop(0)
 	train2acc = train2acc_sum/num_batches
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
