@@ -84,14 +84,14 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(tim
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
-i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 #k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
