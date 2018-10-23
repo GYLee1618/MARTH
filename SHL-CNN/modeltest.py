@@ -62,22 +62,22 @@ x_test_2 /= 255
 # y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
-	x_train_1,y_train_1,test_size=.05,random_state=random.seed(time.time()))
+	x_train_1,y_train_1,test_size=.2,random_state=random.seed(time.time()))
 
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
-	x_train_2,y_train_2,test_size=.05,random_state=random.seed(time.time()))
+	x_train_2,y_train_2,test_size=.2,random_state=random.seed(time.time()))
 intial = keras.initializers.RandomNormal(mean=0, stddev=0.01,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = MaxPooling2D(pool_size=(3, 3),strides=2)(e)
 g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
-i = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -85,7 +85,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizers.SGD(lr=.01,decay=.00001)
+optim = keras.optimizers.SGD(lr=.1,decay=.0001)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
