@@ -68,7 +68,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 	x_train_2,y_train_2,test_size=.2,random_state=random.seed(time.time()))
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.5,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -196,8 +196,8 @@ for ii in range(EPOCHS):
 	train2error = train2error_sum/num_batches
 	losses2 += [train2error]
 	train2acc = train2acc_sum/num_batches
-	print('\n')
-	print("Val1 loss: {:0.4f}\tVal1 accuracy: {:0.4f}\tVal2 loss: {:0.4f}\tVal2 accuracy: {:0.4f}\r".format(
+	print('\n',end=None)
+	print("Val1 loss: {:0.4f}\tVal1 accuracy: {:0.4f}\tVal2 loss: {:0.4f}\tVal2 accuracy: {:0.4f}\n".format(
 			val1error,val1acc,val2error,val2acc))
 
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
