@@ -142,6 +142,11 @@ for ii in range(EPOCHS):
 		model2.save('SHL-CNN2.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
+	try:
+		print(losses2[2]+losses1[2] - losses2[4] - losses1[4])
+	except:
+		pass
+		
 	if ((ii > 5 and (losses2[2]+losses1[2] - losses2[4] - losses1[4]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 5
@@ -156,7 +161,7 @@ for ii in range(EPOCHS):
 		model2.compile(loss=keras.losses.categorical_crossentropy,
 		            	optimizer=optim,
 						metrics=['accuracy'])
-		cooldown -= 1
+	cooldown -= 1
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
