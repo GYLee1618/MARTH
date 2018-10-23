@@ -70,17 +70,17 @@ x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 
 
 a = Input(shape=input_shape)
-b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(a)
+b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(d)
+e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(d)
 f = MaxPooling2D(pool_size=(3, 3),strides=2)(e)
 g = Lambda(lrn)(f)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(g)
-i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(h)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(g)
+i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(h)
 j = Flatten()(i)
-k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(j)
-k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.now())))(j)
+k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(j)
+k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time())))(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
