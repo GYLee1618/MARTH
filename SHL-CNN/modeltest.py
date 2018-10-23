@@ -32,7 +32,7 @@ input_shape = (ROWS, COLS, 3)
 
 icdar2003 = ICDAR2003('./ICDAR')
 
-x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
+x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(1)
 x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
 
 x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
