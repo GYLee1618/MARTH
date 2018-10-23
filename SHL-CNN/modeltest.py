@@ -100,14 +100,16 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
-learn = .01
-optim = keras.optimizers.SGD(lr=learn)
+learn1 = .001
+learn2 = .1
+optim1 = keras.optimizers.SGD(lr=learn1)
+optim2 = keras.optimizers.SGD(lr=learn2)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=optim,
+            	optimizer=optim1,
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
-            	optimizer=optim,
+            	optimizer=optim2,
 				metrics=['accuracy'])
 # model3.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim,
@@ -175,16 +177,18 @@ for ii in range(EPOCHS):
 	if ((ii > 5 and (losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
-		learn = learn*np.sqrt(.1)
+		learn1 = learn1*np.sqrt(.1)
+		learn2 = learn2*np.sqrt(.1)
 		print("Changing learning rate to: ",learn)
-		optim = keras.optimizers.SGD(lr=learn)
+		optim1 = keras.optimizers.SGD(lr=learn1)
+		optim2 = keras.optimizers.SGD(lr=learn2)
 
 		model1.compile(loss=keras.losses.categorical_crossentropy,
-		            	optimizer=optim,
+		            	optimizer=optim1,
 						metrics=['accuracy'])
 
 		model2.compile(loss=keras.losses.categorical_crossentropy,
-		            	optimizer=optim,
+		            	optimizer=optim2,
 						metrics=['accuracy'])
 		# model3.compile(loss=keras.losses.categorical_crossentropy,
 		#             	optimizer=optim,
