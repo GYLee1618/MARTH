@@ -25,7 +25,7 @@ BATCH_SIZE = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 EPOCHS = 10000
-eps = .001
+eps = .0005
 min_rate = .5e-07
 
 ROWS, COLS = 48,48
@@ -146,11 +146,11 @@ for ii in range(EPOCHS):
 		print(losses2[2]+losses1[2] - losses2[4] - losses1[4])
 	except:
 		pass
-		
+
 	if ((ii > 5 and (losses2[2]+losses1[2] - losses2[4] - losses1[4]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 5
-		learn = learn*np.sqrt(.1)
+		learn = learn*.5
 		print("Changing learning rate to: ",learn)
 		optim = keras.optimizers.SGD(lr=learn,momentum=.5)
 
