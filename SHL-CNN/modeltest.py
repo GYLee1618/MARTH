@@ -41,7 +41,7 @@ def lr_schedule(epoch):
 
 rows, cols,channels = 48,48,3
 
-icdar2003 = ICDAR2003('./ICDAR',NUM_CLASSES_EN)
+icdar2003 = ICDAR2003('./ICDAR')
 x_train,y_train,x_test,y_test = icdar2003.load_data(1)
 
 x_train, x_val, y_train, y_val = train_test_split(
