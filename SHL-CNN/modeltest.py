@@ -141,8 +141,12 @@ for ii in range(EPOCHS):
 	for jj in tqdm(range(num_batches)): 
 		x_train_1_b,y_train_1_b = x_train_1_batches[jj]
 		x_train_2_b,y_train_2_b = x_train_2_batches[jj]
-		train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
-		train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+		if jj %2 == 0:
+			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+		else:
+			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 		train1error_sum += train1error
 		train1acc_sum += train1acc
 		train2error_sum += train2error
