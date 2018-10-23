@@ -85,7 +85,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizers.SGD(lr=.1,decay=.0001)
+optim = keras.optimizers.SGD(lr=.01,nesterov=True)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
@@ -114,7 +114,6 @@ datagen = ImageDataGenerator(
 x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE)
 x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE)
 
-m_m,n_n = x_train_1_batches[0]
 
 val1error = 0
 val1acc = 0
