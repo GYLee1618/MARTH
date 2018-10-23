@@ -58,9 +58,9 @@ x_train_2 = x_train_2.astype('float32')
 x_train_2 /= 255
 # x_test_2 /= 255
 
-x_train_3 = x_train_3.astype('float32')
+# x_train_3 = x_train_3.astype('float32')
 # x_test_3 = x_test_3.astype('float32')
-x_train_3 /= 255
+# x_train_3 /= 255
 # x_test_3 /= 255
 
 
