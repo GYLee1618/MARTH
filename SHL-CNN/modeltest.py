@@ -22,7 +22,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 BATCH_SIZE = 32
 NUM_CLASSES = 10
-EPOCHS = 5
+EPOCHS = 100
 
 def lr_schedule(epoch):
     lr = 1e-3
@@ -137,9 +137,9 @@ model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           verbose=1,
           validation_data=(x_val,y_val))
 
-score = model.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+#score = model.evaluate(x_test, y_test, verbose=0)
+#print('Test loss:', score[0])
+#print('Test accuracy:', score[1])
 
 
 
