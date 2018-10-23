@@ -161,7 +161,7 @@ for ii in range(EPOCHS):
 	losses2 = []
 	
 
-	for jj in tqdm(range(num_batches)): 
+	for jj in range(num_batches): 
 		if random.random() >.5:
 			if batch1_count > len(x_train_1_batches)-1:
 				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
@@ -186,7 +186,7 @@ for ii in range(EPOCHS):
 		train1acc_sum += train1acc
 		train2error_sum += train2error
 		train2acc_sum += train2acc
-		print("Train1 loss: {:0.4f}\tTrain1 accuracy: {:0.4f}\tTrain2 loss: {:0.4f}\tTrain2 accuracy: {:0.4f}".format(
+		print("Batch:{}/{}\tTrain1 loss: {:0.4f}\tTrain1 accuracy: {:0.4f}\tTrain2 loss: {:0.4f}\tTrain2 accuracy: {:0.4f}".format(jj,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc/(batch1_count+.0001),train2error/(batch2_count+.0001),train2acc/(batch2_count+.0001)),end='\r')
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
