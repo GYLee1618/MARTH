@@ -200,7 +200,7 @@ for ii in range(EPOCHS):
 	train1acc_sum = 0
 	train2acc_sum = 0
 	train3acc_sum = 0
-	num_batches = len(x_train_1_batches)+len(x_train_2_batches)+len(x_train_3_batches)
+	num_batches = len(x_train_1_batches)+len(x_train_2_batches)#+len(x_train_3_batches)
 	batch1_count = 0
 	batch2_count = 0
 	batch3_count = 0
