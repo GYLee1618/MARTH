@@ -84,14 +84,14 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(tim
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
-i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+h = LocallyConnected2D(64,(7,7),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+i = LocallyConnected2D(32,(7,7),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -101,7 +101,7 @@ model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
 learn1 = .01
-learn2 = .00001
+learn2 = .0001
 optim1 = keras.optimizers.SGD(lr=learn1)
 optim2 = keras.optimizers.SGD(lr=learn2)
 
@@ -162,9 +162,9 @@ losses3 = []
 
 for ii in range(EPOCHS):
 	
-	if ii % 100 == 0:
-		model1.save('SHL-CNN1.h5')
-		model2.save('SHL-CNN2.h5')
+	# if ii % 100 == 0:
+		# model1.save('SHL-CNN1.h5')
+		# model2.save('SHL-CNN2.h5')
 		# model3.save('SHL-CNN3.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
