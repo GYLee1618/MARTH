@@ -85,7 +85,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizers.SGD(lr=.01,momentum=1,nesterov=True,decay=.001)
+optim = keras.optimizers.SGD(lr=.01,decay=.001)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
@@ -106,8 +106,8 @@ model2.compile(loss=keras.losses.categorical_crossentropy,
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=15,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
-        zoom_range=0.1,channel_shift_range=0.,fill_mode='nearest',cval=0.,
+        rotation_range=15,width_shift_range=0.4,height_shift_range=0.15,shear_range=0.,
+        zoom_range=0.21,channel_shift_range=0.1,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
@@ -132,8 +132,6 @@ for ii in range(EPOCHS):
 	print("Epoch: ", ii)
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
-	x_train_1_b,y_train_1_b = next(x_train_1_batches)
-	x_train_2_b,y_train_2_b = next(x_train_2_batches)
 	train1error_sum = 0
 	train2error_sum = 0
 	train1acc_sum = 0
