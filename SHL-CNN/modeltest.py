@@ -192,7 +192,7 @@ for ii in range(EPOCHS):
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
-	x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE,shuffle=True)
+	# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE,shuffle=True)
 
 	train1error_sum = 0
 	train2error_sum = 0
