@@ -105,8 +105,8 @@ if layer1 == layer2:
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=60,width_shift_range=0.2,height_shift_range=0.2,shear_range=0.,
-        zoom_range=0.2,channel_shift_range=0.,fill_mode='nearest',cval=0.,
+        rotation_range=15,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
+        zoom_range=0.1,channel_shift_range=0.,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
