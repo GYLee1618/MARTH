@@ -107,7 +107,7 @@ optim1 = keras.optimizers.SGD(lr=learn1)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
-				metrics=['top_k_categorical_accuracy'])
+				metrics=['accuracy'])
 # model2.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim2,
 # 				metrics=['top_k_categorical_accuracy'])
