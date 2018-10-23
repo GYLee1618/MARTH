@@ -101,7 +101,7 @@ model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
 learn1 = .01
-learn2 = .00001
+learn2 = .00005
 optim1 = keras.optimizers.SGD(lr=learn1)
 optim2 = keras.optimizers.SGD(lr=learn2)
 
