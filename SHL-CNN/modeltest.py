@@ -129,12 +129,13 @@ datagen = ImageDataGenerator(
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
 datagen.fit(x_train)
-model.summary()
+#model.summary()
 model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
           epochs=EPOCHS,
-          verbose=1,
           callbacks=callbacks,
-          validation_data=(x_val, y_val))
+          steps_per_epoch=len(x_train)/BATCH_SIZE,
+          verbose=1,
+          validation_data=(x_val,y_val))
 
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
