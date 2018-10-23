@@ -21,22 +21,22 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE_1 = 16
+BATCH_SIZE_1 = 128
 BATCH_SIZE_2 = 16
-NUM_CLASSES_1 = 10
+NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
 eps = 0
 min_rate = .5e-07
 
-ROWS, COLS = 48,48
+ROWS, COLS = 128,128
 channels = 3
 
 
 icdar2003 = ICDAR2003('./ICDAR')
 
-x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(1)
+x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
 x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
 # x_train_3,y_train_3,x_test_3,y_test_3 = icdar2003.load_data(2)
 
@@ -101,7 +101,7 @@ model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
 learn1 = .01
-learn2 = .01
+learn2 = .00001
 optim1 = keras.optimizers.SGD(lr=learn1)
 optim2 = keras.optimizers.SGD(lr=learn2)
 
