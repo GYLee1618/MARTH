@@ -60,12 +60,12 @@ class ICDAR2003:
 
 	def load_data(self,dataset,size=-1):
 		trainfiles = self.trainfiles[dataset][:min(size,len(self.trainfiles))]
-		testfiles = self.testfiles[dataset][:min(size,len(self.testfiles))]
+		testfiles = None # self.testfiles[dataset][:min(size,len(self.testfiles))]
 
 		train_data = np.array([get_image(file[0],(48,48)) for file in trainfiles])
 		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes[dataset])
-		test_data = np.array([get_image(file[0],(48,48)) for file in testfiles])
-		test_tags = self.one_hot([file[1] for file in testfiles],self.classes[dataset])
+		test_data = None #np.array([get_image(file[0],(48,48)) for file in testfiles])
+		test_tags = None #self.one_hot([file[1] for file in testfiles],self.classes[dataset])
 
 		return train_data, train_tags, test_data, test_tags
 
