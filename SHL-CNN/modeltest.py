@@ -187,7 +187,7 @@ for ii in range(EPOCHS):
 		train2error_sum += train2error
 		train2acc_sum += train2acc
 		print("Train1 loss: {:0.4f}\tTrain1 accuracy: {:0.4f}\tTrain2 loss: {:0.4f}\tTrain2 accuracy: {:0.4f}\r".format(
-			train1error_sum/batch1_count,train1acc/batch1_count,train2error/batch2_count,train2acc/batch2_count))
+			train1error_sum/(batch1_count+.0001),train1acc/(batch1_count+.0001),train2error/(batch2_count+.0001),train2acc/(batch2_count+.0001)))
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	train1error = train1error_sum/num_batches
