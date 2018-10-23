@@ -32,6 +32,7 @@ class ICDAR2003:
 		# self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
 		# import pdb
 		# pdb.set_trace()
+
 		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0]
 		self.testfiles[0] = None
 		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1]
@@ -56,13 +57,16 @@ class ICDAR2003:
 		# only want alphanumeric for this case
 		imagepaths = [(directory+'/'+child.attrib['file'],child.attrib['tag'])
 			for child in root if re.search(regex,child.attrib['tag'])]
+
+		import pdb
+		pdb.set_trace()
 		return imagepaths
 
 	def load_data(self,dataset,size=-1):
 		trainfiles = self.trainfiles[dataset][:min(size,len(self.trainfiles))]
 		testfiles = None # self.testfiles[dataset][:min(size,len(self.testfiles))]
 
-		train_data = np.array([get_image(file[0],(64,64)) for file in trainfiles])
+		train_data = np.array([get_image(file[0],(48,48)) for file in trainfiles])
 		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes[dataset])
 		test_data = None #np.array([get_image(file[0],(48,48)) for file in testfiles])
 		test_tags = None #self.one_hot([file[1] for file in testfiles],self.classes[dataset])

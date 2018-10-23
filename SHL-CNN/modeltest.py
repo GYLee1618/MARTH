@@ -21,8 +21,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE_1 = 8
-BATCH_SIZE_2 = 8
+BATCH_SIZE_1 = 128
+BATCH_SIZE_2 = 16
 NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
@@ -30,7 +30,7 @@ EPOCHS = 10000
 eps = 0
 min_rate = .5e-07
 
-ROWS, COLS = 64,64
+ROWS, COLS = 48,48
 channels = 3
 
 
@@ -72,10 +72,10 @@ x_train_2 /= 255
 # y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
-	x_train_1,y_train_1,test_size=.05,random_state=random.seed(time.time()))
+	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
 
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
-	x_train_2,y_train_2,test_size=.05,random_state=random.seed(time.time()))
+	x_train_2,y_train_2,test_size=.1,random_state=random.seed(time.time()))
 
 # x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
 # 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
@@ -84,14 +84,14 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(tim
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(9,9),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-h = LocallyConnected2D(64,(7,7),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
-i = LocallyConnected2D(32,(7,7),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -162,9 +162,9 @@ losses3 = []
 
 for ii in range(EPOCHS):
 	
-	# if ii % 100 == 0:
-		# model1.save('SHL-CNN1.h5')
-		# model2.save('SHL-CNN2.h5')
+	if ii % 100 == 0:
+		model1.save('SHL-CNN1.h5')
+		model2.save('SHL-CNN2.h5')
 		# model3.save('SHL-CNN3.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
