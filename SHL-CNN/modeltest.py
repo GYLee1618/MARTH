@@ -186,6 +186,8 @@ for ii in range(EPOCHS):
 		train1acc_sum += train1acc
 		train2error_sum += train2error
 		train2acc_sum += train2acc
+		print("Train1 loss: {:0.4f}\tTrain1 accuracy: {:0.4f}\tTrain2 loss: {:0.4f}\tTrain2 accuracy: {:0.4f}\r".format(
+			train1error_sum/batch1_count,train1acc/batch1_count,train2error/batch2_count,train2acc/batch2_count))
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	train1error = train1error_sum/num_batches
@@ -194,8 +196,9 @@ for ii in range(EPOCHS):
 	train2error = train2error_sum/num_batches
 	losses2 += [train2error]
 	train2acc = train2acc_sum/num_batches
-	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
-	print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
+	print("Val1 loss: {:0.4f}\tVal1 accuracy: {:0.4f}\tVal2 loss: {:0.4f}\tVal2 accuracy: {:0.4f}\r".format(
+			val1error,val1acc,val2error,val2acc))
+	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
 
 from keras.models import load_model
