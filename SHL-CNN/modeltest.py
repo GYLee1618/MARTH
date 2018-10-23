@@ -228,7 +228,7 @@ for ii in range(EPOCHS):
 			train2error_sum += train2error
 			train2acc_sum += train2acc
 			batch2_count += 1
-		elif (rng > (2/3) and batch3_count < len(x_train_3_batches):
+		elif (rng > (2/3) and batch3_count < len(x_train_3_batches)):
 			x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
 			train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
 			train3error_sum += train3error
