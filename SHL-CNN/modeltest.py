@@ -180,7 +180,7 @@ for ii in range(EPOCHS):
 		cooldown = 3
 		learn1 = learn1*np.sqrt(.1)
 		learn2 = learn2*np.sqrt(.1)
-		print("Changing learning rate to: ",learn)
+		print("Changing learning rate to: ",learn1,learn2)
 		optim1 = keras.optimizers.SGD(lr=learn1)
 		optim2 = keras.optimizers.SGD(lr=learn2)
 
