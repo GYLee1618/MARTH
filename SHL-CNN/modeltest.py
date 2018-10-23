@@ -17,6 +17,7 @@ import time
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
+
 def lrn(x):
 	return tf.nn.lrn(x)
 
@@ -67,7 +68,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 	x_train_2,y_train_2,test_size=.2,random_state=random.seed(time.time()))
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=0.25,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=1,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -85,8 +86,8 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
-
-optim = keras.optimizers.SGD(lr=.01,decay=.001)
+learn = .01
+optim = keras.optimizers.SGD(lr=learn, momentum=.5)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
@@ -124,12 +125,27 @@ train1error = 0
 train2error = 0
 train1acc = 0
 train2acc = 0
+lastloss1 = 0
+lastloss2 = 0
 from keras.models import load_model
 
 for ii in range(EPOCHS):
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
+
+	# if ii % 5 ==0 and :
+	# 	learn = learn/10
+	# 	optim = keras.optimizers.SGD(lr=learn)
+
+	# 	model1.compile(loss=keras.losses.categorical_crossentropy,
+	# 	            	optimizer=optim,
+	# 					metrics=['accuracy'])
+
+	# 	model2.compile(loss=keras.losses.categorical_crossentropy,
+	# 	            	optimizer=optim,
+	# 					metrics=['accuracy'])
+
 	print("Epoch: ", ii)
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
@@ -140,34 +156,10 @@ for ii in range(EPOCHS):
 	num_batches = len(x_train_1_batches)+len(x_train_2_batches)
 	batch1_count = 0
 	batch2_count = 0
-	# got stuck
-	# TODO: make it train on random batch from union of two batches til it runs all batches
-	# that way its more random
-	# probably try to merge two batch lists with an indicator vector saying which batch its in
-	# batch_union = [(batch,model) for batch in ]
-	# batch_union = [None]*num_batches
-	# from_set = [None]*num_batches
-	# last_1 = 0
-	# last_2 = 0
-	# for jj in range(num_batches):
-	# 	if random.getrandbits(1) && last_1 < len(x_train_1_batches):
-	# 		batch_union[jj] = x_train_1[last_1]
-	# 		last_1 += 1
-	# 		from_set[jj] = 1
-	# 	else if last_2 < len(x_train_2_batches):
-	# 		batch_union[jj] = x_train_2[last_2]
-	# 		last_2 += 1
-	# 		from_set[jj] = 0
-	# 	else if last_1 > len(x_train_1_batches):
-	# 		batch_union[jj] = x_train_2[last_2]
-	# 		last_2 += 1
-	# 		from_set[jj] = 0
-	# 	else if last_2 >len(x_train_2_batches):
-	# 		batch_union[jj] = x_train_1[last_1]
-	# 		last_1 += 1
-	# 		from_set[jj] = 1
-
-
+	random.seed()
+	losses1 = []
+	losses2 = []
+	
 
 	for jj in tqdm(range(num_batches)): 
 		if random.random() >.5:
@@ -197,11 +189,14 @@ for ii in range(EPOCHS):
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
 	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	train1error = train1error_sum/num_batches
+	losses1 += [train1error]
 	train1acc = train1acc_sum/num_batches
 	train2error = train2error_sum/num_batches
+	losses2 += [train2error]
 	train2acc = train2acc_sum/num_batches
 	print("Train1 loss: ",train1error, " Train1 accuracy: ", train1acc, " Val1 loss: ", val1error, " Val1 accuracy: ", val1acc)
 	print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
+
 
 from keras.models import load_model
 
