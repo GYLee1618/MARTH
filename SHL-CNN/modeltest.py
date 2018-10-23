@@ -137,16 +137,59 @@ for ii in range(EPOCHS):
 	train2error_sum = 0
 	train1acc_sum = 0
 	train2acc_sum = 0
-	num_batches = min(len(x_train_1_batches),len(x_train_2_batches))
+	num_batches = len(x_train_1_batches)+len(x_train_2_batches)
+	batch1_count = 0
+	batch2_count = 0
+	# got stuck
+	# TODO: make it train on random batch from union of two batches til it runs all batches
+	# that way its more random
+	# probably try to merge two batch lists with an indicator vector saying which batch its in
+	# batch_union = [(batch,model) for batch in ]
+	# batch_union = [None]*num_batches
+	# from_set = [None]*num_batches
+	# last_1 = 0
+	# last_2 = 0
+	# for jj in range(num_batches):
+	# 	if random.getrandbits(1) && last_1 < len(x_train_1_batches):
+	# 		batch_union[jj] = x_train_1[last_1]
+	# 		last_1 += 1
+	# 		from_set[jj] = 1
+	# 	else if last_2 < len(x_train_2_batches):
+	# 		batch_union[jj] = x_train_2[last_2]
+	# 		last_2 += 1
+	# 		from_set[jj] = 0
+	# 	else if last_1 > len(x_train_1_batches):
+	# 		batch_union[jj] = x_train_2[last_2]
+	# 		last_2 += 1
+	# 		from_set[jj] = 0
+	# 	else if last_2 >len(x_train_2_batches):
+	# 		batch_union[jj] = x_train_1[last_1]
+	# 		last_1 += 1
+	# 		from_set[jj] = 1
+
+
+
 	for jj in tqdm(range(num_batches)): 
-		x_train_1_b,y_train_1_b = x_train_1_batches[jj]
-		x_train_2_b,y_train_2_b = x_train_2_batches[jj]
-		if jj %2 == 0:
-			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
-			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+		if random.random() >.5:
+			if batch1_count > len(x_train_1_batches):
+				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
+				train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+				batch2_count += 1
+			else:
+				x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
+				train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+				batch1_count +=1
+			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 		else:
-			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
-			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+			if batch2_count > len(x_train_2_batches):
+				x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
+				train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+				batch1_count +=1
+			else:
+				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
+				train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+				batch2_count += 1
+			#train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 		train1error_sum += train1error
 		train1acc_sum += train1acc
 		train2error_sum += train2error
