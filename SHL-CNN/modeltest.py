@@ -49,20 +49,20 @@ x_train_3,y_train_3,x_test_3,y_test_3 = icdar2003.load_data(2)
 input_shape = (ROWS, COLS, channels)
 
 x_train_1 = x_train_1.astype('float32')
-x_test_1 = x_test_1.astype('float32')
+# x_test_1 = x_test_1.astype('float32')
 x_train_1 /= 255
-x_test_1 /= 255
+# x_test_1 /= 255
 
 
 x_train_2 = x_train_2.astype('float32')
-x_test_2 = x_test_2.astype('float32')
+# x_test_2 = x_test_2.astype('float32')
 x_train_2 /= 255
-x_test_2 /= 255
+# x_test_2 /= 255
 
 x_train_3 = x_train_3.astype('float32')
-x_test_3 = x_test_3.astype('float32')
+# x_test_3 = x_test_3.astype('float32')
 x_train_3 /= 255
-x_test_3 /= 255
+# x_test_3 /= 255
 
 
 
