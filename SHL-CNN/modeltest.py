@@ -174,7 +174,8 @@ for ii in range(EPOCHS):
 	except:
 		pass
 
-	if ((ii > 5 and (losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52) < eps and learn >= min_rate and cooldown <= 0)  or 
+	if ((ii > 5 and (losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52) < eps and learn1 >= min_rate
+	 	and learn2 >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
 		learn1 = learn1*np.sqrt(.1)
