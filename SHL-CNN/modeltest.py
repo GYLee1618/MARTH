@@ -151,8 +151,8 @@ lastloss1 = 0
 lastloss2 = 0
 lastloss3 = 0
 cooldown = 0
-from keras.models import load_model
-(len(x_train_1_batches)/num_batches)
+# from keras.models import load_model
+# (len(x_train_1_batches)/num_batches)
 losses1 = []
 losses2 = []
 losses3 = []
