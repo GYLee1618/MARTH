@@ -20,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE = 8
+BATCH_SIZE = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 EPOCHS = 10000
@@ -85,7 +85,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizers.SGD(lr=10,decay=.00001)
+optim = keras.optimizers.SGD(lr=.01,decay=.00001)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
