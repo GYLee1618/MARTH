@@ -198,6 +198,7 @@ for ii in range(EPOCHS):
 	train2acc = train2acc_sum/num_batches
 	print("Val1 loss: {:0.4f}\tVal1 accuracy: {:0.4f}\tVal2 loss: {:0.4f}\tVal2 accuracy: {:0.4f}\r".format(
 			val1error,val1acc,val2error,val2acc))
+	print('\n')
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
 
