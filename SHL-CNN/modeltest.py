@@ -168,31 +168,39 @@ for ii in range(EPOCHS):
 		train2acc = 0
 		
 		if random.random() >.5:
-			if batch1_count > len(x_train_1_batches)-1:
+			if batch1_count >= len(x_train_1_batches):
 				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 				train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+				train2error_sum += train2error
+				train2acc_sum += train2acc
 				batch2_count += 1
 			else:
 				x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 				train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+				train1error_sum += train1error
+				train1acc_sum += train1acc
 				batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 		else:
-			if batch2_count > len(x_train_2_batches)-1:
+			if batch2_count >= len(x_train_2_batches):
 				x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 				train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
+				train1error_sum += train1error
+				train1acc_sum += train1acc
 				batch1_count +=1
 			else:
 				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 				train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+				train2error_sum += train2error
+				train2acc_sum += train2acc
 				batch2_count += 1
 			#train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
-		train1error_sum += train1error
-		train1acc_sum += train1acc
-		train2error_sum += train2error
-		train2acc_sum += train2acc
+		# train1error_sum += train1error
+		# train1acc_sum += train1acc
+		# train2error_sum += train2error
+		# train2acc_sum += train2acc
 		
-		print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}".format(jj+1,num_batches,
+		print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)),end='\r')
 
 	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
@@ -204,9 +212,9 @@ for ii in range(EPOCHS):
 	losses2 += [train2error]
 	train2acc = train2acc_sum/num_batches
 
-	print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}".format(jj+1,num_batches,
+	print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
-	print("Val1 loss: {:0.4f}  Val1 accuracy: {:0.4f}  Val2 loss: {:0.4f}  Val2 accuracy: {:0.4f}\n".format(
+	print("Batch:{}/{}  Val1 loss: {:0.4f}  Val1 accuracy: {:0.4f}  Val2 loss: {:0.4f}  Val2 accuracy: {:0.4f}\n".format(num_batches,num_batches
 			val1error,val1acc,val2error,val2acc))
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
