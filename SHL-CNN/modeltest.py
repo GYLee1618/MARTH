@@ -69,10 +69,10 @@ x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 
 
 a = Input(shape=input_shape)
-b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.001))(a)
+b = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.0001))(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.001))(d)
+e = Conv2D(32,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01),kernel_regularizer=l2(.0001))(d)
 f = MaxPooling2D(pool_size=(3, 3),strides=2)(e)
 g = Lambda(lrn)(f)
 h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=keras.initializers.RandomNormal(mean=0.0, stddev=0.01)(g)
