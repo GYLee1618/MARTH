@@ -216,20 +216,21 @@ for ii in range(EPOCHS):
 		train3error = 0
 		train3acc = 0
 		rng = random.random()
-		if rng <(1/3) and batch1_count < len(x_train_1_batches):
+		if rng <(len(x_train_1_batches)/num_batches) and batch1_count < len(x_train_1_batches):
 			x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
 			train1error_sum += train1error
 			train1acc_sum += train1acc
 			batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
-		elif (rng > (1/3) and rng < (2/3)) and batch2_count < len(x_train_2_batches):
+		elif (rng > (len(x_train_1_batches)/num_batches)  and rng < 1-(len(x_train_3_batches)/num_batches)) 
+			and batch2_count < len(x_train_2_batches):
 			x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 			train2error_sum += train2error
 			train2acc_sum += train2acc
 			batch2_count += 1
-		elif (rng > (2/3) and batch3_count < len(x_train_3_batches)):
+		elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
 			x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
 			train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
 			train3error_sum += train3error
