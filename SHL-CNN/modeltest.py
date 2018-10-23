@@ -21,7 +21,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE = 64
+BATCH_SIZE = 16
 NUM_CLASSES_1 = 26
 NUM_CLASSES_2 = 26
 NUM_CLASSES_3 = 10
@@ -173,7 +173,7 @@ for ii in range(EPOCHS):
 
 	if ((ii > 5 and (losses2[0]+losses1[0]+losses3[0] - losses2[2] - losses1[2]-losses3[2]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
-		cooldown = 5
+		cooldown = 3
 		learn = learn*np.sqrt(.1)
 		print("Changing learning rate to: ",learn)
 		optim = keras.optimizers.SGD(lr=learn,momentum=.5)
