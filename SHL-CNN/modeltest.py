@@ -84,7 +84,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=keras.initializ
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizer.SGD(lr=.001,decay=.01)
+optim = keras.optimizer.SGD(lr=.01,decay=.01)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
