@@ -21,8 +21,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE_1 = 16
-BATCH_SIZE_2 = 16
+BATCH_SIZE_1 = 8
+BATCH_SIZE_2 = 8
 NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
