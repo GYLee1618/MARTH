@@ -166,11 +166,11 @@ for ii in range(EPOCHS):
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
 	try:
-		print(-(losses2[2]+losses1[2]+losses3[2] - losses2[4] - losses1[4] - losses3[4]))
+		print(losses2[]+losses1[2]+losses3[2] - losses2[4] - losses1[4] - losses3[4])
 	except:
 		pass
 
-	if ((ii > 5 and (-(losses2[2]+losses1[2]+losses3[2] - losses2[4] - losses1[4]-losses3[4])) < eps and learn >= min_rate and cooldown <= 0)  or 
+	if ((ii > 5 and (losses2[2]+losses1[2]+losses3[2] - losses2[4] - losses1[4]-losses3[4]) < eps and learn >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 5
 		learn = learn*np.sqrt(.1)
