@@ -138,7 +138,7 @@ for ii in range(EPOCHS):
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
 	total_loss = [(losses1[i+1]+losses2[i+1]) - (losses1[i]+losses2[i]) for i in range(len(losses1)-1)]
-	if all(loss < eps for loss in total_loss) && learn >= min_rate:
+	if all(loss < eps for loss in total_loss) and learn >= min_rate:
 		learn = learn*np.sqrt(.1)
 		optim = keras.optimizers.SGD(lr=learn)
 
