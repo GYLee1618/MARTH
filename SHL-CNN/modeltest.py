@@ -21,7 +21,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
-BATCH_SIZE = 16
+BATCH_SIZE_1 = 64
+BATCH_SIZE_2 = 16
 NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
@@ -130,8 +131,8 @@ datagen = ImageDataGenerator(
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
-x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE)
-x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE)
+x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
+x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2)
 # x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE)
 
 
@@ -190,8 +191,8 @@ for ii in range(EPOCHS):
 		# 				metrics=['accuracy'])
 	cooldown -= 1
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
-	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
-	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE,shuffle=True)
+	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1,shuffle=True)
+	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2,shuffle=True)
 	# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE,shuffle=True)
 
 	train1error_sum = 0
