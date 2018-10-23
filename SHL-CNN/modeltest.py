@@ -25,7 +25,7 @@ BATCH_SIZE = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 EPOCHS = 10000
-eps = .0001
+eps = .001
 min_rate = .5e-07
 
 ROWS, COLS = 48,48
