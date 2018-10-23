@@ -25,6 +25,8 @@ BATCH_SIZE = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 EPOCHS = 10000
+eps = .0001
+min_rate = .5e-07
 
 ROWS, COLS = 48,48
 channels = 3
@@ -130,21 +132,23 @@ lastloss2 = 0
 from keras.models import load_model
 
 for ii in range(EPOCHS):
+	losses1 = []
+	losses2 = []
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
+	total_loss = [(losses1[i+1]+losses2[i+1]) - (losses1[i]+losses2[i]) for i in range(len(losses1)-1)]
+	if all(loss < eps for loss in total_loss) && learn >= min_rate:
+		learn = learn*np.sqrt(.1)
+		optim = keras.optimizers.SGD(lr=learn)
 
-	# if ii % 5 ==0 and :
-	# 	learn = learn/10
-	# 	optim = keras.optimizers.SGD(lr=learn)
+		model1.compile(loss=keras.losses.categorical_crossentropy,
+		            	optimizer=optim,
+						metrics=['accuracy'])
 
-	# 	model1.compile(loss=keras.losses.categorical_crossentropy,
-	# 	            	optimizer=optim,
-	# 					metrics=['accuracy'])
-
-	# 	model2.compile(loss=keras.losses.categorical_crossentropy,
-	# 	            	optimizer=optim,
-	# 					metrics=['accuracy'])
+		model2.compile(loss=keras.losses.categorical_crossentropy,
+		            	optimizer=optim,
+						metrics=['accuracy'])
 
 	print("Epoch: ", ii)
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE,shuffle=True)
@@ -157,8 +161,7 @@ for ii in range(EPOCHS):
 	batch1_count = 0
 	batch2_count = 0
 	random.seed()
-	losses1 = []
-	losses2 = []
+	
 	
 
 	for jj in range(num_batches): 
@@ -214,7 +217,7 @@ for ii in range(EPOCHS):
 
 	print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
-	print("Batch:{}/{}  Val1 loss: {:0.4f}  Val1 accuracy: {:0.4f}  Val2 loss: {:0.4f}  Val2 accuracy: {:0.4f}\n".format(num_batches,num_batches,
+	print("Batch:{}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
 			val1error,val1acc,val2error,val2acc))
 	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
