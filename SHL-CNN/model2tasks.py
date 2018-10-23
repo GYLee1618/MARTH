@@ -103,7 +103,7 @@ model1 = Model(inputs=a, outputs=k1)
 learn1 = .01
 #learn2 = .001
 optim1 = keras.optimizers.SGD(lr=learn1)
-optim2 = keras.optimizers.SGD(lr=learn2)
+# optim2 = keras.optimizers.SGD(lr=learn2)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
