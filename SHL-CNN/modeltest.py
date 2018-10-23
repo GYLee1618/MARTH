@@ -166,6 +166,7 @@ for ii in range(EPOCHS):
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
 	try:
+		print(losses1,'\n',losses2,'\n',losses3)
 		print(losses2[0]+losses1[0]+losses3[0] - losses2[2] - losses1[2] - losses3[2])
 	except:
 		pass
@@ -248,7 +249,7 @@ for ii in range(EPOCHS):
 	
 	train1error = train1error_sum/num_batches
 	losses1 += [train1error]
-	if (len(losses1) > 5):
+	if (len(losses1) > 3):
 		losses1.pop(0)
 	train1acc = train1acc_sum/num_batches
 	
