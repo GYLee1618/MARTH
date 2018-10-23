@@ -162,6 +162,11 @@ for ii in range(EPOCHS):
 	
 
 	for jj in range(num_batches): 
+		train1error = 0
+		train1acc = 0
+		train2error = 0
+		train2acc = 0
+		
 		if random.random() >.5:
 			if batch1_count > len(x_train_1_batches)-1:
 				x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
@@ -198,7 +203,7 @@ for ii in range(EPOCHS):
 	train2error = train2error_sum/num_batches
 	losses2 += [train2error]
 	train2acc = train2acc_sum/num_batches
-	
+
 	print("Batch:{}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
 	print("Val1 loss: {:0.4f}  Val1 accuracy: {:0.4f}  Val2 loss: {:0.4f}  Val2 accuracy: {:0.4f}\n".format(
