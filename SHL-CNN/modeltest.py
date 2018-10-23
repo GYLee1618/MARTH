@@ -66,7 +66,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 	x_train_2,y_train_2,test_size=.1,random_state=random.seed(time.time()))
-intial = keras.initializers.RandomNormal(mean=0.0, stddev=0.01,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=0.2,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -85,7 +85,7 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 
-optim = keras.optimizers.SGD(lr=.01,decay=.01)
+optim = keras.optimizers.SGD(lr=.1,decay=.01)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
@@ -94,14 +94,14 @@ model2.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim,
 				metrics=['accuracy'])
 
-layer1 = model1.get_layer(index = 7)
-layer2 = model2.get_layer(index = 7)
+# layer1 = model1.get_layer(index = 7)
+# layer2 = model2.get_layer(index = 7)
 
 
 
 
-if layer1 == layer2:
-	print("BOOM")
+# if layer1 == layer2:
+# 	print("BOOM")
 
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
