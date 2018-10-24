@@ -89,11 +89,11 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.22,seed=random.seed(tim
 
 a = Input(shape=input_shape)
 b = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
-c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
+c = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(b)
 d = Lambda(lrn)(c)
 e = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
-g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
+g = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(f)
 # p = Lambda(pad)(g)
 h = LocallyConnected2D(64,(3,3),activation='tanh',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
 # pp = Lambda(pad)(h)

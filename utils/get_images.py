@@ -11,5 +11,6 @@ def get_image(fname,size):
 
     result = np.zeros((size[0],size[1],3))
     result[:pix.shape[0],:pix.shape[1],:] = pix
+
     return result
 

@@ -22,23 +22,13 @@ directory
 class ICDAR2003:
 	def __init__(self,directory):
 		# import training data
-		self.trainfiles = [0,0,0]
-		self.testfiles = [0,0,0]
-		self.trainfiles[0] = self.xml_parse(directory+'/'+'train','char.xml',0)
-		self.testfiles[0] = self.xml_parse(directory+'/'+'test','char.xml',0)
-		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)
-		self.testfiles[1] = self.xml_parse(directory+'/'+'test','char.xml',1)
-		# self.trainfiles[2] = self.xml_parse(directory+'/'+'train','char.xml',2)
-		# self.testfiles[2] = self.xml_parse(directory+'/'+'test','char.xml',2)
-		# import pdb
-		# pdb.set_trace()
+		self.trainfiles = [0,0]
+		self.testfiles = [0,0]
 
-		self.trainfiles[0] = self.trainfiles[0]+self.testfiles[0]
-		self.testfiles[0] = None
-		self.trainfiles[1] = self.trainfiles[1]+self.testfiles[1]
-		self.testfiles[1] = None
-		# self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2]
-		# self.testfiles[2] = None
+		self.trainfiles[0] = self.xml_parse(directory+'/'+'train','char.xml',0)+self.xml_parse(directory+'/'+'test','char.xml',0)
+		self.testfiles[0] = self.xml_parse(directory+'/'+'sample','char.xml',0)
+		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)+self.xml_parse(directory+'/'+'test','char.xml',1)
+		self.testfiles[1] = self.xml_parse(directory+'/'+'sample','char.xml',0)
 		
 		self.classes = (31,31)
 		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
@@ -62,12 +52,12 @@ class ICDAR2003:
 
 	def load_data(self,dataset,size=-1):
 		trainfiles = self.trainfiles[dataset][:min(size,len(self.trainfiles))]
-		testfiles = None # self.testfiles[dataset][:min(size,len(self.testfiles))]
+		testfiles = self.testfiles[dataset][:min(size,len(self.testfiles))]
 
 		train_data = np.array([get_image(file[0],(48,48)) for file in trainfiles])
-		train_tags = self.one_hot([file[1] for file in trainfiles],self.classes[dataset])
-		test_data = None #np.array([get_image(file[0],(48,48)) for file in testfiles])
-		test_tags = None #self.one_hot([file[1] for file in testfiles],self.classes[dataset])
+		train_tags = np.array([self.mapping[file[1]] for file in trainfiles])
+		test_data = np.array([get_image(file[0],(48,48)) for file in testfiles])
+		test_tags = np.array([self.mapping[file[1]] for file in testfiles])
 
 		return train_data, train_tags, test_data, test_tags
 
