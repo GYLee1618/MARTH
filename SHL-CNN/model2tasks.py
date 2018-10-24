@@ -120,7 +120,8 @@ lr_scheduler = LearningRateScheduler(lr_schedule)
 lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
                                cooldown=0,
                                patience=5,
-                               min_lr=0.5e-6)
+                               verbose=1
+                               min_lr=min_rate)
 
 callbacks = [lr_reducer,lr_scheduler] 
 
