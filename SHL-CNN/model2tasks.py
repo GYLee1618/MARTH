@@ -123,7 +123,7 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
                                verbose=1,
                                min_lr=min_rate)
 
-callbacks = [lr_reducer,lr_scheduler] 
+callbacks = [lr_reducer] 
 
 
 model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE_1),
