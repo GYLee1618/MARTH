@@ -24,8 +24,8 @@ def pad(x):
 	padding = tf.constant([[0,0],[1,1],[1,1],[0,0]])
 	return tf.pad(x,padding,'constant')
 
-BATCH_SIZE_1 = 64
-BATCH_SIZE_2 = 64
+BATCH_SIZE_1 = 32
+BATCH_SIZE_2 = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
@@ -75,10 +75,10 @@ y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_2)
 y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_2)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
-	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
+	x_train_1,y_train_1,test_size=.01,random_state=random.seed(time.time()))
 
 x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
-	x_train_2,y_train_2,test_size=.1,random_state=random.seed(time.time()))
+	x_train_2,y_train_2,test_size=.01,random_state=random.seed(time.time()))
 
 # x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
 # 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
@@ -88,12 +88,12 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.22,seed=random.seed(tim
 
 a = Input(shape=input_shape)
 b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
-c = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(b)
+c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 l = Activation('linear')(c)
 d = Lambda(lrn)(l)
 e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
-g = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(f)
+g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
 ll = Activation('linear')(g)
 # p = Lambda(pad)(g)
 h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(ll)
@@ -107,10 +107,10 @@ k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
-learn1 = .01
-learn2 = .01
-optim1 = keras.optimizers.SGD(lr=learn1)
-optim2 = keras.optimizers.SGD(lr=learn2)
+learn1 = .001
+learn2 = .001
+optim1 = keras.optimizers.SGD(lr=learn1,decay=.001)
+optim2 = keras.optimizers.SGD(lr=learn2,decay=.001)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
@@ -167,33 +167,33 @@ for ii in range(EPOCHS):
 		# model3.save('SHL-CNN3.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
 	# print(total_loss)
-	try:
-		# print(losses1,'\n',losses2,'\n',losses3)
-		print(losses2[1]+losses1[1] - losses2[2] - losses1[2])
-	except:
-		pass
+	# try:
+	# 	# print(losses1,'\n',losses2,'\n',losses3)
+	# 	print(losses2[1]+losses1[1] - losses2[2] - losses1[2])
+	# except:
+	# 	pass
 
-	if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
-	 	and learn2 >= min_rate and cooldown <= 0)  or 
-		(cooldown < -100)):
-		cooldown = 3
-		learn1 = learn1*np.sqrt(.5)
-		learn2 = learn2*np.sqrt(.5)
-		print("Changing learning rate to: ",learn1,learn2)
-		optim1 = keras.optimizers.SGD(lr=learn1)
-		optim2 = keras.optimizers.SGD(lr=learn2)
+	# if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
+	#  	and learn2 >= min_rate and cooldown <= 0)  or 
+	# 	(cooldown < -100)):
+	# 	cooldown = 3
+	# 	learn1 = learn1*np.sqrt(.5)
+	# 	learn2 = learn2*np.sqrt(.5)
+	# 	print("Changing learning rate to: ",learn1,learn2)
+	# 	optim1 = keras.optimizers.SGD(lr=learn1,decay=.00)
+	# 	optim2 = keras.optimizers.SGD(lr=learn2)
 
-		model1.compile(loss=keras.losses.categorical_crossentropy,
-		            	optimizer=optim1,
-						metrics=['accuracy'])
+	# 	model1.compile(loss=keras.losses.categorical_crossentropy,
+	# 	            	optimizer=optim1,
+	# 					metrics=['accuracy'])
 
-		model2.compile(loss=keras.losses.categorical_crossentropy,
-		            	optimizer=optim2,
-						metrics=['accuracy'])
-		# model3.compile(loss=keras.losses.categorical_crossentropy,
-		#             	optimizer=optim,
-		# 				metrics=['accuracy'])
-	cooldown -= 1
+	# 	model2.compile(loss=keras.losses.categorical_crossentropy,
+	# 	            	optimizer=optim2,
+	# 					metrics=['accuracy'])
+	# 	# model3.compile(loss=keras.losses.categorical_crossentropy,
+	# 	#             	optimizer=optim,
+	# 	# 				metrics=['accuracy'])
+	# cooldown -= 1
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1,shuffle=True)
 	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2,shuffle=True)
@@ -250,17 +250,8 @@ for ii in range(EPOCHS):
 				train2acc_sum/(batch2_count+.0001)),end='\r')
 	# import pdb
 	# pdb.set_trace()
-	index1 =int(np.floor(x_val_1.shape[0]/2))
-	index2 = int(np.floor(x_val_2.shape[0]/2))
-	val1error1,val1acc1 = model1.test_on_batch(x_val_1[0:index1,:],y_val_1[0:index1,:])
-	val1error2,val1acc2 = model1.test_on_batch(x_val_1[index1:,:],y_val_1[index1:,:])
-	val2error1,val2acc1 = model2.test_on_batch(x_val_2[0:index2,:],y_val_2[0:index2,:])
-	val2error2,val2acc2 = model2.test_on_batch(x_val_2[index2:,:],y_val_2[index2:,:])
-	val1error = (val1error1+val1error2)/2
-	val1acc = (val1acc1+val1acc2)/2
-	val2error = (val2error1+val2error2)/2
-	val2acc = (val2acc1+val2acc2)/2
-	# val3error,val3acc = model3.test_on_batch(x_val_3,y_val_3)
+	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
+	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
 	
 	train1error = train1error_sum/batch1_count
 	losses1 += [train1error]
@@ -273,12 +264,6 @@ for ii in range(EPOCHS):
 	if (len(losses2) > 3):
 		losses2.pop(0)
 	train2acc = train2acc_sum/batch2_count
-
-	# train3error = train3error_sum/batch3_count
-	# losses3 += [train3error]
-	# if (len(losses3) > 3):
-	# 	losses3.pop(0)
-	# train3acc = train3acc_sum/batch3_count
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
