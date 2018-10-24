@@ -100,14 +100,14 @@ datagen = ImageDataGenerator(
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
 #x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
-datagen.fit(x_train)
+datagen.fit(x_train_1)
 
 
-model.fit_generator(datagen.flow(x_train, y_train,batch_size=BATCH_SIZE),
+model.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE),
           epochs=EPOCHS,
-          steps_per_epoch=len(x_train)/BATCH_SIZE,
+          steps_per_epoch=len(x_train_1)/BATCH_SIZE,
           verbose=1,
-          validation_data=(x_val,y_val))
+          validation_data=(x_val_1,y_val_1))
 
 
 score = model.evaluate(x_test, y_test, verbose=0)
