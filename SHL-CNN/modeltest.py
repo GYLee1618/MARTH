@@ -69,10 +69,10 @@ x_train_2 /= 255
 
 
 
- y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
- y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
- y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
- y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
+y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
+y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
+y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
+y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
