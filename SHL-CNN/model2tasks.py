@@ -18,7 +18,7 @@ from tensorflow.keras.models import load_model
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def lr_schedule(epoch):
-	lr = 1e-3
+	lr = 1e-2
 	if epoch > 200:
 		lr *= 0.5e-3
 	elif epoch > 150:
