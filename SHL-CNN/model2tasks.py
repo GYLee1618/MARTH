@@ -1,15 +1,15 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
-from tf.keras.layers import *
-from tf.keras import backend as K
-from tf.keras.regularizers import l2
-from tf.keras.preprocessing.image import ImageDataGenerator
-from tf.keras.callbacks import LearningRateScheduler, ReduceLROnPlateau
+from tensorflow.keras.layers import *
+from tensorflow.keras import backend as K
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import LearningRateScheduler, ReduceLROnPlateau
 from ICDAR2003 import ICDAR2003
 import os 
 from sklearn.model_selection import train_test_split
-from tf.keras.models import Model
+from tensorflow.keras.models import Model
 from tqdm import tqdm
 import random
 import time
