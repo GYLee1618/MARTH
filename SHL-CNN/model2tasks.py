@@ -20,7 +20,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def lrn(x):
 	import tensorflow as tf
-	return tensorflow.nn.lrn(x)
+	return tf.nn.lrn(x)
 
 BATCH_SIZE_1 = 32
 #BATCH_SIZE_2 = 16
