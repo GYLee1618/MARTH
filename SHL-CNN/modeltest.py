@@ -22,11 +22,11 @@ def lrn(x):
 	return tf.nn.lrn(x)
 
 def pad(x):
-	padding = tf.constant([[0,0],[2,2],[2,2],[0,0]])
+	padding = tf.constant([[0,0],[1,1],[1,1],[0,0]])
 	return tf.pad(x,padding,'constant')
 
 BATCH_SIZE_1 = 128
-BATCH_SIZE_2 = 16
+BATCH_SIZE_2 = 32
 NUM_CLASSES_1 = 52
 NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
@@ -94,10 +94,10 @@ d = Lambda(lrn)(c)
 e = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(p)
-pp = Lambda(pad)(h)
-i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(pp)
+# p = Lambda(pad)(g)
+h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+# pp = Lambda(pad)(h)
+i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -116,7 +116,7 @@ model1.compile(loss=keras.losses.categorical_crossentropy,
 				metrics=['accuracy'])
 model2.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim2,
-				metrics=['top_k_categorical_accuracy'])
+				metrics=['accuracy'])
 # model3.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim,
 # 				metrics=['accuracy'])
@@ -168,11 +168,11 @@ for ii in range(EPOCHS):
 	# print(total_loss)
 	try:
 		# print(losses1,'\n',losses2,'\n',losses3)
-		print(losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52)
+		print(losses2[0]+losses1[0] - losses2[2] - losses1[2])
 	except:
 		pass
 
-	if ((ii > 5 and (losses2[0]*10+losses1[0]*52 - losses2[2]*10 - losses1[2]*52) < eps and learn1 >= min_rate
+	if ((ii > 5 and (losses2[0]+losses1[0] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
 	 	and learn2 >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
@@ -244,7 +244,7 @@ for ii in range(EPOCHS):
 			jj -= 1
 
 		
-		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".
+		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".
 				format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
 				train2acc_sum/(batch2_count+.0001)),end='\r')
 	# import pdb
