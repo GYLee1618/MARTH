@@ -95,7 +95,7 @@ e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format=
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
 p = Lambda(pad)(g)
-h = Conv2D(64,(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(p)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(p)
 pp = Lambda(pad)(h)
 i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(pp)
 j = Flatten()(i)
