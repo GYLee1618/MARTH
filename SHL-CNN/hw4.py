@@ -22,7 +22,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 BATCH_SIZE = 32
 NUM_CLASSES = 31
-EPOCHS = 10
+EPOCHS = 200
 
 def lr_schedule(epoch):
     lr = 1e-3

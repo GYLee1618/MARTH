@@ -28,7 +28,7 @@ class ICDAR2003:
 		self.trainfiles[0] = self.xml_parse(directory+'/'+'train','char.xml',0)+self.xml_parse(directory+'/'+'test','char.xml',0)
 		self.testfiles[0] = self.xml_parse(directory+'/'+'sample','char.xml',0)
 		self.trainfiles[1] = self.xml_parse(directory+'/'+'train','char.xml',1)+self.xml_parse(directory+'/'+'test','char.xml',1)
-		self.testfiles[1] = self.xml_parse(directory+'/'+'sample','char.xml',0)
+		self.testfiles[1] = self.xml_parse(directory+'/'+'sample','char.xml',1)
 		
 		self.classes = (31,31)
 		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
