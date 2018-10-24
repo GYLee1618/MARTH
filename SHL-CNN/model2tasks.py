@@ -147,10 +147,8 @@ for ii in range(EPOCHS):
 		train1acc = 0
 		x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 		hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
-		import pdb
-		pdb.set_trace()
-		train1error_sum += hist1.history['loss']
-		train1acc_sum += hist1.history['acc']
+		train1error_sum += hist1.history['loss'][0]
+		train1acc_sum += hist1.history['acc'][0]
 		batch1_count +=1
 
 		
