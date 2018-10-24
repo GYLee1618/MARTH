@@ -18,7 +18,7 @@ from tensorflow.keras.models import load_model
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def lr_schedule(epoch):
-	lr = 1e-3
+	lr = 1e-2
 	if epoch > 200:
 		lr *= 0.5e-3
 	elif epoch > 150:
@@ -71,7 +71,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
 
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.01,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -120,9 +120,10 @@ lr_scheduler = LearningRateScheduler(lr_schedule)
 lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
                                cooldown=0,
                                patience=5,
-                               min_lr=0.5e-6)
+                               verbose=1,
+                               min_lr=min_rate)
 
-callbacks = [lr_reducer,lr_scheduler,keras.callbacks.TensorBoard(log_dir='./logs1')] 
+callbacks = [lr_reducer,keras.callbacks.TensorBoard(log_dir='./logs1',write_grads=True)] 
 
 
 model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE_1),
