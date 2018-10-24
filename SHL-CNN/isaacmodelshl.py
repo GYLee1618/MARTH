@@ -175,10 +175,27 @@ for ii in range(EPOCHS):
   num_batches = len(x_train_1_batches)+len(x_train_2_batches)
   batch1_count = 0
   batch2_count = 0
-
+  cooldown = 0
   random.seed(time.time())
 
   for jj in range(num_batches): 
+
+    if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < 0 and learn >= -5e-11 and cooldown <= 0)  or 
+    (cooldown < -100)):
+    cooldown = 3
+    learn = learn*np.sqrt(.1)
+    print("Changing learning rate to: ",learn)
+    optim = keras.optimizers.SGD(lr=learn)
+
+    model1.compile(loss=keras.losses.categorical_crossentropy,
+                  optimizer=optim,
+            metrics=[categorical_accuracy])
+
+    model2.compile(loss=keras.losses.categorical_crossentropy,
+                  optimizer=optim,
+            metrics=[categorical_accuracy])
+
+    cooldown -= 1
     train1error = 0
     train1acc = 0
     train2error = 0

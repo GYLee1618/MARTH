@@ -43,7 +43,7 @@ BATCH_SIZE_1 = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
-EPOCHS = 10000
+EPOCHS = 250
 eps = 0
 min_rate = .5e-16
 
@@ -163,104 +163,4 @@ x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
 score = model1.evaluate_generator(x_1_test,steps=1)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
-
-
-
-# val1error = 0
-# val1acc = 0
-# train1error = 0
-# train1acc = 0
-# lastloss1 = 0
-# cooldown = 0
-
-# # (len(x_train_1_batches)/num_batches)
-# losses1 = []
-# losses2 = []
-# losses3 = []
-
-# for ii in range(EPOCHS):
-
-# 	if ii % 100 == 0:
-# 	 	model1.save('SHL-CNN1.h5')
-# 	try:
-# 		print(losses1[0] - losses1[2])
-# 	except:
-# 		pass
-
-# 	if ((ii > 5 and (losses1[0] - losses1[2]) < eps and learn1 >= min_rate and cooldown <= 0)  or 
-# 		(cooldown < -100)):
-# 		cooldown = 3
-# 		learn1 = learn1*np.sqrt(.1)
-# 		print("Changing learning rate to: ",learn1)#,learn2)
-# 		optim1 = keras.optimizers.SGD(lr=learn1)
-
-# 		model1.compile(loss=keras.losses.categorical_crossentropy,
-# 		            	optimizer=optim1,
-# 						metrics=['accuracy'])
-
-# 	cooldown -= 1
-# 	print("Epoch {}/{}".format(ii+1,EPOCHS))
-# 	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1,shuffle=True)
-# 	train1error_sum = 0
-# 	train1acc_sum = 0
-# 	num_batches = len(x_train_1_batches)#+len(x_train_2_batches)#+len(x_train_3_batches)
-# 	batch1_count = 0
-	
-	
-
-# 	for jj in range(num_batches): 
-# 		train1error = 0
-# 		train1acc = 0
-# 		x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
-# 		hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
-# 		train1error_sum += hist1.history['loss'][0]
-# 		train1acc_sum += hist1.history['acc'][0]
-# 		batch1_count +=1
-
-		
-# 		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}     ".
-# 				format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001)),end='\r')
-
-# 	index1 =int(np.floor(x_val_1.shape[0]/2))
-# 	val1error1,val1acc1 = model1.test_on_batch(x_val_1[0:index1,:],y_val_1[0:index1,:])
-# 	val1error2,val1acc2 = model1.test_on_batch(x_val_1[index1:,:],y_val_1[index1:,:])
-# 	val1error = (val1error1+val1error2)/2
-# 	val1acc = (val1acc1+val1acc2)/2
-	
-# 	train1error = train1error_sum/batch1_count
-# 	losses1 += [train1error]
-# 	if (len(losses1) > 3):
-# 		losses1.pop(0)
-# 	train1acc = train1acc_sum/batch1_count
-	
-
-# 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}     ".format(jj+1,num_batches,
-# 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001)))
-# 	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
-# 			val1error,val1acc))
-
-# from keras.models import load_model
-
-# model.save('SHL-CNN.h5')
-
-
-'''
-layer1 = model1.get_layer(index = 7)
-layer2 = model2.get_layer(index = 7)
-
-
-if layer1 == layer2:
-	print("BOOM2")
-
-
-
-
-
-score = model2.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
-'''
-
-
-
 
