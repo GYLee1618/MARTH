@@ -128,7 +128,6 @@ callbacks = [lr_reducer,keras.callbacks.TensorBoard(log_dir='./logs1',write_grad
 x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
 										target_size=(48,48),
 										color_mode='rgb',
-										batch_size=32,
 										class_mode='categorical',
 										shuffle=True)
 
@@ -149,16 +148,8 @@ model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/v
 x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 									target_size=(48,48),
 									color_mode='rgb',
-									batch_size=32,
 									class_mode='categorical',
 									shuffle=True)
-x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
-									target_size=(48,48),
-									color_mode='rgb',
-									batch_size=32,
-									class_mode='categorical',
-									shuffle=True)
-
 
 score = model1.evaluate_generator(x_1_test,steps=1)
 print('Test loss:', score[0])

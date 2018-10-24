@@ -181,13 +181,11 @@ for ii in range(EPOCHS):
 	x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
 										target_size=(48,48),
 										color_mode='rgb',
-										batch_size=32,
 										class_mode='categorical',
 										shuffle=True)
 	x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/val/',
 										target_size=(48,48),
 										color_mode='rgb',
-										batch_size=32,
 										class_mode='categorical',
 										shuffle=True)
 	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches,steps=1)
@@ -214,13 +212,11 @@ for ii in range(EPOCHS):
 x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 									target_size=(48,48),
 									color_mode='rgb',
-									batch_size=32,
 									class_mode='categorical',
 									shuffle=True)
 x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
 									target_size=(48,48),
 									color_mode='rgb',
-									batch_size=32,
 									class_mode='categorical',
 									shuffle=True)
 
