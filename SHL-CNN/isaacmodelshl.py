@@ -156,11 +156,11 @@ for ii in range(EPOCHS):
 
   model1.compile(loss=keras.losses.categorical_crossentropy,
                 optimizer=optim,
-          metrics=[categorical_accuracy])
+          metrics=['accuracy'])
 
   model2.compile(loss=keras.losses.categorical_crossentropy,
                 optimizer=optim,
-          metrics=[categorical_accuracy])
+          metrics=['accuracy'])
 
   cooldown -= 1
   print("Epoch {}/{}".format(ii+1,EPOCHS))
