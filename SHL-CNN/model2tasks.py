@@ -162,8 +162,8 @@ losses3 = []
 
 for ii in range(EPOCHS):
 	
-	# if ii % 100 == 0:
-	# 	model1.save('SHL-CNN1.h5')
+	 if ii % 100 == 0:
+	 	model1.save('SHL-CNN1.h5')
 	# 	model2.save('SHL-CNN2.h5')
 		# model3.save('SHL-CNN3.h5')
 	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
