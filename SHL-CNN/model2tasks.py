@@ -103,7 +103,7 @@ datagen = ImageDataGenerator(
 datagen.fit(x_train_1)
 
 
-model.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE),
+model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE),
           epochs=EPOCHS,
           steps_per_epoch=len(x_train_1)/BATCH_SIZE,
           verbose=1,
