@@ -1,10 +1,9 @@
 import tensorflow as tf
 import numpy as np
-from keras.models import Sequential
 from keras.layers import *
 from keras import backend as K
 from keras.regularizers import l2
-import keras
+from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import LearningRateScheduler, ReduceLROnPlateau
 from ICDAR2003 import ICDAR2003
