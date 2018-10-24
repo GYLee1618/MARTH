@@ -71,7 +71,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
 
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.01,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
