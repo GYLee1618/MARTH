@@ -148,25 +148,21 @@ lastloss1 = 0
 lastloss2 = 0
 cooldown = 0
 
-learn = .01
+learn = .001
 
 losses1 = []
 losses2 = []
 for ii in range(EPOCHS):
-  if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < 0 and learn >= -5e-11 and cooldown <= 0)  or 
-    (cooldown < -100)):
-    cooldown = 3
-    learn = learn*np.sqrt(.1)
-    print("Changing learning rate to: ",learn)
-    optim = keras.optimizers.SGD(lr=learn)
+  learn = lr_schedule(ii)
+  optim = keras.optimizers.SGD(lr=learn)
 
-    model1.compile(loss=keras.losses.categorical_crossentropy,
-                  optimizer=optim,
-            metrics=[categorical_accuracy])
+  model1.compile(loss=keras.losses.categorical_crossentropy,
+                optimizer=optim,
+          metrics=[categorical_accuracy])
 
-    model2.compile(loss=keras.losses.categorical_crossentropy,
-                  optimizer=optim,
-            metrics=[categorical_accuracy])
+  model2.compile(loss=keras.losses.categorical_crossentropy,
+                optimizer=optim,
+          metrics=[categorical_accuracy])
 
   cooldown -= 1
   print("Epoch {}/{}".format(ii+1,EPOCHS))
