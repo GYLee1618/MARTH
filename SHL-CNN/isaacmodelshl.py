@@ -199,8 +199,8 @@ for ii in range(EPOCHS):
     elif (rng > .5 and batch2_count < len(x_train_2_batches)):
       x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
       history = model2.fit(x_train_2_b,y_train_2_b,epochs=1,verbose=0)
-      train1error_sum += history.history['loss'][0]
-      train1acc_sum += history.history['acc'][0]
+      train2error_sum += history.history['loss'][0]
+      train2acc_sum += history.history['acc'][0]
       batch2_count += 1
 
     else:
