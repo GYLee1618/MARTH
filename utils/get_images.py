@@ -10,7 +10,9 @@ def get_image(fname,size):
     pix = np.array(pix).reshape((im.size[0],im.size[1],3))
 
     result = np.zeros((size[0],size[1],3))
-    result[:pix.shape[0],:pix.shape[1],:] = pix
+    rowpad = size[0]-pix.shape[0]
+    colpad = size[1]-pix.shape[1]
+    result[rowpad/2:rowpad/2+pix.shape[0],colpad/2:colpad/2+pix.shape[1],:] = pix
 
     return result
 
