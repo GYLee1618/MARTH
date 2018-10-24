@@ -148,8 +148,6 @@ lastloss1 = 0
 lastloss2 = 0
 cooldown = 0
 
-learn = .001
-
 losses1 = []
 losses2 = []
 for ii in range(EPOCHS):
@@ -235,11 +233,11 @@ for ii in range(EPOCHS):
       val1error,val1acc,val2error,val2acc))
   # print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
 
-score = model1.evaluate(xtest0, ytest0)
+score = model1.test_on_batch(xtest0, ytest0)
 
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
-score = model2.evaluate(xtest1, ytest1)
+score = model2.test_on_batch(xtest1, ytest1)
 
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
