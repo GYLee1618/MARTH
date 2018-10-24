@@ -1,4 +1,4 @@
-import tensorflow as tf
+import tensorflow as tensorflow
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras.layers import *
@@ -19,7 +19,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 def lrn(x):
-	return tf.nn.lrn(x)
+	return tensorflow.nn.lrn(x)
 
 BATCH_SIZE_1 = 32
 #BATCH_SIZE_2 = 16
