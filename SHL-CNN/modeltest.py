@@ -30,7 +30,7 @@ BATCH_SIZE_2 = 64
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
-EPOCHS = 10000
+EPOCHS = 2500
 eps = 0
 min_rate = .5e-16
 
@@ -308,6 +308,7 @@ print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 '''
 
-
+import pdb
+pdb.set_trace()
 
 
