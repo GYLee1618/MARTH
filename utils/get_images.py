@@ -11,7 +11,7 @@ def get_image(fname,size):
 	pix = np.array(pix).reshape((im.size[1],im.size[0],3))
 	# print(fname,pix.shape)
 	# exit()
-	result = np.zeros((size[1],size[0],3))
+	result = np.ones((size[1],size[0],3))*255
 	rowpad = size[0]-pix.shape[0]
 	colpad = size[1]-pix.shape[1]
 	result[rowpad//2:rowpad//2+pix.shape[0],colpad//2:colpad//2+pix.shape[1],:] = pix
