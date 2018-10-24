@@ -122,7 +122,7 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
                                patience=5,
                                min_lr=0.5e-6)
 
-callbacks = [lr_reducer,lr_scheduler] 
+callbacks = [lr_reducer,lr_scheduler,keras.callbacks.TensorBoard(log_dir='./logs1')] 
 
 
 model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE_1),

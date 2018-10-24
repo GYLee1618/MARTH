@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 import re
 import numpy as np
 import string
-
-
+import os
+from shutil import copyfile
 '''
 Expected structure of the IDCAR2003 directory is:
 directory
@@ -64,6 +64,30 @@ class ICDAR2003:
 	def one_hot(self,targets,classes):
 		targets = np.array([self.mapping[char] for char in targets]).reshape(-1)
 		return np.eye(classes)[targets]
+
+	def organize_data(self,newdir):
+		i = 0
+		for x in self.trainfiles[0]:
+			if (i % 10 != 0):
+				copyfile(x[0],newdir+'/1/train/'+x[1]+'/'+str(i)+'.jpg')
+			else:
+				copyfile(x[0],newdir+'/1/val/'+x[1]+'/'+str(i)+'.jpg')
+			i+=1
+		i = 0
+		for x in self.testfiles[0]:
+			copyfile(x[0],newdir+'/1/test/'+x[1]+'/'+str(i)+'.jpg')
+			i+=1
+		i = 0
+		for x in self.trainfiles[1]:
+			if (i % 10 != 0):
+				copyfile(x[0],newdir+'/2/train/'+x[1]+'/'+str(i)+'.jpg')
+			else:
+				copyfile(x[0],newdir+'/2/val/'+x[1]+'/'+str(i)+'.jpg')
+			i+=1
+		i = 0
+		for x in self.testfiles[1]:
+			copyfile(x[0],newdir+'/2/test/'+x[1]+'/'+str(i)+'.jpg')
+			i+=1
 
 
 	

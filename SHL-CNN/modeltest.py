@@ -29,88 +29,70 @@ BATCH_SIZE_2 = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
-EPOCHS = 2500
+EPOCHS = 100
 eps = 0
 min_rate = .5e-16
 
 ROWS, COLS = 48,48
 channels = 3
 
+# icdar2003 = ICDAR2003('./ICDAR')
 
-icdar2003 = ICDAR2003('./ICDAR')
+# x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
+# x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
 
-x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
-x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
-# x_train_3,y_train_3,x_test_3,y_test_3 = icdar2003.load_data(2)
-
-# x_train_1 = x_train_1.reshape(x_train_1.shape[0], ROWS, COLS, channels)
-# x_test_1 = x_test_1.reshape(x_test_1.shape[0], ROWS, COLS, channels)
-
-# x_train_2 = x_train_2.reshape(x_train_2.shape[0], ROWS, COLS, channels)
-# x_test_2 = x_test_2.reshape(x_test_2.shape[0], ROWS, COLS, channels)
 
 input_shape = (ROWS, COLS, channels)
 
-x_train_1 = x_train_1.astype('float32')
+# x_train_1 = x_train_1.astype('float32')
 # x_test_1 = x_test_1.astype('float32')
-x_train_1 /= 255
+# x_train_1 /= 255
 # x_test_1 /= 255
 
 
-x_train_2 = x_train_2.astype('float32')
+# x_train_2 = x_train_2.astype('float32')
 # x_test_2 = x_test_2.astype('float32')
-x_train_2 /= 255
+# x_train_2 /= 255
 # x_test_2 /= 255
 
-# x_train_3 = x_train_3.astype('float32')
-# x_test_3 = x_test_3.astype('float32')
-# x_train_3 /= 255
-# x_test_3 /= 255
 
+# y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_1)
+# y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_1)
+# y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_2)
+# y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_2)
 
+# x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
+# 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
 
-y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_1)
-y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_1)
-y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_2)
-y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_2)
-
-x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
-	x_train_1,y_train_1,test_size=.01,random_state=random.seed(time.time()))
-
-x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
-	x_train_2,y_train_2,test_size=.01,random_state=random.seed(time.time()))
+# x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
+# 	x_train_2,y_train_2,test_size=.1,random_state=random.seed(time.time()))
 
 # x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
 # 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.22,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.01,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
 b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
-l = Activation('linear')(c)
-d = Lambda(lrn)(l)
+d = Lambda(lrn)(c)
 e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-ll = Activation('linear')(g)
-# p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(ll)
-# pp = Lambda(pad)(h)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
 i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
-# k3 = Dense(NUM_CLASSES_3,activation='softmax',kernel_initializer=intial)(j)
  
 model1 = Model(inputs=a, outputs=k1)
 model2 = Model(inputs=a, outputs=k2)
 # model3 = Model(inputs=a, outputs=k3)
-learn1 = .001
-learn2 = .001
-optim1 = keras.optimizers.SGD(lr=learn1,decay=.001)
-optim2 = keras.optimizers.SGD(lr=learn2,decay=.001)
+learn1 = .01
+learn2 = .01
+optim1 = keras.optimizers.SGD(lr=learn1,decay=.1)
+optim2 = keras.optimizers.SGD(lr=learn2,decay=.1)
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
@@ -118,43 +100,59 @@ model1.compile(loss=keras.losses.categorical_crossentropy,
 model2.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim2,
 				metrics=['accuracy'])
-# model3.compile(loss=keras.losses.categorical_crossentropy,
-#             	optimizer=optim,
-# 				metrics=['accuracy'])
 
- 
+# tensorboard = keras.callbacks.TensorBoard(
+# 				  log_dir='./logs1',
+# 				  histogram_freq=0,
+# 				  batch_size=32,
+# 				  write_graph=True,
+# 				  write_grads=True
+# 				)
+# tensorboard.set_model(model1)
+
+# Transform train_on_batch return value
+# to dict expected by on_batch_end callback
+def named_logs(model, logs):
+	result = {}
+	for l in zip(model.metrics_names, logs):
+		result[l[0]] = l[1]
+	return result
 
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
-        rotation_range=15,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
-        zoom_range=0.1,channel_shift_range=0.0,fill_mode='nearest',cval=0.,
+        rotation_range=30,width_shift_range=0.25,height_shift_range=0.25,shear_range=0.,
+        zoom_range=0.25,channel_shift_range=0.0,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.0)
 
-x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
-x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2)
-# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE)
+# x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
+# x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2)
 
+x_train_1 = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
+x_train_2 = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
 
 val1error = 0
 val1acc = 0
 val2error = 0
 val2acc = 0
-val3error = 0
-val3acc = 0
+
 train1error = 0
 train2error = 0
-train3error = 0
+
 train1acc = 0
 train2acc = 0
-train3acc = 0
-lastloss1 = 0
-lastloss2 = 0
-lastloss3 = 0
-cooldown = 0
-# from keras.models import load_model
-# (len(x_train_1_batches)/num_batches)
+
 losses1 = []
 losses2 = []
 losses3 = []
@@ -164,54 +162,34 @@ for ii in range(EPOCHS):
 	if ii % 100 == 0:
 		model1.save('SHL-CNN1.h5')
 		model2.save('SHL-CNN2.h5')
-		# model3.save('SHL-CNN3.h5')
-	# total_loss = [(-(losses1[i+1]+losses2[i+1]) + (losses1[i]+losses2[i])) for i in range(len(losses1)-1)]
-	# print(total_loss)
-	# try:
-	# 	# print(losses1,'\n',losses2,'\n',losses3)
-	# 	print(losses2[1]+losses1[1] - losses2[2] - losses1[2])
-	# except:
-	# 	pass
-
-	# if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
-	#  	and learn2 >= min_rate and cooldown <= 0)  or 
-	# 	(cooldown < -100)):
-	# 	cooldown = 3
-	# 	learn1 = learn1*np.sqrt(.5)
-	# 	learn2 = learn2*np.sqrt(.5)
-	# 	print("Changing learning rate to: ",learn1,learn2)
-	# 	optim1 = keras.optimizers.SGD(lr=learn1,decay=.00)
-	# 	optim2 = keras.optimizers.SGD(lr=learn2)
-
-	# 	model1.compile(loss=keras.losses.categorical_crossentropy,
-	# 	            	optimizer=optim1,
-	# 					metrics=['accuracy'])
-
-	# 	model2.compile(loss=keras.losses.categorical_crossentropy,
-	# 	            	optimizer=optim2,
-	# 					metrics=['accuracy'])
-	# 	# model3.compile(loss=keras.losses.categorical_crossentropy,
-	# 	#             	optimizer=optim,
-	# 	# 				metrics=['accuracy'])
-	# cooldown -= 1
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
-	x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1,shuffle=True)
-	x_train_2_batches = datagen.flow(x_train_2,y_train_2,batch_size=BATCH_SIZE_2,shuffle=True)
+	x_train_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
+	x_train_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
+
 	# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE,shuffle=True)
 
 	train1error_sum = 0
 	train2error_sum = 0
-	train3error_sum = 0
+
 	train1acc_sum = 0
 	train2acc_sum = 0
-	train3acc_sum = 0
+
 	num_batches = len(x_train_1_batches)+len(x_train_2_batches)#+len(x_train_3_batches)
 	batch1_count = 0
 	batch2_count = 0
-	batch3_count = 0
 	random.seed()
 	
-	
+
 
 	for jj in range(num_batches): 
 		train1error = 0
@@ -219,30 +197,22 @@ for ii in range(EPOCHS):
 		train2error = 0
 		train2acc = 0
 		train3error = 0
-		train3acc = 0
+
 		rng = random.random()
 		if rng <(len(x_train_1_batches)/num_batches) and batch1_count < len(x_train_1_batches):
 			x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
-			hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
-			train1error_sum += hist1.history['loss'][0]
-			train1acc_sum += hist1.history['acc'][0]
+			hist1 = model1.train_on_batch(x_train_1_b, y_train_1_b)
+			train1error_sum += hist1[0]
+			train1acc_sum += hist1[1]
 			batch1_count +=1
-			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
+			# tensorboard.on_epoch_end(ii*324+jj, named_logs(model1, hist1))
 		elif (rng > (len(x_train_1_batches)/num_batches)#  and rng < 1-(len(x_train_3_batches)/num_batches) 
 			and batch2_count < len(x_train_2_batches)):
 			x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
-			hist2 = model1.fit(x_train_2_b, y_train_2_b,batch_size=x_train_2_b.shape[0],verbose=0)
-			train2error_sum += hist2.history['loss'][0]
-			train2acc_sum += hist2.history['acc'][0]
+			hist2 = model1.train_on_batch(x_train_2_b, y_train_2_b)
+			train2error_sum += hist2[0]
+			train2acc_sum += hist2[1]
 			batch2_count += 1
-		# elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
-		# 	x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
-		# 	train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
-		# 	train3error_sum += train3error
-		# 	train3acc_sum += train3acc
-		#	batch3_count +=1
-		#else:
-		#	jj -= 1
 
 		
 		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".
@@ -250,51 +220,48 @@ for ii in range(EPOCHS):
 				train2acc_sum/(batch2_count+.0001)),end='\r')
 	# import pdb
 	# pdb.set_trace()
-	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
-	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
-	
-	train1error = train1error_sum/batch1_count
-	losses1 += [train1error]
-	if (len(losses1) > 3):
-		losses1.pop(0)
-	train1acc = train1acc_sum/batch1_count
-	
-	train2error = train2error_sum/batch2_count
-	losses2 += [train2error]
-	if (len(losses2) > 3):
-		losses2.pop(0)
-	train2acc = train2acc_sum/batch2_count
+
+	x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
+	x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/val/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
+	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches)
+	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches)
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
 	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
 			val1error,val1acc,val2error,val2acc))
-	# print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
+	
+# tensorboard.on_train_end(None)
 
+x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
+									target_size=(48,48),
+									color_mode='rgb',
+									batch_size=32,
+									class_mode='categorical',
+									shuffle=True)
+x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
+									target_size=(48,48),
+									color_mode='rgb',
+									batch_size=32,
+									class_mode='categorical',
+									shuffle=True)
 
-# from keras.models import load_model
-
-# model.save('SHL-CNN.h5')
-
-
-'''
-layer1 = model1.get_layer(index = 7)
-layer2 = model2.get_layer(index = 7)
-
-
-if layer1 == layer2:
-	print("BOOM2")
-
-
-
-
-
-score = model2.evaluate(x_test, y_test, verbose=0)
+score = model1.evaluate_generator(x_1_test,steps=1)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
-'''
 
-import pdb
-pdb.set_trace()
+score = model1.evaluate_generator(x_2_test,steps=1)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
 
 
