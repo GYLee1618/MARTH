@@ -64,10 +64,10 @@ ytest1 /= 255
 
 inp = Input(shape=input_shape)
 conv1 = Conv2D(9, kernel_size=(5, 5),activation='linear',padding='same')(inp)
-max1 = MaxPooling2D(pool_size=(3,3),stride=3)(conv1)
+max1 = MaxPooling2D(pool_size=(3,3),stride=(3,3))(conv1)
 a1 = Activation('tanh')(max1)
 conv2 = Conv2D(37, kernel_size=(5,5), activation='linear',padding='same')(a1)
-max2 = MaxPooling2D(pool_size=(3,3),stride=3)(conv2)
+max2 = MaxPooling2D(pool_size=(3,3),stride=(3,3))(conv2)
 hid = Dense(500,activation='tanh')(max2)
 
 
