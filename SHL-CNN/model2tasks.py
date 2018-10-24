@@ -51,8 +51,8 @@ x_train_1 /= 255
 
 
 
-# y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
-# y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
+y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
+y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
@@ -146,9 +146,9 @@ for ii in range(EPOCHS):
 		train1error = 0
 		train1acc = 0
 		x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
-		train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
-		train1error_sum += train1error
-		train1acc_sum += train1acc
+		hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
+		train1error_sum += hist1.history['loss']
+		train1acc_sum += hist1.history['acc']
 		batch1_count +=1
 
 		
