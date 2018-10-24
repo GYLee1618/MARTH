@@ -126,15 +126,33 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
 callbacks = [lr_reducer,keras.callbacks.TensorBoard(log_dir='./logs1',write_grads=True)] 
 
 
-model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE_1),
-          epochs=EPOCHS,
-          callbacks=callbacks,
-          steps_per_epoch=len(x_train_1)/BATCH_SIZE_1,
-          verbose=1,
-          validation_data=(x_val_1,y_val_1))
+model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
+					target_size=(48,48),
+					color_mode='rgb',
+					batch_size=32,
+					class_mode='categorical',
+					shuffle=True),
+			          epochs=EPOCHS,
+			          callbacks=callbacks,
+			          steps_per_epoch=len(x_train_1)/BATCH_SIZE_1,
+			          verbose=1,
+			          validation_data=(x_val_1,y_val_1))
+
+x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
+									target_size=(48,48),
+									color_mode='rgb',
+									batch_size=32,
+									class_mode='categorical',
+									shuffle=True)
+x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
+									target_size=(48,48),
+									color_mode='rgb',
+									batch_size=32,
+									class_mode='categorical',
+									shuffle=True)
 
 
-score = model.evaluate(x_test, y_test, verbose=0)
+score = model1.evaluate_generator(x_1_test,steps=1)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 

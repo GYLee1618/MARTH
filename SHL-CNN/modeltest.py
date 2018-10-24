@@ -233,8 +233,8 @@ for ii in range(EPOCHS):
 										batch_size=32,
 										class_mode='categorical',
 										shuffle=True)
-	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches)
-	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches)
+	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches,steps=1)
+	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches,steps=1)
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
