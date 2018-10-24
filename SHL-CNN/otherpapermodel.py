@@ -68,7 +68,8 @@ max1 = MaxPooling2D(pool_size=(3,3),strides=3)(conv1)
 a1 = Activation('tanh')(max1)
 conv2 = Conv2D(37, kernel_size=(5,5), activation='linear',padding='same')(a1)
 max2 = MaxPooling2D(pool_size=(3,3),strides=3)(conv2)
-hid = Dense(500,activation='tanh')(max2)
+flat = Flatten()(max2)
+hid = Dense(500,activation='tanh')(flat)
 
 
 # bn1 = BatchNormalization()(conv1)
