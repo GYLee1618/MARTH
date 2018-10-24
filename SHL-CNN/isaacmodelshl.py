@@ -192,24 +192,24 @@ for ii in range(EPOCHS):
     if rng < .5 and batch1_count < len(x_train_1_batches):
       x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
       history = model1.fit(x_train_1_b, y_train_1_b,epochs=1)
-      train1error_sum += history.history["loss"]
-      train1acc_sum += history.history["categorical_accuracy"]
+      # train1error_sum += history.history["loss"]
+      # train1acc_sum += history.history["categorical_accuracy"]
       batch1_count +=1
 
     elif (rng > .5 and batch2_count < len(x_train_2_batches)):
       x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
       history = model2.fit(x_train_2_b,y_train_2_b,epochs=1)
-      train2error_sum += history.history["loss"]
-      train2acc_sum += history.history["categorical_accuracy"]
+      # train2error_sum += history.history["loss"]
+      # train2acc_sum += history.history["categorical_accuracy"]
       batch2_count += 1
 
     else:
       jj -= 1
 
     
-    print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".
-        format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
-        train2acc_sum/(batch2_count+.0001)),end='\r')
+    # print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".
+    #     format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
+    #     train2acc_sum/(batch2_count+.0001)),end='\r')
   # import pdb
   val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
   val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
@@ -227,8 +227,8 @@ for ii in range(EPOCHS):
     losses2.pop(0)
   train2acc = train2acc_sum/batch2_count
 
-  print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
-      train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
+  # print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
+  #     train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
   print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
       val1error,val1acc,val2error,val2acc))
   # print("Train2 loss: ",train2error, " Train2 accuracy: ", train2acc, " Val2 loss: ", val2error, " Val2 accuracy: ", val2acc)
