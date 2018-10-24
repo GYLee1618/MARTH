@@ -192,15 +192,15 @@ for ii in range(EPOCHS):
     if rng < .5 and batch1_count < len(x_train_1_batches):
       x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
       history = model1.fit(x_train_1_b, y_train_1_b,epochs=1)
-      train1error_sum += history["loss"]
-      train1acc_sum += history["categorical_accuracy"]
+      train1error_sum += history.history["loss"]
+      train1acc_sum += history.history["categorical_accuracy"]
       batch1_count +=1
 
     elif (rng > .5 and batch2_count < len(x_train_2_batches)):
       x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
       history = model2.fit(x_train_2_b,y_train_2_b,epochs=1)
-      train2error_sum += history["loss"]
-      train2acc_sum += history["categorical_accuracy"]
+      train2error_sum += history.history["loss"]
+      train2acc_sum += history.history["categorical_accuracy"]
       batch2_count += 1
 
     else:
