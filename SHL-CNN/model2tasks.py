@@ -1,4 +1,4 @@
-import tensorflow as tensorflow
+import tensorflow as tf
 import numpy as np
 from tensorflow import keras
 from tensorflow.keras.layers import *
@@ -19,6 +19,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 def lrn(x):
+	import tensorflow as tf
 	return tensorflow.nn.lrn(x)
 
 BATCH_SIZE_1 = 32
@@ -108,7 +109,7 @@ optim1 = keras.optimizers.SGD(lr=learn1)
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
 				metrics=['accuracy'])
-#model1 = load_model('SHL-CNN1.h5')
+model1 = load_model('SHL-CNN1.h5')
 # model2.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim2,
 # 				metrics=['top_k_categorical_accuracy'])
