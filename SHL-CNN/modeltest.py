@@ -222,16 +222,16 @@ for ii in range(EPOCHS):
 		if rng <(len(x_train_1_batches)/num_batches) and batch1_count < len(x_train_1_batches):
 			x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
 			hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
-			train1error_sum += hist1.history['loss']
-			train1acc_sum += hist1.history['acc']
+			train1error_sum += hist1.history['loss'][0]
+			train1acc_sum += hist1.history['acc'][0]
 			batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 		elif (rng > (len(x_train_1_batches)/num_batches)#  and rng < 1-(len(x_train_3_batches)/num_batches) 
 			and batch2_count < len(x_train_2_batches)):
 			x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
 			hist2 = model1.fit(x_train_2_b, y_train_2_b,batch_size=x_train_2_b.shape[0],verbose=0)
-			train2error_sum += hist2.history['loss']
-			train2acc_sum += hist2.history['acc']
+			train2error_sum += hist2.history['loss'][0]
+			train2acc_sum += hist2.history['acc'][0]
 			batch2_count += 1
 		# elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
 		# 	x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
