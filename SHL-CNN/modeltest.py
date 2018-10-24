@@ -249,9 +249,16 @@ for ii in range(EPOCHS):
 				train2acc_sum/(batch2_count+.0001)),end='\r')
 	import pdb
 	pdb.set_trace()
-
-	val1error,val1acc = model1.test_on_batch(x_val_1,y_val_1)
-	val2error,val2acc = model2.test_on_batch(x_val_2,y_val_2)
+	index1 =int(np.floor(x_val_1.shape[0]/2))
+	index2 = int(np.floor(x_val_2.shape[0]/2))
+	val1error1,val1acc1 = model1.test_on_batch(x_val_1[0:index1,:],y_val_1[0:index1,:])
+	val1error2,val1acc2 = model1.test_on_batch(x_val_1[index1:,:],y_val_1[index1:,:])
+	val2error1,val2acc1 = model2.test_on_batch(x_val_2[0:index2,:],y_val_2[0:index2,:])
+	val2error2,val2acc2 = model2.test_on_batch(x_val_2[index2:,:],y_val_2[index2:,:])
+	val1error = (val1error1+val1error2)/2
+	val1acc = (val1acc1+val1acc2)/2
+	val2error = (val2error1+val2error2)/2
+	val2acc = (val2acc1+val2acc2)/2
 	# val3error,val3acc = model3.test_on_batch(x_val_3,y_val_3)
 	
 	train1error = train1error_sum/batch1_count
