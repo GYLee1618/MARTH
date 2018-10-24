@@ -15,7 +15,20 @@ import random
 import time
 from tensorflow.keras.models import load_model
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+def lr_schedule(epoch):
+	lr = 1e-3
+	if epoch > 200:
+		lr *= 0.5e-3
+	elif epoch > 150:
+		lr *= 1e-3
+	elif epoch > 100:
+		lr *= 1e-2
+	elif epoch > 40:
+		lr *= 1e-1
+	print('Learning rate: ', lr)
+	return lr 
 
 def lrn(x):
 	import tensorflow as tf
@@ -62,18 +75,18 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.01,seed=random.seed(tim
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(7,7),activation='relu',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 l = Activation('linear')(c)
 d = Lambda(lrn)(l)
-e = Conv2D(64,kernel_size=(7,7),activation='relu',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
 ll = Activation('linear')(g)
 #p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(5,5),activation='relu',padding='valid',data_format='channels_last',kernel_initializer=intial)(ll)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(ll)
 #pp = Lambda(pad)(h)
-i = LocallyConnected2D(32,(5,5),activation='relu',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 
@@ -102,9 +115,19 @@ datagen = ImageDataGenerator(
 #x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
 datagen.fit(x_train_1)
 
+lr_scheduler = LearningRateScheduler(lr_schedule)
+
+lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
+                               cooldown=0,
+                               patience=5,
+                               min_lr=0.5e-6)
+
+callbacks = [lr_reducer,lr_scheduler] 
+
 
 model1.fit_generator(datagen.flow(x_train_1, y_train_1,batch_size=BATCH_SIZE_1),
           epochs=EPOCHS,
+          callbacks=callbacks,
           steps_per_epoch=len(x_train_1)/BATCH_SIZE_1,
           verbose=1,
           validation_data=(x_val_1,y_val_1))
