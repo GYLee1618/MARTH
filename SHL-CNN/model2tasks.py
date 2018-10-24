@@ -114,6 +114,7 @@ optim1 = keras.optimizers.SGD(lr=learn1)
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
 				metrics=['accuracy'])
+model.summary()
 #model1 = load_model('SHL-CNN1.h5')
 # model2.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim2,
