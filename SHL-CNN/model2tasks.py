@@ -81,7 +81,7 @@ x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 # x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
 # 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.01,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
@@ -109,7 +109,7 @@ optim1 = keras.optimizers.SGD(lr=learn1)
 model1.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim1,
 				metrics=['accuracy'])
-model1 = load_model('SHL-CNN1.h5')
+#model1 = load_model('SHL-CNN1.h5')
 # model2.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim2,
 # 				metrics=['top_k_categorical_accuracy'])
