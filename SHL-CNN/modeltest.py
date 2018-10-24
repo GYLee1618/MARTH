@@ -21,6 +21,10 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def lrn(x):
 	return tf.nn.lrn(x)
 
+def pad(x):
+	padding = tf.constant([[0,0],[2,2],[2,2],[0,0]])
+	return tf.pad(x,padding,'constant')
+
 BATCH_SIZE_1 = 128
 BATCH_SIZE_2 = 16
 NUM_CLASSES_1 = 52
@@ -28,7 +32,7 @@ NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
 eps = 0
-min_rate = .5e-07
+min_rate = .5e-16
 
 ROWS, COLS = 48,48
 channels = 3
@@ -90,8 +94,10 @@ d = Lambda(lrn)(c)
 e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
-i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+p = Lambda(pad)(g)
+h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(p)
+pp = Lambda(pad)(h)
+i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(pp)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -115,15 +121,7 @@ model2.compile(loss=keras.losses.categorical_crossentropy,
 #             	optimizer=optim,
 # 				metrics=['accuracy'])
 
- # layer1 = model1.get_layer(index = 2)
- # print(layer1.output_shape)
-# layer2 = model2.get_layer(index = 7)
-
-
-
-
-# if layer1 == layer2:
-# 	print("BOOM")
+ 
 
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
