@@ -14,6 +14,7 @@ from keras.models import Model
 from tqdm import tqdm
 import random
 import time
+from keras.models import load_model
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
@@ -155,7 +156,7 @@ lastloss1 = 0
 lastloss2 = 0
 lastloss3 = 0
 cooldown = 0
-# from keras.models import load_model
+
 # (len(x_train_1_batches)/num_batches)
 losses1 = []
 losses2 = []
