@@ -22,7 +22,7 @@ def lrn(x):
 	return tf.nn.lrn(x)
 
 def pad(x):
-	padding = tf.constant([[1,1],[1,1],[0,0]])
+	padding = tf.constant([[0,0],[1,1],[1,1],[0,0]])
 	return tf.pad(x,padding,'constant')
 
 BATCH_SIZE_1 = 32
