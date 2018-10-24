@@ -57,8 +57,6 @@ NUM_CLASSES_2 = 31
 
 input_shape = (48,48,3)
 
-EPOCHS = 100
-
 xtrain0 /= 255
 xtrain1 /= 255
 xtest0 /= 255
