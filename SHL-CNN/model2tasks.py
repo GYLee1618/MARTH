@@ -32,7 +32,7 @@ NUM_CLASSES_2 = 10
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
 eps = 0
-min_rate = .5e-07
+min_rate = .5e-16
 
 ROWS, COLS = 48,48
 channels = 3
@@ -95,7 +95,7 @@ e = Conv2D(64,kernel_size=(7,7),activation='sigmoid',padding='same',data_format=
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
 p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(p)
+h = Conv2D(64,(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(p)
 pp = Lambda(pad)(h)
 i = LocallyConnected2D(32,(5,5),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(pp)
 j = Flatten()(i)
