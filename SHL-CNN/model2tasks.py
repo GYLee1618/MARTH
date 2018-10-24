@@ -125,6 +125,12 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
 
 callbacks = [lr_reducer,keras.callbacks.TensorBoard(log_dir='./logs1',write_grads=True)] 
 
+x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True)
 
 model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
 					target_size=(48,48),
@@ -136,7 +142,9 @@ model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/v
 			          callbacks=callbacks,
 			          steps_per_epoch=len(x_train_1)/BATCH_SIZE_1,
 			          verbose=1,
-			          validation_data=(x_val_1,y_val_1))
+			          validation_data=x_val_1_batches)
+
+
 
 x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 									target_size=(48,48),
