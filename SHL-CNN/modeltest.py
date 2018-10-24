@@ -69,10 +69,10 @@ x_train_2 /= 255
 
 
 
- y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_EN)
- y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_EN)
- y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_EN)
- y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_EN)
+y_train_1 = keras.utils.to_categorical(y_train_1, NUM_CLASSES_1)
+y_test_1 = keras.utils.to_categorical(y_test_1, NUM_CLASSES_1)
+y_train_2 = keras.utils.to_categorical(y_train_2, NUM_CLASSES_2)
+y_test_2 = keras.utils.to_categorical(y_test_2, NUM_CLASSES_2)
 
 x_train_1, x_val_1, y_train_1, y_val_1 = train_test_split(
 	x_train_1,y_train_1,test_size=.1,random_state=random.seed(time.time()))
@@ -87,16 +87,16 @@ intial = keras.initializers.RandomNormal(mean=0, stddev=.22,seed=random.seed(tim
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2,padding='same')(f)
 # p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(3,3),activation='tanh',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
 # pp = Lambda(pad)(h)
-i = LocallyConnected2D(32,(3,3),activation='tanh',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -221,26 +221,26 @@ for ii in range(EPOCHS):
 		rng = random.random()
 		if rng <(len(x_train_1_batches)/num_batches) and batch1_count < len(x_train_1_batches):
 			x_train_1_b,y_train_1_b = x_train_1_batches[batch1_count]
-			train1error,train1acc = model1.train_on_batch(x_train_1_b, y_train_1_b)
-			train1error_sum += train1error
-			train1acc_sum += train1acc
+			hist1 = model1.fit(x_train_1_b, y_train_1_b,batch_size=x_train_1_b.shape[0],verbose=0)
+			train1error_sum += hist1.history['loss'][0]
+			train1acc_sum += hist1.history['acc'][0]
 			batch1_count +=1
 			#train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
 		elif (rng > (len(x_train_1_batches)/num_batches)#  and rng < 1-(len(x_train_3_batches)/num_batches) 
 			and batch2_count < len(x_train_2_batches)):
 			x_train_2_b,y_train_2_b = x_train_2_batches[batch2_count]
-			train2error,train2acc = model2.train_on_batch(x_train_2_b,y_train_2_b)
-			train2error_sum += train2error
-			train2acc_sum += train2acc
+			hist2 = model1.fit(x_train_2_b, y_train_2_b,batch_size=x_train_2_b.shape[0],verbose=0)
+			train2error_sum += hist2.history['loss'][0]
+			train2acc_sum += hist2.history['acc'][0]
 			batch2_count += 1
 		# elif (rng > (len(x_train_3_batches)/num_batches) and batch3_count < len(x_train_3_batches)):
 		# 	x_train_3_b,y_train_3_b = x_train_3_batches[batch3_count]
 		# 	train3error,train3acc = model3.train_on_batch(x_train_3_b, y_train_3_b)
 		# 	train3error_sum += train3error
 		# 	train3acc_sum += train3acc
-			batch3_count +=1
-		else:
-			jj -= 1
+		#	batch3_count +=1
+		#else:
+		#	jj -= 1
 
 		
 		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".

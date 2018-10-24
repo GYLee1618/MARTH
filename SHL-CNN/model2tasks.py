@@ -79,7 +79,7 @@ model1 = Model(inputs=a, outputs=k1)
 
 learn1 = .01
 
-optim1 = keras.optimizers.Adam(lr=learn1)
+optim1 = keras.optimizers.SGD(lr=learn1)
 
 
 model1.compile(loss=keras.losses.categorical_crossentropy,
@@ -126,7 +126,7 @@ for ii in range(EPOCHS):
 		cooldown = 3
 		learn1 = learn1*np.sqrt(.1)
 		print("Changing learning rate to: ",learn1)#,learn2)
-		optim1 = keras.optimizers.Adam(lr=learn1)
+		optim1 = keras.optimizers.SGD(lr=learn1)
 
 		model1.compile(loss=keras.losses.categorical_crossentropy,
 		            	optimizer=optim1,
