@@ -25,10 +25,10 @@ def pad(x):
 	padding = tf.constant([[0,0],[1,1],[1,1],[0,0]])
 	return tf.pad(x,padding,'constant')
 
-BATCH_SIZE_1 = 128
-BATCH_SIZE_2 = 32
-NUM_CLASSES_1 = 52
-NUM_CLASSES_2 = 10
+BATCH_SIZE_1 = 64
+BATCH_SIZE_2 = 64
+NUM_CLASSES_1 = 31
+NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
 EPOCHS = 10000
 eps = 0
@@ -84,20 +84,20 @@ x_train_2, x_val_2, y_train_2, y_val_2 = train_test_split(
 # x_train_3, x_val_3, y_train_3, y_val_3 = train_test_split(
 # 	x_train_3,y_train_3,test_size=.1,random_state=random.seed(time.time()))
 
-intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
+intial = keras.initializers.RandomNormal(mean=0, stddev=.22,seed=random.seed(time.time()))
 
 
 a = Input(shape=input_shape)
-b = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
+b = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(a)
 c = MaxPooling2D(pool_size=(3, 3),strides=2)(b)
 d = Lambda(lrn)(c)
-e = Conv2D(64,kernel_size=(5,5),activation='sigmoid',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
+e = Conv2D(64,kernel_size=(5,5),activation='tanh',padding='same',data_format='channels_last',kernel_initializer=intial)(d)
 f = Lambda(lrn)(e)
 g = MaxPooling2D(pool_size=(3, 3),strides=2)(f)
 # p = Lambda(pad)(g)
-h = LocallyConnected2D(64,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
+h = LocallyConnected2D(64,(3,3),activation='tanh',padding='valid',data_format='channels_last',kernel_initializer=intial)(g)
 # pp = Lambda(pad)(h)
-i = LocallyConnected2D(32,(3,3),activation='sigmoid',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
+i = LocallyConnected2D(32,(3,3),activation='tanh',padding='valid',data_format='channels_last',kernel_initializer=intial)(h)
 j = Flatten()(i)
 k1 = Dense(NUM_CLASSES_1,activation='softmax',kernel_initializer=intial)(j)
 k2 = Dense(NUM_CLASSES_2,activation='softmax',kernel_initializer=intial)(j)
@@ -168,16 +168,16 @@ for ii in range(EPOCHS):
 	# print(total_loss)
 	try:
 		# print(losses1,'\n',losses2,'\n',losses3)
-		print(losses2[0]+losses1[0] - losses2[2] - losses1[2])
+		print(losses2[1]+losses1[1] - losses2[2] - losses1[2])
 	except:
 		pass
 
-	if ((ii > 5 and (losses2[0]+losses1[0] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
+	if ((ii > 5 and (losses2[1]+losses1[1] - losses2[2] - losses1[2]) < eps and learn1 >= min_rate
 	 	and learn2 >= min_rate and cooldown <= 0)  or 
 		(cooldown < -100)):
 		cooldown = 3
-		learn1 = learn1*np.sqrt(.1)
-		learn2 = learn2*np.sqrt(.1)
+		learn1 = learn1*np.sqrt(.5)
+		learn2 = learn2*np.sqrt(.5)
 		print("Changing learning rate to: ",learn1,learn2)
 		optim1 = keras.optimizers.SGD(lr=learn1)
 		optim2 = keras.optimizers.SGD(lr=learn2)

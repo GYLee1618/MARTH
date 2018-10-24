@@ -40,19 +40,19 @@ class ICDAR2003:
 		# self.trainfiles[2] = self.trainfiles[2]+self.testfiles[2]
 		# self.testfiles[2] = None
 		
-		self.classes = (52,10)
-		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(52))+list(range(10))))
+		self.classes = (31,31)
+		self.mapping = dict(zip(string.ascii_letters+string.digits,list(range(31))+list(range(31))))
 
 	def xml_parse(self,directory,fname,mode):
 		tree = ET.parse(directory+'/'+fname)
 		root = tree.getroot()
 		
 		if mode == 0:
-			regex = r'^[A-Za-z]$'
+			regex = r'^[A-Z0-4]$'
 		# elif mode == 1:
 			# regex = r'^[a-z]$'
 		elif mode == 1:
-			regex = r'^[0-9]$'
+			regex = r'^[5-9a-z]$'
 
 		# only want alphanumeric for this case
 		imagepaths = [(directory+'/'+child.attrib['file'],child.attrib['tag'])
