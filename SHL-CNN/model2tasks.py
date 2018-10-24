@@ -43,7 +43,7 @@ BATCH_SIZE_1 = 32
 NUM_CLASSES_1 = 31
 NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
-EPOCHS = 250
+EPOCHS = 1
 eps = 0
 min_rate = .5e-16
 
@@ -110,7 +110,7 @@ datagen = ImageDataGenerator(
         rotation_range=15,width_shift_range=0.1,height_shift_range=0.1,shear_range=0.,
         zoom_range=0.1,channel_shift_range=0.0,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
-        preprocessing_function=None,data_format=None,validation_split=0.0)
+        preprocessing_function=None,data_format=None,validation_split=0.1)
 
 #x_train_1_batches = datagen.flow(x_train_1,y_train_1,batch_size=BATCH_SIZE_1)
 datagen.fit(x_train_1)
@@ -125,21 +125,22 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
 
 callbacks = [lr_reducer,keras.callbacks.TensorBoard(log_dir='./logs1',write_grads=True)] 
 
-x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
+x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
 										target_size=(48,48),
 										color_mode='rgb',
 										class_mode='categorical',
-										shuffle=True)
+										shuffle=False,
+    									subset='validation')
 
-model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
+model1.fit_generator(datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
 					target_size=(48,48),
 					color_mode='rgb',
 					batch_size=32,
 					class_mode='categorical',
-					shuffle=True),
+					shuffle=True, subset='training'),
 			          epochs=EPOCHS,
 			          callbacks=callbacks,
-			          steps_per_epoch=len(x_train_1)/BATCH_SIZE_1,
+			          steps_per_epoch=len(x_train_1)//BATCH_SIZE_1,
 			          verbose=1,
 			          validation_data=x_val_1_batches)
 
@@ -149,9 +150,10 @@ x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 									target_size=(48,48),
 									color_mode='rgb',
 									class_mode='categorical',
-									shuffle=True)
+									shuffle=False,
+									batch_size=1)
 
-score = model1.evaluate_generator(x_1_test,steps=1)
+score = model1.evaluate_generator(generator=x_1_test)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 

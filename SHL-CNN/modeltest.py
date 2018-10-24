@@ -35,12 +35,6 @@ EPOCHS = 250
 ROWS, COLS = 48,48
 channels = 3
 
-# icdar2003 = ICDAR2003('./ICDAR')
-
-# x_train_1,y_train_1,x_test_1,y_test_1 = icdar2003.load_data(0)
-# x_train_2,y_train_2,x_test_2,y_test_2 = icdar2003.load_data(1)
-
-
 input_shape = (ROWS, COLS, channels)
 
 intial = keras.initializers.RandomNormal(mean=0, stddev=.25,seed=random.seed(time.time()))
@@ -74,30 +68,13 @@ model2.compile(loss=keras.losses.categorical_crossentropy,
             	optimizer=optim2,
 				metrics=['accuracy'])
 
-# tensorboard = keras.callbacks.TensorBoard(
-# 				  log_dir='./logs1',
-# 				  histogram_freq=0,
-# 				  batch_size=32,
-# 				  write_graph=True,
-# 				  write_grads=True
-# 				)
-# tensorboard.set_model(model1)
-
-# Transform train_on_batch return value
-# to dict expected by on_batch_end callback
-def named_logs(model, logs):
-	result = {}
-	for l in zip(model.metrics_names, logs):
-		result[l[0]] = l[1]
-	return result
-
 datagen = ImageDataGenerator(
         featurewise_center=False,samplewise_center=False,featurewise_std_normalization=False,
         samplewise_std_normalization=False,zca_whitening=False,zca_epsilon=1e-06,
         rotation_range=30,width_shift_range=0.25,height_shift_range=0.25,shear_range=0.,
         zoom_range=0.25,channel_shift_range=0.0,fill_mode='nearest',cval=0.,
         horizontal_flip=False,vertical_flip=False,rescale=None,
-        preprocessing_function=None,data_format=None,validation_split=0.0)
+        preprocessing_function=None,data_format=None,validation_split=0.1)
 
 val1error = 0
 val1acc = 0
@@ -110,30 +87,50 @@ train2error = 0
 train1acc = 0
 train2acc = 0
 
-losses1 = []
-losses2 = []
-losses3 = []
-
 for ii in range(EPOCHS):
-	
-	if ii % 100 == 0:
-		model1.save('SHL-CNN1.h5')
-		model2.save('SHL-CNN2.h5')
+
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
 	x_train_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
 										target_size=(48,48),
 										color_mode='rgb',
 										batch_size=32,
 										class_mode='categorical',
-										shuffle=True)
+										shuffle=True,
+										subset='training')
 	x_train_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
 										target_size=(48,48),
 										color_mode='rgb',
 										batch_size=32,
 										class_mode='categorical',
-										shuffle=True)
+										shuffle=True,
+										subset='training')
 
-	# x_train_3_batches = datagen.flow(x_train_3,y_train_3,batch_size=BATCH_SIZE,shuffle=True)
+	x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=True,
+										batch_size=1,
+										subset='validation')
+	x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=True,
+										batch_size=1,
+										subset='validation')
+	x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1)
+	x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1)
 
 	train1error_sum = 0
 	train2error_sum = 0
@@ -177,17 +174,6 @@ for ii in range(EPOCHS):
 				train2acc_sum/(batch2_count+.0001)),end='\r')
 	# import pdb
 	# pdb.set_trace()
-
-	x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/val/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=True)
-	x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/val/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=True)
 	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches,steps=1)
 	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches,steps=1)
 
@@ -207,25 +193,22 @@ for ii in range(EPOCHS):
 	if (len(losses2) > 3):
 		losses2.pop(0)
 	train2acc = train2acc_sum/batch2_count
-# tensorboard.on_train_end(None)
 
-x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
-									target_size=(48,48),
-									color_mode='rgb',
-									class_mode='categorical',
-									shuffle=True)
-x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
-									target_size=(48,48),
-									color_mode='rgb',
-									class_mode='categorical',
-									shuffle=True)
+	if (ii % 250 == 0):
+		score = model1.evaluate_generator(x_1_test)
+		print('Test loss:', score[0])
+		print('Test accuracy:', score[1])
 
-score = model1.evaluate_generator(x_1_test,steps=1)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+		score = model1.evaluate_generator(x_2_test)
+		print('Test loss:', score[0])
+		print('Test accuracy:', score[1])
 
-score = model1.evaluate_generator(x_2_test,steps=1)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+score = model1.evaluate_generator(x_1_test)
+		print('Test loss:', score[0])
+		print('Test accuracy:', score[1])
+
+score = model1.evaluate_generator(x_2_test)
+		print('Test loss:', score[0])
+		print('Test accuracy:', score[1])
 
 
