@@ -21,7 +21,7 @@ def lrn(x):
 	import tensorflow as tf
 	return tf.nn.lrn(x)
 
-def pad(x)
+def pad(x):
 	padding = tf.constant([[1,1],[1,1],[0,0]])
 	return tf.pad(x,padding,'constant')
 
