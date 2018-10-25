@@ -109,14 +109,12 @@ x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 										target_size=(48,48),
 										color_mode='rgb',
 										class_mode='categorical',
-										shuffle=False,
-										batch_size=1)
+										shuffle=False)
 x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
 										target_size=(48,48),
 										color_mode='rgb',
 										class_mode='categorical',
-										shuffle=False,
-										batch_size=1)
+										shuffle=False)
 
 val1error = 0
 val1acc = 0
