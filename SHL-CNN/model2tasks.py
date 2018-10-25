@@ -150,10 +150,9 @@ x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
 									target_size=(48,48),
 									color_mode='rgb',
 									class_mode='categorical',
-									shuffle=False,
-									batch_size=1)
+									shuffle=False)
 
-score = model1.evaluate_generator(generator=x_1_test)
+score = model1.evaluate_generator(generator=x_1_test,steps=len(x_1_test))
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 

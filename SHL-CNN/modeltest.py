@@ -31,7 +31,7 @@ NUM_CLASSES_2 = 31
 NUM_CLASSES_3 = 10
 eps = 0
 min_rate = .5e-16
-EPOCHS = 250
+EPOCHS = 5000
 ROWS, COLS = 48,48
 channels = 3
 
@@ -76,6 +76,48 @@ datagen = ImageDataGenerator(
         horizontal_flip=False,vertical_flip=False,rescale=None,
         preprocessing_function=None,data_format=None,validation_split=0.1)
 
+x_train_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True,
+										subset='training')
+x_train_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										batch_size=32,
+										class_mode='categorical',
+										shuffle=True,
+										subset='training')
+
+x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1,
+										subset='validation')
+x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1,
+										subset='validation')
+x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1)
+x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
+										target_size=(48,48),
+										color_mode='rgb',
+										class_mode='categorical',
+										shuffle=False,
+										batch_size=1)
+
 val1error = 0
 val1acc = 0
 val2error = 0
@@ -90,48 +132,7 @@ train2acc = 0
 for ii in range(EPOCHS):
 
 	print("Epoch {}/{}".format(ii+1,EPOCHS))
-	x_train_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
-										target_size=(48,48),
-										color_mode='rgb',
-										batch_size=32,
-										class_mode='categorical',
-										shuffle=True,
-										subset='training')
-	x_train_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
-										target_size=(48,48),
-										color_mode='rgb',
-										batch_size=32,
-										class_mode='categorical',
-										shuffle=True,
-										subset='training')
-
-	x_val_1_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/1/train/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=True,
-										batch_size=1,
-										subset='validation')
-	x_val_2_batches = datagen.flow_from_directory(directory='./ICDAR_reformat/2/train/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=True,
-										batch_size=1,
-										subset='validation')
-	x_1_test = datagen.flow_from_directory(directory='./ICDAR_reformat/1/test/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=False,
-										batch_size=1)
-	x_2_test = datagen.flow_from_directory(directory='./ICDAR_reformat/2/test/',
-										target_size=(48,48),
-										color_mode='rgb',
-										class_mode='categorical',
-										shuffle=False,
-										batch_size=1)
-
+	
 	train1error_sum = 0
 	train2error_sum = 0
 
@@ -172,43 +173,30 @@ for ii in range(EPOCHS):
 		print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}    ".
 				format(jj+1,num_batches,train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),
 				train2acc_sum/(batch2_count+.0001)),end='\r')
-	# import pdb
-	# pdb.set_trace()
-	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches,steps=1)
-	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches,steps=1)
+
+	val1error,val1acc = model1.evaluate_generator(generator=x_val_1_batches,steps=len(x_val_1_batches))
+	val2error,val2acc = model2.evaluate_generator(generator=x_val_2_batches,steps=len(x_val_2_batches))
 
 	print("Batch:{:3.0f}/{}  Train1 loss: {:0.4f}  Train1 accuracy: {:0.4f}   Train2 loss: {:0.4f}  Train2 accuracy: {:0.4f}     ".format(jj+1,num_batches,
 			train1error_sum/(batch1_count+.0001),train1acc_sum/(batch1_count+.0001),train2error_sum/(batch2_count+.0001),train2acc_sum/(batch2_count+.0001)))
 	print("Batch:{:3.0f}/{}  Val1 loss:   {:0.4f}  Val1 accuracy:   {:0.4f}   Val2 loss:   {:0.4f}  Val2 accuracy:   {:0.4f}\n".format(num_batches,num_batches,
 			val1error,val1acc,val2error,val2acc))
-	
-	train1error = train1error_sum/batch1_count
-	losses1 += [train1error]
-	if (len(losses1) > 3):
-		losses1.pop(0)
-	train1acc = train1acc_sum/batch1_count
-  
-	train2error = train2error_sum/batch2_count
-	losses2 += [train2error]
-	if (len(losses2) > 3):
-		losses2.pop(0)
-	train2acc = train2acc_sum/batch2_count
 
 	if (ii % 250 == 0):
-		score = model1.evaluate_generator(x_1_test)
+		score = model1.evaluate_generator(generator=x_1_test,steps=len(x_1_test))
 		print('Test loss:', score[0])
 		print('Test accuracy:', score[1])
 
-		score = model1.evaluate_generator(x_2_test)
+		score = model2.evaluate_generator(generator=x_2_test,steps=len(x_2_test))
 		print('Test loss:', score[0])
 		print('Test accuracy:', score[1])
 
-score = model1.evaluate_generator(x_1_test)
-		print('Test loss:', score[0])
-		print('Test accuracy:', score[1])
+score = model1.evaluate_generator(generator=x_1_test,steps=len(x_1_test))
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
 
-score = model1.evaluate_generator(x_2_test)
-		print('Test loss:', score[0])
-		print('Test accuracy:', score[1])
+score = model2.evaluate_generator(generator=x_2_test,steps=len(x_2_test))
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
 
 
