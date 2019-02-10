@@ -46,19 +46,6 @@ class ICDAR2003:
 
 		return train_data, train_tags, test_data, test_tags
 
-	# def get_max_size(self):
-	# 	from PIL import Image
-	# 	toobig = 0
-	# 	total = 0
-	# 	for file in self.testfiles:
-	# 		im = Image.open(file[0])
-	# 		total += 1
-	# 		if im.size[0] > 48:
-	# 			toobig += 1
-	# 		elif im.size[1] > 48:
-	# 			toobig += 1
-	# 	return toobig,total
-
 	def one_hot(self,targets,classes):
 		targets = np.array([self.mapping[char] for char in targets]).reshape(-1)
 		return np.eye(classes)[targets]
